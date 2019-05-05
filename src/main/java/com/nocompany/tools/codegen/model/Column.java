@@ -1,5 +1,7 @@
 package com.nocompany.tools.codegen.model;
 
+import com.nocompany.tools.codegen.util.GenUtil;
+
 public class Column {
 
     private String colName;
@@ -12,6 +14,12 @@ public class Column {
     public String getColName() {
         return colName;
     }
+    public String getColNameFL() {
+        return GenUtil.getCamelCaseString(colName,false);
+    }
+    public String getColNameFU() {
+        return GenUtil.getCamelCaseString(colName,true);
+    }
 
     public void setColName(String colName) {
         this.colName = colName;
@@ -19,6 +27,9 @@ public class Column {
 
     public String getDataType() {
         return dataType;
+    }
+    public String getDataTypeUpperCase() {
+        return dataType.toUpperCase();
     }
 
     public void setDataType(String dataType) {
@@ -68,5 +79,32 @@ public class Column {
         sb.append(", isPrimaryKey='").append(isPrimaryKey).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public String getDbType() {
+        switch(this.getDataType()) {
+
+            case "tinyint":
+            case "int":
+            case "bigint":
+            case "float":
+            case "decimal":
+            case "double":
+                return "Long";
+
+            case "char":
+            case "varchar":
+            case "text":
+                return "String";
+
+            case "datetime":
+            case "time":
+            case "timestamp":
+                return "Date";
+
+            default:
+                throw new java.lang.UnsupportedOperationException();
+        }
+
     }
 }

@@ -21,7 +21,7 @@ public class MysqlTableInitializer implements TableInitializer {
     }
 
     public void initColumn(Table table) {
-        String sql = "select * from information_schema.columns where table_name = '" + table.getTableName() + "'";
+        String sql = "select * from information_schema.columns where table_schema='kangpaas_baseline' and table_name = '" + table.getTableName() + "'";
 
         List columnList = jdbcTemplate.query(sql, new RowMapper<Column>() {
             public Column mapRow(ResultSet rs, int rowNum) throws SQLException {

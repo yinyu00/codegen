@@ -1,5 +1,7 @@
 package com.nocompany.tools.codegen.model;
 
+import com.nocompany.tools.codegen.util.GenUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,8 @@ public class Table {
 
 
     private String tableName;
+    public String tableNameFL;
+    public String tableNameFU;
 
     private List<Column> columnList = new ArrayList<Column>();
 
@@ -31,6 +35,8 @@ public class Table {
 
     public Table(String tableName) {
         this.tableName = tableName;
+        this.tableNameFU = GenUtil.getCamelCaseString(tableName, true);
+        this.tableNameFL = GenUtil.getCamelCaseString(tableName, false);
     }
 
     @Override
