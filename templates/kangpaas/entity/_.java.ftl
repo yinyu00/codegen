@@ -18,6 +18,7 @@ public class ${table.NameFU} implements java.io.Serializable {
     /** ${column.colName}: ${column.comments} */
     <#if column.primaryKey>
     @Id
+    @GeneratedValue(generator = "JDBC")//此处加上注解
     </#if>
     @Column(name = "${column.colName}", nullable = <#if column.nullable="Y">true<#else>false</#if>, length = ${column.dataLength})
     private ${column.dbType} ${column.colNameFL};

@@ -29,7 +29,22 @@ public class Column {
         return dataType;
     }
     public String getDataTypeUpperCase() {
-        return dataType.toUpperCase();
+
+        switch(this.getDataType()) {
+
+            case "int":
+                return "BIGINT";
+
+            case "text":
+                return "String";
+
+            case "datetime":
+            case "date":
+                return "TIMESTAMP";
+
+            default:
+                return dataType.toUpperCase();
+        }
     }
 
     public void setDataType(String dataType) {

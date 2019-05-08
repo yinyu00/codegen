@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kangpaas.monitormgnt.dao.MonitorTemplateMapper">
+<mapper namespace="com.kangpaas.monitormgnt.dao.${table.NameFU}Mapper">
     <resultMap id="BaseResultMap" type="com.kangpaas.monitormgnt.entity.${table.NameFU}">
         <!--
           WARNING - @mbg.generated
@@ -24,7 +24,7 @@
         </trim>
     </sql>
     <!-- 集成列 -->
-    <sql id="coloumn">
+    <sql id="columns">
 
     <#list columns as column>
         ${column.colName},
@@ -33,7 +33,7 @@
 
     <select id="select${table.NameFU}List" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="BaseResultMap" >
         SELECT
-        <include refid="coloumn"/>
+        <include refid="columns"/>
         FROM ${table.Name}
         <include refid="conditions"/>
     </select>

@@ -31,15 +31,16 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
 
+    @Autowired
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
     public ${table.NameFU}ServiceImpl(${table.NameFU}Mapper ${table.NameFL}Mapper) {
         this.${table.NameFL}Mapper = ${table.NameFL}Mapper;
     }
 
     /**
-     *根据管理域id查看详情
+     * 根据id查看详情
      * @param ${table.NameFL}Id 物理主键
-     * @return
+     * @return 操作结果
      */
     public PlatformResult select${table.NameFU}ById(Long ${table.NameFL}Id) {
         if (${table.NameFL}Id == null) {
@@ -66,6 +67,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
+        OperatorUtil.insert(${table.NameFL}Vo);
+
         ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
         BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
 
@@ -74,7 +77,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     }
 
     /**
-     * 更新一个管理域信息
+     * 更新信息
      * @param ${table.NameFL}Vo
      * @return 更新结果
      */
@@ -83,8 +86,10 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
+        OperatorUtil.update(${table.NameFL}Vo);
+
         ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
-        BeanUtils.copyProperties(${table.NameFL}, ${table.NameFL});
+        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
 
         ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL});
         return PlatformResult.success();
@@ -106,20 +111,20 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
 
 
     /**
-    *  批量删除
-    * @param deleteIdList 待删除id列表
-    * @return 删除结果
-    */
+     *  批量删除
+     * @param deleteIdList 待删除id列表
+     * @return 删除结果
+     */
     //public PlatformResult batchDel${table.NameFU}(List<Long> deleteIdList) {
     //    ${table.NameFL}Mapper.batchDel${table.NameFU}(deleteIdList);
     //    return PlatformResult.success();
     //}
 
     /**
-    *  查询管理域列表
-    * @param pageVo 分页查询条件
-    * @return 管理域列表
-    */
+     * 查询列表
+     * @param pageVo 分页查询条件
+     * @return 列表
+     */
     public PlatformResult<ResponsePageVo<${table.NameFU}Vo>> select${table.NameFU}List(RequestPageVo<${table.NameFU}Vo> pageVo) {
         if (pageVo == null) {
             return PlatformResult.success();

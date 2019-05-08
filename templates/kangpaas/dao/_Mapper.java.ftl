@@ -21,9 +21,9 @@ public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}> {
     //void batchDel${table.NameFU}(List<Long> deleteIdList);
 
     /**
-    *  查询管理域列表
+    *  查询列表
     * @param ${table.NameFL}Vo 查询条件
-    * @return 管理域列表
+    * @return 列表
     */
     List<${table.NameFU}Vo> select${table.NameFU}List(${table.NameFU}Vo ${table.NameFL}Vo);
 

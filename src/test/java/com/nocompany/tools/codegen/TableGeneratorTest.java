@@ -35,7 +35,7 @@ public class TableGeneratorTest {
 
     @Test
     public void generate() throws Exception {
-        Table table = new Table("monitor_template");
+        Table table = new Table("monitor_disc_item"); // monitor_disc_rule monitor_disc_item
         tableInitializer.initColumn(table);
         tableInitializer.initPrimaryKey(table);
 
