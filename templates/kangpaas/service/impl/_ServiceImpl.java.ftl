@@ -33,6 +33,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
 
     @Autowired
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
+
+    @Override
     public ${table.NameFU}ServiceImpl(${table.NameFU}Mapper ${table.NameFL}Mapper) {
         this.${table.NameFL}Mapper = ${table.NameFL}Mapper;
     }
@@ -42,6 +44,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Id 物理主键
      * @return 操作结果
      */
+    @Override
     public PlatformResult select${table.NameFU}ById(Long ${table.NameFL}Id) {
         if (${table.NameFL}Id == null) {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
@@ -62,6 +65,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Vo
      * @return 操作结果
      */
+    @Override
     public PlatformResult insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
         if (null == ${table.NameFL}Vo) {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
@@ -81,6 +85,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Vo
      * @return 更新结果
      */
+    @Override
     public PlatformResult update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
         if (${table.NameFL}Vo == null || ${table.NameFL}Vo.get${table.NameFU}Id() == null) {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
@@ -100,6 +105,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Id 待删除id
      * @return 删除结果
      */
+    @Override
     public PlatformResult delete${table.NameFU}ById(Long ${table.NameFL}Id) {
         if (null ==  ${table.NameFL}Id) {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
@@ -125,6 +131,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param pageVo 分页查询条件
      * @return 列表
      */
+    @Override
     public PlatformResult<ResponsePageVo<${table.NameFU}Vo>> select${table.NameFU}List(RequestPageVo<${table.NameFU}Vo> pageVo) {
         if (pageVo == null) {
             return PlatformResult.success();

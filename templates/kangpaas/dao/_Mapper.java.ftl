@@ -3,6 +3,7 @@ package com.kangpaas.monitormgnt.service;
 import com.kangpaas.monitormgnt.entity.${table.NameFU};
 import com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo;
 import tk.mybatis.mapper.common.Mapper;
+import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ import java.util.List;
  * @author jinw
  * @version 1.0  2019-04-29
  **/
+@Component
 public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}> {
 
     /**
