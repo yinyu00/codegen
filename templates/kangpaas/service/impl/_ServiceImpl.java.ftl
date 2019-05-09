@@ -114,15 +114,18 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
         return PlatformResult.success();
     }
 
-
     /**
-     *  批量删除
-     * @param deleteIdList 待删除id列表
+     * 批量删除
+     * @param idList 待删除Id数组
      * @return 删除结果
      */
     @Override
-    public PlatformResult batchDel${table.NameFU}(List<Long> deleteIdList) {
-        ${table.NameFL}Mapper.batchDel${table.NameFU}(deleteIdList);
+    public PlatformResult batchDelByIdList(List<Long> idList) {
+        if (null ==  idList || idList.isEmpty()) {
+            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        }
+
+        ${table.NameFL}Mapper.batchDelByIdList(idList);
         return PlatformResult.success();
     }
 

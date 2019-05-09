@@ -54,4 +54,10 @@ public class ${table.NameFU}Controller {
         return ${table.NameFL}Service.delete${table.NameFU}ById(id);
     }
 
+    @ApiOperation(value = "batchDel", notes = "批量删除资源")
+    @DeleteMapping("/batchDel")
+    public PlatformResult batchDel(@RequestBody DeleteIdListVo deleteIdListVo) {
+        return ${table.NameFL}Service.batchDelByIdList(deleteIdListVo.getDelIdList());
+    }
+
 }
