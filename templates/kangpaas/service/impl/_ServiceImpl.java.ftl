@@ -34,7 +34,6 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     @Autowired
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
 
-    @Override
     public ${table.NameFU}ServiceImpl(${table.NameFU}Mapper ${table.NameFL}Mapper) {
         this.${table.NameFL}Mapper = ${table.NameFL}Mapper;
     }
@@ -121,6 +120,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param deleteIdList 待删除id列表
      * @return 删除结果
      */
+    @Override
     public PlatformResult batchDel${table.NameFU}(List<Long> deleteIdList) {
         ${table.NameFL}Mapper.batchDel${table.NameFU}(deleteIdList);
         return PlatformResult.success();

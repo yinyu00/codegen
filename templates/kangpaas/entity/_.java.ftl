@@ -1,7 +1,7 @@
 package com.kangpaas.logmgmt.model;
 
 import lombok.Data;
-
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.sql.Timestamp;
@@ -38,19 +38,13 @@ public class ${table.NameFU} implements java.io.Serializable {
         }
 
         ${table.NameFU} that = (${table.NameFU}) o;
+<#assign x = 0>
+<#assign size = columns?size>
+        return
 <#list columns as column>
-<#if column.nullable="Y">
-        if (${column.colNameFL} != null ? !${column.colNameFL}.equals(that.${column.colNameFL}) : that.${column.colNameFL} != null) {
-            return false;
-        }
-<#else>
-        if (!${column.colNameFL}.equals(that.${column.colNameFL})) {
-            return false;
-        }
-</#if>
+  <#assign x = x+1>
+    Objects.equals(${column.colNameFL},that.${column.colNameFL})<#if x lt size>&&<#else>;</#if>
 </#list>
-
-        return true;
     }
 
     /**
@@ -59,13 +53,13 @@ public class ${table.NameFU} implements java.io.Serializable {
     */
     @Override
     public int hashCode() {
-        int result = 0;
-
+<#assign xx = 0>
+        return Objects.hash(
 <#list columns as column>
-        result = 31 * result + (${column.colNameFL} != null ? ${column.colNameFL}.hashCode() : 0);
+  <#assign xx = xx+1>
+        ${column.colNameFL}<#if xx lt size>,</#if>
 </#list>
-
-        return result;
+        );
     }
 
 }

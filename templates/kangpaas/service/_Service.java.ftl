@@ -19,7 +19,7 @@ public interface ${table.NameFU}Service {
      * @param deleteIdList 待删除id列表
      * @return 删除结果
      */
-    //PlatformResult batchDel${table.NameFU}(List<Long> deleteIdList);
+    PlatformResult batchDel${table.NameFU}(List<Long> deleteIdList);
 
     /**
      * 查询列表
