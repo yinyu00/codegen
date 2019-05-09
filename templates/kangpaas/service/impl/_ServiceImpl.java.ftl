@@ -44,7 +44,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @return 操作结果
      */
     @Override
-    public PlatformResult select${table.NameFU}ById(Long ${table.NameFL}Id) {
+    public PlatformResult<${table.NameFU}Vo> select${table.NameFU}ById(Long ${table.NameFL}Id) {
         if (${table.NameFL}Id == null) {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
         }

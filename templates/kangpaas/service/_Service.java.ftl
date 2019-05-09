@@ -34,7 +34,7 @@ public interface ${table.NameFU}Service {
      * @param ${table.NameFL}Id 物理主键
      * @return
      */
-    PlatformResult select${table.NameFU}ById(Long ${table.NameFL}Id);
+    PlatformResult<${table.NameFU}Vo> select${table.NameFU}ById(Long ${table.NameFL}Id);
 
     /**
      * 插入记录
