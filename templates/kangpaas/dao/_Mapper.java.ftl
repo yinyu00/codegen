@@ -20,7 +20,7 @@ public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}> {
     * @param deleteIdList 待删除id列表
     * @return 删除结果
     */
-    //void batchDel${table.NameFU}(List<Long> deleteIdList);
+    void batchDel${table.NameFU}(List<Long> deleteIdList);
 
     /**
     *  查询列表

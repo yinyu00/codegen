@@ -121,10 +121,10 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param deleteIdList 待删除id列表
      * @return 删除结果
      */
-    //public PlatformResult batchDel${table.NameFU}(List<Long> deleteIdList) {
-    //    ${table.NameFL}Mapper.batchDel${table.NameFU}(deleteIdList);
-    //    return PlatformResult.success();
-    //}
+    public PlatformResult batchDel${table.NameFU}(List<Long> deleteIdList) {
+        ${table.NameFL}Mapper.batchDel${table.NameFU}(deleteIdList);
+        return PlatformResult.success();
+    }
 
     /**
      * 查询列表

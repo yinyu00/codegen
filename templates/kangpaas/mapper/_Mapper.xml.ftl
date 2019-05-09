@@ -19,7 +19,7 @@
     <sql id="conditions"><!-- Search Condition -->
         <trim prefix="where " prefixOverrides="and |or">
 <#list columns as column>
-            <if test="${column.colNameFL} != null"> and ${column.colName} = {${column.colNameFL}}</if>
+            <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
 </#list>
         </trim>
     </sql>
@@ -39,4 +39,19 @@
         FROM ${table.Name}
         <include refid="conditions"/>
     </select>
+
+  <delete id="batchDel${table.NameFU}" parameterType="java.util.List">
+    DELETE FROM ${table.Name}
+    WHERE
+<#list columns as column>
+    <#if column.primaryKey>
+    ${column.colName}
+    </#if>
+</#list>
+    IN
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+    ${r"#"}{item}
+    </foreach>
+  </delete>
+
 </mapper>
