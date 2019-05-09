@@ -37,4 +37,18 @@
         FROM ${table.Name}
         <include refid="conditions"/>
     </select>
+
+    <delete id="batchDelByIdList">
+        DELETE FROM monitor_disc_rule
+        WHERE
+        <#list columns as column>
+            <#if column.primaryKey>
+                ${column.colName}
+            </#if>
+        </#list>
+        IN
+        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
+        #{item}
+        </foreach>
+    </delete>
 </mapper>
