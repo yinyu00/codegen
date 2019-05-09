@@ -25,9 +25,11 @@
     </sql>
     <!-- 集成列 -->
     <sql id="columns">
-
+    <#assign x = 0>
+    <#assign size = columns?size>
     <#list columns as column>
-        ${column.colName},
+        <#assign x = x+1>
+        ${column.colName}<#if x lt size>,</#if>
     </#list>
     </sql>
 
