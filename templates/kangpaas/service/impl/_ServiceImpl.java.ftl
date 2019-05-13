@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -65,6 +67,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Vo
      * @return 操作结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
         if (null == ${table.NameFL}Vo) {
@@ -85,6 +88,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Vo
      * @return 更新结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
         if (${table.NameFL}Vo == null || ${table.NameFL}Vo.get${table.NameFU}Id() == null) {
@@ -105,6 +109,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Id 待删除id
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult delete${table.NameFU}ById(Long ${table.NameFL}Id) {
         if (null ==  ${table.NameFL}Id) {
@@ -120,6 +125,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param idList 待删除Id数组
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult batchDelByIdList(List<Long> idList) {
         if (null ==  idList || idList.isEmpty()) {
