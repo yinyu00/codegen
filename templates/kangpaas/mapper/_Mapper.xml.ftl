@@ -19,7 +19,8 @@
     <sql id="conditions"><!-- Search Condition -->
         <trim prefix="where " prefixOverrides="and |or">
 <#list columns as column>
-            <if test="${column.colNameFL} != null"> and ${column.colName} = {${column.colNameFL}}</if>
+            <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
+
 </#list>
         </trim>
     </sql>
@@ -50,7 +51,7 @@
         </#list>
         IN
         <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
-        #{item}
+        ${r"#"}{item}
         </foreach>
     </delete>
 </mapper>

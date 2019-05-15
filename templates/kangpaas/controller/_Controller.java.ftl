@@ -60,4 +60,10 @@ public class ${table.NameFU}Controller {
         return ${table.NameFL}Service.batchDelByIdList(deleteIdListVo.getDelIdList());
     }
 
+    @ApiOperation(value = "exist", notes = "存在性校验")
+    @PostMapping("/exist")
+    public PlatformResult exist(@RequestBody ${table.NameFU}Vo vo) {
+        return ${table.NameFL}Service.exist(vo);
+    }
+
 }
