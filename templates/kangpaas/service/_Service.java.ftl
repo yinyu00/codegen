@@ -63,4 +63,12 @@ public interface ${table.NameFU}Service {
      * @return 删除结果
      */
     PlatformResult batchDelByIdList(List<Long> idList);
+
+    /**
+     * 存在性校验
+     * @param ${table.NameFL}Vo 校验对象
+     * @return 校验结果
+     */
+    PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo);
+
 }

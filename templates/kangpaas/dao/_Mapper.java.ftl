@@ -34,4 +34,12 @@ public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}> {
       * @param idList 删除ID列表
       */
     void batchDelByIdList(@Param("idList") List<Long> idList);
+
+
+    /**
+     * 存在性校验
+     * @param ${table.NameFL}Vo 校验对象
+     * @return 校验结果
+     */
+    PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo);
 }

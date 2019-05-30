@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -64,18 +66,26 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Vo
      * @return 操作结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        if (null == ${table.NameFL}Vo) {
-            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        try {
+            if (null == ${table.NameFL}Vo) {
+                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+            }
+
+            OperatorUtil.insert(${table.NameFL}Vo);
+
+            ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
+            BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
+
+            ${table.NameFL}Mapper.insert(${table.NameFL});
+        }
+        catch (Exception ex) {
+            LOG.error(ErrorCodeEnum.${table.Name}_CREATE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_CREATE_ERR.getCode(), ErrorCodeEnum.${table.Name}_CREATE_ERR.getMessage());
         }
 
-        OperatorUtil.insert(${table.NameFL}Vo);
-
-        ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
-        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
-
-        ${table.NameFL}Mapper.insert(${table.NameFL});
         return PlatformResult.success();
     }
 
@@ -84,18 +94,26 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Vo
      * @return 更新结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        if (${table.NameFL}Vo == null || ${table.NameFL}Vo.get${table.NameFU}Id() == null) {
-            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        try {
+            if (${table.NameFL}Vo == null || ${table.NameFL}Vo.get${table.NameFU}Id() == null) {
+                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+            }
+
+            OperatorUtil.update(${table.NameFL}Vo);
+
+            ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
+            BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
+
+            ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL});
+        }
+        catch (Exception ex) {
+            LOG.error(ErrorCodeEnum.${table.Name}_UPDATE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_UPDATE_ERR.getCode(), ErrorCodeEnum.${table.Name}_UPDATE_ERR.getMessage());
         }
 
-        OperatorUtil.update(${table.NameFL}Vo);
-
-        ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
-        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
-
-        ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL});
         return PlatformResult.success();
     }
 
@@ -104,13 +122,21 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL}Id 待删除id
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult delete${table.NameFU}ById(Long ${table.NameFL}Id) {
-        if (null ==  ${table.NameFL}Id) {
-            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        try {
+            if (null ==  ${table.NameFL}Id) {
+                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+            }
+
+            ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
+        }
+        catch (Exception ex) {
+            LOG.error(ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage());
         }
 
-        ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
         return PlatformResult.success();
     }
 
@@ -119,13 +145,21 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param idList 待删除Id数组
      * @return 删除结果
      */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult batchDelByIdList(List<Long> idList) {
-        if (null ==  idList || idList.isEmpty()) {
-            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        try {
+            if (null ==  idList || idList.isEmpty()) {
+                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+            }
+
+            ${table.NameFL}Mapper.batchDelByIdList(idList);
+        }
+        catch (Exception ex) {
+            LOG.error(ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage());
         }
 
-        ${table.NameFL}Mapper.batchDelByIdList(idList);
         return PlatformResult.success();
     }
 
@@ -148,4 +182,26 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
         return PlatformResult.success(${table.NameFL}List, new PageInfo(${table.NameFL}List).getTotal());
     }
 
+
+    /**
+    * 存在性校验
+    * @param ${table.NameFL}Vo 校验对象
+    * @return 校验结果
+    */
+    public PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo) {
+    List<${table.NameFU}> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}List(${table.NameFL}Vo);
+        if(${table.NameFL}List == null || ${table.NameFL}List.isEmpty()) {
+            return PlatformResult.success(CommonConstant.INT_ONE);  // 无重复记录
+        }
+
+        for(${table.NameFU} ${table.NameFL} : ${table.NameFL}List) {
+            if(${table.NameFL}.get${table.NameFU}Id().equals(${table.NameFL}Vo.get${table.NameFU}Id())) {
+                continue; // 跳过相同id的记录
+            }
+
+            return PlatformResult.success(CommonConstant.INT_ZERO); // 有重复记录
+        }
+
+        return PlatformResult.success(CommonConstant.INT_ONE);  // 无重复记录
+    }
 }

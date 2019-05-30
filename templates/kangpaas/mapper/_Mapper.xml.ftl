@@ -20,6 +20,7 @@
         <trim prefix="where " prefixOverrides="and |or">
 <#list columns as column>
             <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
+
 </#list>
         </trim>
     </sql>
@@ -49,7 +50,7 @@
             </#if>
         </#list>
         IN
-        <foreach close=")" collection="collection" index="index" item="item" open="(" separator=",">
+        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
         ${r"#"}{item}
         </foreach>
     </delete>
