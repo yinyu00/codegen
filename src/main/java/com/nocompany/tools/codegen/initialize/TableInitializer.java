@@ -11,6 +11,12 @@ public interface TableInitializer {
      * 初始化列
      * @param table
      */
+    void initTable(Table table);
+
+    /**
+     * 初始化列
+     * @param table
+     */
     void initColumn(Table table);
 
     /**

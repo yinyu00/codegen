@@ -2,6 +2,7 @@ package com.kangpaas.monitormgnt.controller;
 
 import com.kangpaas.monitormgnt.service.${table.NameFU}Service;
 import com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo;
+import com.kangpaas.sdk.common.vo.DeleteIdListVo;
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
 import com.kangpaas.sdk.common.vo.ResponsePageVo;

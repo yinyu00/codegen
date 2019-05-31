@@ -33,6 +33,14 @@
         ${column.colName}<#if x lt size>,</#if>
     </#list>
     </sql>
+    <sql id="columns2">
+    <#assign x = 0>
+    <#assign size = columns?size>
+    <#list columns as column>
+        <#assign x = x+1>
+        ${column.colName}<#if x lt size>,</#if>
+    </#list>
+    </sql>
 
     <select id="select${table.NameFU}List" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="BaseResultMap" >
         SELECT
@@ -41,8 +49,31 @@
         <include refid="conditions"/>
     </select>
 
+    <select id="select${table.NameFU}" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="columns"/>
+        FROM ${table.Name}
+        <include refid="conditions2"/>
+    </select>
+
+    <delete id="batchSelectByIdList">
+        SELECT
+        <include refid="columns"/>
+        FROM ${table.Name}
+        WHERE
+        <#list columns as column>
+            <#if column.primaryKey>
+                ${column.colName}
+            </#if>
+        </#list>
+        IN
+        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
+        ${r"#"}{item}
+        </foreach>
+    </delete>
+
     <delete id="batchDelByIdList">
-        DELETE FROM monitor_disc_rule
+        DELETE FROM ${table.Name}
         WHERE
         <#list columns as column>
             <#if column.primaryKey>
