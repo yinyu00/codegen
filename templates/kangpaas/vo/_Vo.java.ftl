@@ -8,7 +8,7 @@ import java.sql.Date;
 /**
  * ${table.NameFL}
  *
- * @author jinw
+ * @author ${param.author}
  * @version 1.0
  **/
 @Data

@@ -1,4 +1,4 @@
-package com.kangpaas.logmgmt.model;
+package ${param.basePackage}.entity;
 
 import lombok.Data;
 import java.util.Objects;
@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 /**
  * ${table.NameFL}
  *
- * @author jinw
+ * @author ${param.author}
  * @version 1.0  2019-04-29
  **/
 @Data

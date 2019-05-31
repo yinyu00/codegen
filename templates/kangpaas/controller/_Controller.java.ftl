@@ -1,7 +1,7 @@
-package com.kangpaas.monitormgnt.controller;
+package ${param.basePackage}.controller;
 
-import com.kangpaas.monitormgnt.service.${table.NameFU}Service;
-import com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo;
+import ${param.basePackage}.service.${table.NameFU}Service;
+import ${param.voPackage}.${table.NameFU}Vo;
 import com.kangpaas.sdk.common.vo.DeleteIdListVo;
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 功能描述: XXXXXX接口
  *
- * @author Duwei
+ * @author ${param.author}
  * @date 2019-4-25 0025 下午 2:05
  */
 @Api(value = "XXXXXXAPI", tags = "XXXXXX接口规格")
-@RequestMapping("/api/v1/monitormgnt/${table.NameFL}")
+@RequestMapping("${param.baseUri}${table.NameFL}")
 @RestController
 public class ${table.NameFU}Controller {
 
