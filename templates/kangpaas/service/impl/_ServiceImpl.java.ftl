@@ -2,6 +2,7 @@ package com.kangpaas.cmp.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kangpaas.common.core.constant.CommonConstant;
 import com.kangpaas.monitormgnt.dao.${table.NameFU}Mapper;
 import com.kangpaas.monitormgnt.entity.${table.NameFU};
 import com.kangpaas.monitormgnt.service.${table.NameFU}Service;
@@ -14,6 +15,8 @@ import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
 import com.kangpaas.sdk.common.vo.ResponsePageVo;
 import com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
+
+    /**
+     * LOGGER日志
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}ServiceImpl.class);
 
     @Autowired
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
@@ -82,8 +90,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
             ${table.NameFL}Mapper.insert(${table.NameFL});
         }
         catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name}_CREATE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_CREATE_ERR.getCode(), ErrorCodeEnum.${table.Name}_CREATE_ERR.getMessage());
+            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getMessage());
         }
 
         return PlatformResult.success();
@@ -110,8 +118,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
             ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL});
         }
         catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name}_UPDATE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_UPDATE_ERR.getCode(), ErrorCodeEnum.${table.Name}_UPDATE_ERR.getMessage());
+            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getMessage());
         }
 
         return PlatformResult.success();
@@ -133,11 +141,33 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
             ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
         }
         catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage());
+            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage());
         }
 
         return PlatformResult.success();
+    }
+
+    /**
+     * 批量查询
+     * @param idList 待查询记录Id数组
+     * @return 查询结果
+     */
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    @Override
+    public PlatformResult batchSelectByIdList(List<Long> idList) {
+        try {
+            if (null ==  idList || idList.isEmpty()) {
+                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+            }
+
+            List<MonitorLogTemplateVo> monitorLogTemplateVoList = monitorLogTemplateMapper.batchSelectByIdList(idList);
+            return PlatformResult.success(monitorLogTemplateVoList);
+        }
+        catch (Exception ex) {
+            LOG.error(ErrorCodeEnum.MONITOR_LOG_TEMPLATE_DELETE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.MONITOR_LOG_TEMPLATE_DELETE_ERR.getCode(), ErrorCodeEnum.MONITOR_LOG_TEMPLATE_DELETE_ERR.getMessage());
+        }
     }
 
     /**
@@ -156,8 +186,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
             ${table.NameFL}Mapper.batchDelByIdList(idList);
         }
         catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name}_DELETE_ERR.getMessage());
+            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage(), ex);
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage());
         }
 
         return PlatformResult.success();
@@ -189,7 +219,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     * @return 校验结果
     */
     public PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo) {
-    List<${table.NameFU}> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}List(${table.NameFL}Vo);
+    List<${table.NameFU}> ${table.NameFL}List = ${table.NameFL}Mapper.selectByName(${table.NameFL}Vo.getName());
         if(${table.NameFL}List == null || ${table.NameFL}List.isEmpty()) {
             return PlatformResult.success(CommonConstant.INT_ONE);  // 无重复记录
         }

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 //@Profile(value = "mysql")
 public class MysqlTableInitializer implements TableInitializer {
@@ -20,8 +21,15 @@ public class MysqlTableInitializer implements TableInitializer {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public void initTable(Table table) {
+        String sql = "select * from information_schema.tables where table_schema='kangpaas_baseline' and table_name = '" + table.getName() + "'";
+
+        Map<String, Object> tableMap = jdbcTemplate.queryForMap(sql);
+        table.setComments((String)tableMap.get("TABLE_COMMENT"));
+    }
+
     public void initColumn(Table table) {
-        String sql = "select * from information_schema.columns where table_schema='kangpaas_baseline' and table_name = '" + table.getTableName() + "'";
+        String sql = "select * from information_schema.columns where table_schema='kangpaas_baseline' and table_name = '" + table.getName() + "'";
 
         List columnList = jdbcTemplate.query(sql, new RowMapper<Column>() {
             public Column mapRow(ResultSet rs, int rowNum) throws SQLException {

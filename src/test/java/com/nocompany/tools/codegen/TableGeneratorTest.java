@@ -3,6 +3,7 @@ package com.nocompany.tools.codegen;
 import com.nocompany.tools.codegen.generate.TableGenerator;
 import com.nocompany.tools.codegen.initialize.TableInitializer;
 import com.nocompany.tools.codegen.model.Table;
+import org.apache.commons.httpclient.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -35,12 +36,16 @@ public class TableGeneratorTest {
 
     @Test
     public void generate() throws Exception {
-        Table table = new Table("monitor_disc_rule"); // monitor_disc_rule monitor_disc_item
+        Table table = new Table("monitor_log_template"); // monitor_disc_rule monitor_disc_item
+
+        tableInitializer.initTable(table);
         tableInitializer.initColumn(table);
         tableInitializer.initPrimaryKey(table);
 
         Map<String, String> params = new HashMap<>();
         params.put("ftlDir", "templates/kangpaas");
+        params.put("author", "jinw");
+        params.put("date", DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
 
 //        tableGenerator.init(params.get("ftlDir"));
         tableGenerator.generate(table, params);

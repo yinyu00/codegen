@@ -33,6 +33,9 @@ public class TableGenerator {
     @Autowired
     TableInitializer tableInitializer;
 
+    private Map<String, String> generateParam;
+
+
     Configuration cfg;
     public void init(String templatePath) throws IOException {
         cfg = new Configuration();
@@ -42,7 +45,8 @@ public class TableGenerator {
 
 
     public void generate(Table table, Map<String, String> generateParam) throws Exception {
-        String ftlDir = (String) generateParam.get("ftlDir");
+        this.generateParam = generateParam;
+        String ftlDir = generateParam.get("ftlDir");
 
         @SuppressWarnings("unchecked")
         Collection<File> files = (Collection<File>) FileUtils.listFiles(new File(ftlDir), new String[]{"ftl"} , true);
@@ -60,7 +64,7 @@ public class TableGenerator {
 
         String templateName = ftlFile.getName();
         String outputPath = ftlPath.replaceFirst("templates", "target");
-        String outputName = ftlName.replaceAll("[_]", t.tableNameFU);
+        String outputName = ftlName.replaceAll("[_]", t.NameFU);
 
         File outputDir = new File(outputPath);
         if(!outputDir.exists()) {
@@ -86,11 +90,13 @@ public class TableGenerator {
 
     public Map<String,Object> initData(Table t) {
         Map<String,String> table = new HashMap<>();
-        table.put("Name", t.getTableName());
-        table.put("NameFL", t.tableNameFL);
-        table.put("NameFU", t.tableNameFU);
+        table.put("Name", t.getName());
+        table.put("NameFL", t.NameFL);
+        table.put("NameFU", t.NameFU);
+        table.put("comments", t.comments);
 
         Map<String,Object> root = new HashMap<>();
+        root.put("param", generateParam);
         root.put("table", table);
         root.put("columns", t.getColumnList());
         return root;
