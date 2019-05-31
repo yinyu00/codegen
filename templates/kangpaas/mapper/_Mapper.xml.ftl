@@ -24,16 +24,17 @@
 </#list>
         </trim>
     </sql>
+    <!-- SQL查询条件明确，禁止conditions(便于索引) -->
+    <sql id="conditions2"><!-- Search Condition -->
+        <trim prefix="where " prefixOverrides="and |or">
+<#list columns as column>
+    <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
+
+</#list>
+        </trim>
+    </sql>
     <!-- 集成列 -->
     <sql id="columns">
-    <#assign x = 0>
-    <#assign size = columns?size>
-    <#list columns as column>
-        <#assign x = x+1>
-        ${column.colName}<#if x lt size>,</#if>
-    </#list>
-    </sql>
-    <sql id="columns2">
     <#assign x = 0>
     <#assign size = columns?size>
     <#list columns as column>

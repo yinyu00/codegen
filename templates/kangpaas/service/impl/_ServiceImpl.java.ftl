@@ -161,8 +161,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
                 throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
             }
 
-            List<MonitorLogTemplateVo> monitorLogTemplateVoList = monitorLogTemplateMapper.batchSelectByIdList(idList);
-            return PlatformResult.success(monitorLogTemplateVoList);
+            List<${table.NameFU}Vo> ${table.NameFL}VoList = ${table.NameFL}Mapper.batchSelectByIdList(idList);
+            return PlatformResult.success(${table.NameFL}VoList);
         }
         catch (Exception ex) {
             LOG.error(ErrorCodeEnum.MONITOR_LOG_TEMPLATE_DELETE_ERR.getMessage(), ex);
@@ -219,12 +219,12 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     * @return 校验结果
     */
     public PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo) {
-    List<${table.NameFU}> ${table.NameFL}List = ${table.NameFL}Mapper.selectByName(${table.NameFL}Vo.getName());
+    List<${table.NameFU}Vo> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}(${table.NameFL}Vo);
         if(${table.NameFL}List == null || ${table.NameFL}List.isEmpty()) {
             return PlatformResult.success(CommonConstant.INT_ONE);  // 无重复记录
         }
 
-        for(${table.NameFU} ${table.NameFL} : ${table.NameFL}List) {
+        for(${table.NameFU}Vo ${table.NameFL} : ${table.NameFL}List) {
             if(${table.NameFL}.get${table.NameFU}Id().equals(${table.NameFL}Vo.get${table.NameFU}Id())) {
                 continue; // 跳过相同id的记录
             }

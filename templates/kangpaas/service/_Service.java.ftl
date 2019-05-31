@@ -58,8 +58,15 @@ public interface ${table.NameFU}Service {
     PlatformResult delete${table.NameFU}ById(Long ${table.NameFL}Id);
 
     /**
+     * 批量查询
+     * @param idList 待查询记录Id数组
+     * @return 查询结果
+     */
+    PlatformResult batchSelectByIdList(List<Long> idList);
+
+    /**
      * 批量删除
-     * @param idList 待删除资源ID
+     * @param idList 待删除资源Id数组
      * @return 删除结果
      */
     PlatformResult batchDelByIdList(List<Long> idList);
