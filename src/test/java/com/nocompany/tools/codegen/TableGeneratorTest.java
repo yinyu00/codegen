@@ -54,6 +54,7 @@ public class TableGeneratorTest {
         params.put(VO_PACKAGE, "com.kangpaas.sdk.monitormgnt.vo");
         params.put(BASE_URI, "/api/v1/monitormgnt/");
         params.put(API_ID_PREFIX, "60105000");
+        params.put(MENU_ID, "60105000");
 
 //        tableGenerator.init(params.get("ftlDir"));
         tableGenerator.generate(table, params);

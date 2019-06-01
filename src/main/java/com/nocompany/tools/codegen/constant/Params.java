@@ -19,4 +19,5 @@ public interface Params {
     String BASE_URI = "baseUri";
 
     String API_ID_PREFIX = "apiIdPrefix";
+    String MENU_ID = "menuId";
 }
