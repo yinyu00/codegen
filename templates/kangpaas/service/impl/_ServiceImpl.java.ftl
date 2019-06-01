@@ -1,11 +1,11 @@
-package com.kangpaas.cmp.service;
+package ${param.basePackage}.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.kangpaas.common.core.constant.CommonConstant;
-import com.kangpaas.monitormgnt.dao.${table.NameFU}Mapper;
-import com.kangpaas.monitormgnt.entity.${table.NameFU};
-import com.kangpaas.monitormgnt.service.${table.NameFU}Service;
+import ${param.basePackage}.dao.${table.NameFU}Mapper;
+import ${param.basePackage}.entity.${table.NameFU};
+import ${param.basePackage}.service.${table.NameFU}Service;
 import com.kangpaas.common.core.exception.BusinessException;
 import com.kangpaas.common.core.exception.ErrorCodeEnum;
 import com.kangpaas.common.core.utils.CollectionUtil;
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * ${table.NameFL}
  *
- * @author jinw
+ * @author ${param.author}
  * @version 1.0  2019-04-29
  **/
 @Service
@@ -54,7 +54,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @return 操作结果
      */
     @Override
-    public PlatformResult select${table.NameFU}ById(Long ${table.NameFL}Id) {
+    public PlatformResult<${table.NameFU}Vo> select${table.NameFU}ById(Long ${table.NameFL}Id) {
         if (${table.NameFL}Id == null) {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
         }

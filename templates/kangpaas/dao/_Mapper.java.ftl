@@ -1,6 +1,6 @@
-package com.kangpaas.monitormgnt.service;
+package ${param.basePackage}.service;
 
-import com.kangpaas.monitormgnt.entity.${table.NameFU};
+import ${param.basePackage}.entity.${table.NameFU};
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo;
 import tk.mybatis.mapper.common.Mapper;
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * XXXXXX
  *
- * @author jinw
+ * @author ${param.author}
  * @version 1.0  2019-04-29
  **/
 @Component

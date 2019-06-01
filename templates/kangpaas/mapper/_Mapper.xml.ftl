@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kangpaas.monitormgnt.dao.${table.NameFU}Mapper">
-    <resultMap id="BaseResultMap" type="com.kangpaas.monitormgnt.entity.${table.NameFU}">
+<mapper namespace="${param.basePackage}.dao.${table.NameFU}Mapper">
+    <resultMap id="BaseResultMap" type="${param.basePackage}.entity.${table.NameFU}">
         <!--
           WARNING - @mbg.generated
         -->
