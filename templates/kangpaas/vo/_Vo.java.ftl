@@ -3,7 +3,7 @@ package com.kangpaas.sdk.monitormgnt.vo;
 import lombok.Data;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * ${table.NameFL}

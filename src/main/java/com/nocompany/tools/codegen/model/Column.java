@@ -115,7 +115,7 @@ public class Column {
             case "datetime":
             case "time":
             case "timestamp":
-                return "Date";
+                return "Timestamp";
 
             default:
                 throw new java.lang.UnsupportedOperationException();

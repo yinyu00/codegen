@@ -14,6 +14,19 @@
 </#list>
     </resultMap>
 
+    <resultMap id="voMap" type="${param.voPackage}.${table.NameFU}Vo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+<#list columns as column>
+    <#if column.primaryKey>
+        <id column="${column.colName}" jdbcType="${column.dataTypeUpperCase}" property="${column.colNameFL}"/>
+    <#else>
+        <result column="${column.colName}" jdbcType="${column.dataTypeUpperCase}" property="${column.colNameFL}"/>
+    </#if>
+</#list>
+    </resultMap>
+
 
     <!-- SQL查询条件明确，禁止conditions(便于索引) -->
     <sql id="conditions"><!-- Search Condition -->
@@ -43,21 +56,21 @@
     </#list>
     </sql>
 
-    <select id="select${table.NameFU}List" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="BaseResultMap" >
+    <select id="select${table.NameFU}List" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="voMap" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}
         <include refid="conditions"/>
     </select>
 
-    <select id="select${table.NameFU}" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="BaseResultMap" >
+    <select id="select${table.NameFU}" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="voMap" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}
         <include refid="conditions2"/>
     </select>
 
-    <delete id="batchSelectByIdList">
+    <select id="batchSelectByIdList" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}
@@ -71,7 +84,7 @@
         <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
         ${r"#"}{item}
         </foreach>
-    </delete>
+    </select>
 
     <delete id="batchDelByIdList">
         DELETE FROM ${table.Name}
