@@ -31,13 +31,13 @@ VALUES
 
 INSERT INTO `menu_api` (`api_id`, `menu_id`)
 VALUES
-('${param.apiIdPrefix}1',, '${param.menuId}'),
-('${param.apiIdPrefix}2',, '${param.menuId}'),
-('${param.apiIdPrefix}3',, '${param.menuId}'),
-('${param.apiIdPrefix}4',, '${param.menuId}'),
-('${param.apiIdPrefix}5',, '${param.menuId}'),
-('${param.apiIdPrefix}6',, '${param.menuId}'),
-('${param.apiIdPrefix}7',, '${param.menuId}');
+('${param.apiIdPrefix}1', '${param.menuId}'),
+('${param.apiIdPrefix}2', '${param.menuId}'),
+('${param.apiIdPrefix}3', '${param.menuId}'),
+('${param.apiIdPrefix}4', '${param.menuId}'),
+('${param.apiIdPrefix}5', '${param.menuId}'),
+('${param.apiIdPrefix}6', '${param.menuId}'),
+('${param.apiIdPrefix}7', '${param.menuId}');
 
 
 -- ${param.baseUri}${table.NameFL}/query - post
