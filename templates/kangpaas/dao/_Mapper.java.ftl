@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * XXXXXX
+ * ${table.comments}
  *
  * @author ${param.author}
  * @version 1.0  2019-04-29

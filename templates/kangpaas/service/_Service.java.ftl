@@ -1,13 +1,13 @@
 package ${param.basePackage}.service;
 
-import ${param.basePackage}.vo.${table.NameFU}Vo;
+import ${param.voPackage}.${table.NameFU}Vo;
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
 import com.kangpaas.sdk.common.vo.ResponsePageVo;
 import java.util.List;
 
 /**
- * XXXXXX
+ * ${table.comments}
  *
  * @author ${param.author}
  * @version 1.0  2019-04-29
@@ -21,11 +21,10 @@ public interface ${table.NameFU}Service {
      */
     PlatformResult<ResponsePageVo<${table.NameFU}Vo>> select${table.NameFU}List(RequestPageVo<${table.NameFU}Vo> pageVo);
 
-
     /**
      * 根据id查看详情
      * @param ${table.NameFL}Id 物理主键
-     * @return
+     * @return 实体对象
      */
     PlatformResult<${table.NameFU}Vo> select${table.NameFU}ById(Long ${table.NameFL}Id);
 

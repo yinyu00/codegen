@@ -14,7 +14,7 @@ import com.kangpaas.common.core.utils.StringUtil;
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
 import com.kangpaas.sdk.common.vo.ResponsePageVo;
-import com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo;
+import ${param.voPackage}.${table.NameFU}Vo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import lombok.RequiredArgsConstructor;
@@ -77,22 +77,16 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        try {
-            if (null == ${table.NameFL}Vo) {
-                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
-            }
-
-            OperatorUtil.insert(${table.NameFL}Vo);
-
-            ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
-            BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
-
-            ${table.NameFL}Mapper.insert(${table.NameFL});
+        if (null == ${table.NameFL}Vo) {
+            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
-        catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getMessage());
-        }
+
+        OperatorUtil.insert(${table.NameFL}Vo);
+
+        ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
+        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
+
+        ${table.NameFL}Mapper.insert(${table.NameFL});
 
         return PlatformResult.success();
     }
@@ -105,45 +99,33 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        try {
-            if (${table.NameFL}Vo == null || ${table.NameFL}Vo.get${table.NameFU}Id() == null) {
-                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
-            }
-
-            OperatorUtil.update(${table.NameFL}Vo);
-
-            ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
-            BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
-
-            ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL});
+        if (${table.NameFL}Vo == null || ${table.NameFL}Vo.get${table.NameFU}Id() == null) {
+            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
-        catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getMessage());
-        }
+
+        OperatorUtil.update(${table.NameFL}Vo);
+
+        ${table.NameFU} ${table.NameFL} = new ${table.NameFU}();
+        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL});
+
+        ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL});
 
         return PlatformResult.success();
     }
 
     /**
-     *  单个删除
+     * 单个删除
      * @param ${table.NameFL}Id 待删除id
      * @return 删除结果
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult delete${table.NameFU}ById(Long ${table.NameFL}Id) {
-        try {
-            if (null ==  ${table.NameFL}Id) {
-                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
-            }
+        if (null ==  ${table.NameFL}Id) {
+            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        }
 
-            ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
-        }
-        catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage());
-        }
+        ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
 
         return PlatformResult.success();
     }
@@ -178,17 +160,11 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult batchDelByIdList(List<Long> idList) {
-        try {
-            if (null ==  idList || idList.isEmpty()) {
-                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
-            }
+        if (null ==  idList || idList.isEmpty()) {
+            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        }
 
-            ${table.NameFL}Mapper.batchDelByIdList(idList);
-        }
-        catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage());
-        }
+        ${table.NameFL}Mapper.batchDelByIdList(idList);
 
         return PlatformResult.success();
     }

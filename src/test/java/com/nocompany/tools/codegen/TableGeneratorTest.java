@@ -77,7 +77,7 @@ public class TableGeneratorTest {
             params.put(FTLDIR, "templates/kangpaas");
             params.put(AUTHOR, "xg.zhao");
             params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-            params.put(BASE_PACKAGE, "com.kangpaas.monitormgnt.controller");
+            params.put(BASE_PACKAGE, "com.kangpaas.monitormgnt");
             params.put(VO_PACKAGE, "com.kangpaas.sdk.monitormgnt.vo");
             params.put(BASE_URI, "/api/v1/monitormgnt/");
             params.put(API_ID_PREFIX, "50105");
