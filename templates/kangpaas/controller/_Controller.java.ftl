@@ -1,12 +1,12 @@
 package ${param.basePackage}.controller;
 
 import ${param.basePackage}.service.${table.NameFU}Service;
-import com.kangpaas.common.core.exception.ErrorCodeEnum;
 import ${param.voPackage}.${table.NameFU}Vo;
 import com.kangpaas.sdk.common.vo.DeleteIdListVo;
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
 import com.kangpaas.sdk.common.vo.ResponsePageVo;
+import com.kangpaas.sdk.core.exception.ErrorCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * 功能描述: ${table.comments}接口
  *
  * @author ${param.author}
- * @date 2019-4-25 0025 下午 2:05
+ * @version 1.0 ${param.date}
  */
 @Api(value = "${table.comments}API", tags = "${table.comments}接口规格")
 @RequestMapping("${param.baseUri}${table.NameFL}")
@@ -39,13 +39,13 @@ public class ${table.NameFU}Controller {
         return ${table.NameFL}Service.select${table.NameFU}List(pageVo);
     }
 
-    @ApiOperation(value = "select", notes = "查询单个资源详情")
+    @ApiOperation(value = "select${table.NameFU}", notes = "查询单个资源详情")
     @GetMapping("/{id}")
     public PlatformResult select${table.NameFU}ById(@PathVariable Long id) {
         return ${table.NameFL}Service.select${table.NameFU}ById(id);
     }
 
-    @ApiOperation(value = "add${table.NameFU}", notes = "新建${table.comments}")
+    @ApiOperation(value = "add${table.NameFU}", notes = "新增${table.comments}")
     @PostMapping
     public PlatformResult insert${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
         try {
@@ -53,11 +53,11 @@ public class ${table.NameFU}Controller {
         }
         catch (Exception ex) {
             LOG.error(ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR.getMessage());
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_CREATE_ERR);
         }
     }
 
-    @ApiOperation(value = "update", notes = "更新${table.comments}")
+    @ApiOperation(value = "update${table.NameFU}", notes = "更新${table.comments}")
     @PutMapping
     public PlatformResult update${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
         try {
@@ -65,11 +65,11 @@ public class ${table.NameFU}Controller {
         }
         catch (Exception ex) {
             LOG.error(ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR.getMessage());
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_UPDATE_ERR);
         }
     }
 
-    @ApiOperation(value = "delete", notes = "删除单个${table.comments}")
+    @ApiOperation(value = "delete${table.NameFU}", notes = "删除${table.comments}")
     @DeleteMapping("/{id}")
     public PlatformResult delete${table.NameFU}(@PathVariable Long id) {
         try {
@@ -77,11 +77,11 @@ public class ${table.NameFU}Controller {
         }
         catch (Exception ex) {
             LOG.error(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage());
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR);
         }
     }
 
-    @ApiOperation(value = "batchDel", notes = "批量删除${table.comments}")
+    @ApiOperation(value = "batchDelete${table.NameFU}", notes = "批量删除${table.comments}")
     @DeleteMapping("/batchDel")
     public PlatformResult batchDel(@RequestBody DeleteIdListVo deleteIdListVo) {
         try {
@@ -89,11 +89,11 @@ public class ${table.NameFU}Controller {
         }
         catch (Exception ex) {
             LOG.error(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getCode(), ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR.getMessage());
+            return PlatformResult.failure(ErrorCodeEnum.${table.Name?upper_case}_DELETE_ERR);
         }
     }
 
-    @ApiOperation(value = "exist", notes = "存在性校验")
+    @ApiOperation(value = "check${table.NameFU}Exist", notes = "存在性校验")
     @PostMapping("/exist")
     public PlatformResult exist(@RequestBody ${table.NameFU}Vo vo) {
         return ${table.NameFL}Service.exist(vo);

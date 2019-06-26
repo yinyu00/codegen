@@ -7,11 +7,11 @@ import com.kangpaas.sdk.common.vo.ResponsePageVo;
 import java.util.List;
 
 /**
- * ${table.comments}
+ * 功能描述: ${table.comments}
  *
  * @author ${param.author}
- * @version 1.0  2019-04-29
- **/
+ * @version 1.0 ${param.date}
+ */
 public interface ${table.NameFU}Service {
 
     /**
@@ -30,21 +30,21 @@ public interface ${table.NameFU}Service {
 
     /**
      * 插入记录
-     * @param ${table.NameFL}Vo 资源信息
+     * @param ${table.NameFL}Vo 插入对象
      * @return 操作结果
      */
     PlatformResult insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo);
 
     /**
-     * 更新信息
-     * @param ${table.NameFL}Vo 资源信息
+     * 更新记录
+     * @param ${table.NameFL}Vo 更新对象
      * @return 更新结果
      */
     PlatformResult update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo);
 
     /**
      * 单个删除
-     * @param ${table.NameFL}Id 删除资源
+     * @param ${table.NameFL}Id 删除资源主键
      * @return 删除结果
      */
     PlatformResult delete${table.NameFU}ById(Long ${table.NameFL}Id);

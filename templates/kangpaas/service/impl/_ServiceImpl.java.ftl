@@ -10,7 +10,6 @@ import com.kangpaas.common.core.exception.BusinessException;
 import com.kangpaas.common.core.exception.ErrorCodeEnum;
 import com.kangpaas.common.core.utils.CollectionUtil;
 import com.kangpaas.common.core.utils.OperatorUtil;
-import com.kangpaas.common.core.utils.StringUtil;
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
 import com.kangpaas.sdk.common.vo.ResponsePageVo;
@@ -27,11 +26,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * ${table.NameFL}
+ * 功能描述: ${table.comments}
  *
  * @author ${param.author}
- * @version 1.0  2019-04-29
- **/
+ * @version 1.0 ${param.date}
+ */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
@@ -41,9 +40,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}ServiceImpl.class);
 
-    @Autowired
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
-
     public ${table.NameFU}ServiceImpl(${table.NameFU}Mapper ${table.NameFL}Mapper) {
         this.${table.NameFL}Mapper = ${table.NameFL}Mapper;
     }
@@ -70,8 +67,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     }
 
     /**
-     *  插入记录
-     * @param ${table.NameFL}Vo
+     * 插入记录
+     * @param ${table.NameFL}Vo 插入对象
      * @return 操作结果
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -92,8 +89,8 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     }
 
     /**
-     * 更新信息
-     * @param ${table.NameFL}Vo
+     * 更新记录
+     * @param ${table.NameFL}Vo 更新对象
      * @return 更新结果
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -115,7 +112,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
 
     /**
      * 单个删除
-     * @param ${table.NameFL}Id 待删除id
+     * @param ${table.NameFL}Id 待删除记录主键
      * @return 删除结果
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -139,7 +136,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     @Override
     public PlatformResult batchSelectByIdList(List<Long> idList) {
         try {
-            if (null ==  idList || idList.isEmpty()) {
+            if (CollectionUtil.isEmpty(idList)) {
                 throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
             }
 
@@ -160,7 +157,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult batchDelByIdList(List<Long> idList) {
-        if (null ==  idList || idList.isEmpty()) {
+        if (CollectionUtil.isEmpty(idList)) {
             throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
@@ -175,6 +172,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @return 列表
      */
     @Override
+    @SuppressWarnings("unchecked")
     public PlatformResult<ResponsePageVo<${table.NameFU}Vo>> select${table.NameFU}List(RequestPageVo<${table.NameFU}Vo> pageVo) {
         if (pageVo == null) {
             return PlatformResult.success();
@@ -196,7 +194,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     */
     public PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo) {
     List<${table.NameFU}Vo> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}(${table.NameFL}Vo);
-        if(${table.NameFL}List == null || ${table.NameFL}List.isEmpty()) {
+        if(CollectionUtil.isEmpty(${table.NameFL}List)) {
             return PlatformResult.success(CommonConstant.INT_ONE);  // 无重复记录
         }
 

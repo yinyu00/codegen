@@ -9,46 +9,39 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * ${table.comments}
+ * 功能描述: ${table.comments}
  *
  * @author ${param.author}
- * @version 1.0  2019-04-29
- **/
+ * @version 1.0 ${param.date}
+ */
 @Component
 public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}> {
 
     /**
-     * 批量删除记录
-     * @param deleteIdList 待删除id列表
-     * @return 删除结果
-     */
-    //void batchDel${table.NameFU}(List<Long> deleteIdList);
-
-    /**
-     *  查询列表
-     * @param ${table.NameFL}Vo 查询条件
+     * 根据对象模糊查询
+     * @param ${table.NameFL}Vo 模糊查询条件
      * @return 列表
      */
     List<${table.NameFU}Vo> select${table.NameFU}List(${table.NameFU}Vo ${table.NameFL}Vo);
 
-
     /**
-     *  查询列表
-     * @param ${table.NameFL}Vo 查询条件
+     * 根据对象精确查询
+     * @param ${table.NameFL}Vo 精确查询条件
      * @return 列表
      */
     List<${table.NameFU}Vo> select${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo);
 
     /**
-     * 批量删除
-     * @param idList 删除ID列表
+     * 根据主键批量查询
+     * @param idList 查询Id列表
+     * @return 列表
      */
     List<${table.NameFU}Vo> batchSelectByIdList(@Param("idList") List<Long> idList);
 
     /**
-      * 批量删除
-      * @param idList 删除ID列表
-      */
+     * 批量删除记录
+     * @param idList 删除Id列表
+     */
     void batchDelByIdList(@Param("idList") List<Long> idList);
 
     /**

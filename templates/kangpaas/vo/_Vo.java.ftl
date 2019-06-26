@@ -6,11 +6,11 @@ import lombok.ToString;
 import java.sql.Timestamp;
 
 /**
- * ${table.NameFL}
+ * 功能描述: ${table.comments}
  *
  * @author ${param.author}
- * @version 1.0
- **/
+ * @version 1.0 ${param.date}
+ */
 @Data
 @ToString
 public class ${table.NameFU}Vo {

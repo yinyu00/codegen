@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 /**
- * ${table.NameFL}
+ * 功能描述: ${table.comments}
  *
  * @author ${param.author}
- * @version 1.0  2019-04-29
- **/
+ * @version 1.0 ${param.date}
+ */
 @Data
 public class ${table.NameFU} implements java.io.Serializable {
 <#list columns as column>
@@ -26,9 +26,9 @@ public class ${table.NameFU} implements java.io.Serializable {
 </#list>
 
     /**
-    * 覆盖 equals 算法
-    * @return
-    */
+     * 覆盖 equals 算法
+     * @return true if two object equals, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -49,9 +49,9 @@ public class ${table.NameFU} implements java.io.Serializable {
     }
 
     /**
-    * 覆盖 hashCode 算法
-    * @return
-    */
+     * 覆盖 hashCode 算法
+     * @return hash code of the current object
+     */
     @Override
     public int hashCode() {
 <#assign xx = 0>
