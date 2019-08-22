@@ -40,6 +40,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}ServiceImpl.class);
 
+    @Autowired
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
     public ${table.NameFU}ServiceImpl(${table.NameFU}Mapper ${table.NameFL}Mapper) {
         this.${table.NameFL}Mapper = ${table.NameFL}Mapper;

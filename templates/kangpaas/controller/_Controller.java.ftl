@@ -48,6 +48,10 @@ public class ${table.NameFU}Controller {
     @ApiOperation(value = "add${table.NameFU}", notes = "新增${table.comments}")
     @PostMapping
     public PlatformResult insert${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("AppLayerController.insert${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
+        }
+
         try {
             return ${table.NameFL}Service.insert${table.NameFU}(${table.NameFL}Vo);
         }
@@ -60,6 +64,10 @@ public class ${table.NameFU}Controller {
     @ApiOperation(value = "update${table.NameFU}", notes = "更新${table.comments}")
     @PutMapping
     public PlatformResult update${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("AppLayerController.update${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
+        }
+
         try {
             return ${table.NameFL}Service.update${table.NameFU}(${table.NameFL}Vo);
         }
@@ -72,6 +80,10 @@ public class ${table.NameFU}Controller {
     @ApiOperation(value = "delete${table.NameFU}", notes = "删除${table.comments}")
     @DeleteMapping("/{id}")
     public PlatformResult delete${table.NameFU}(@PathVariable Long id) {
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("AppLayerController.delete${table.NameFU} 被触发, id = {}", id);
+        }
+
         try {
             return ${table.NameFL}Service.delete${table.NameFU}ById(id);
         }
@@ -84,6 +96,10 @@ public class ${table.NameFU}Controller {
     @ApiOperation(value = "batchDelete${table.NameFU}", notes = "批量删除${table.comments}")
     @DeleteMapping("/batchDel")
     public PlatformResult batchDel(@RequestBody DeleteIdListVo deleteIdListVo) {
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("AppLayerController.batchDel 被触发, deleteIdListVo = {}", deleteIdListVo);
+        }
+
         try {
             return ${table.NameFL}Service.batchDelByIdList(deleteIdListVo.getDelIdList());
         }
@@ -96,6 +112,10 @@ public class ${table.NameFU}Controller {
     @ApiOperation(value = "check${table.NameFU}Exist", notes = "存在性校验")
     @PostMapping("/exist")
     public PlatformResult exist(@RequestBody ${table.NameFU}Vo vo) {
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("AppLayerController.exist 被触发, vo = {}", vo);
+        }
+
         return ${table.NameFL}Service.exist(vo);
     }
 
