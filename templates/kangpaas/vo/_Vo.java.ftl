@@ -1,4 +1,4 @@
-package com.kangpaas.sdk.monitormgnt.vo;
+package ${param.voPackage};
 
 import lombok.Data;
 import lombok.ToString;

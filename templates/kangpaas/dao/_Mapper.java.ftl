@@ -2,7 +2,7 @@ package ${param.basePackage}.service;
 
 import ${param.basePackage}.entity.${table.NameFU};
 import com.kangpaas.sdk.common.vo.PlatformResult;
-import com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo;
+import ${param.voPackage}.${table.NameFU}Vo;
 import tk.mybatis.mapper.common.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

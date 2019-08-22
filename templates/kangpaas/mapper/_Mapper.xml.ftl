@@ -56,14 +56,14 @@
     </#list>
     </sql>
 
-    <select id="select${table.NameFU}List" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="voMap" >
+    <select id="select${table.NameFU}List" parameterType="${param.voPackage}.${table.NameFU}Vo" resultMap="voMap" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}
         <include refid="conditions"/>
     </select>
 
-    <select id="select${table.NameFU}" parameterType="com.kangpaas.sdk.monitormgnt.vo.${table.NameFU}Vo" resultMap="voMap" >
+    <select id="select${table.NameFU}" parameterType="${param.voPackage}.${table.NameFU}Vo" resultMap="voMap" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}

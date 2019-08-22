@@ -7,12 +7,12 @@ import ${param.basePackage}.dao.${table.NameFU}Mapper;
 import ${param.basePackage}.entity.${table.NameFU};
 import ${param.basePackage}.service.${table.NameFU}Service;
 import com.kangpaas.common.core.exception.BusinessException;
-import com.kangpaas.common.core.exception.ErrorCodeEnum;
 import com.kangpaas.common.core.utils.CollectionUtil;
 import com.kangpaas.common.core.utils.OperatorUtil;
 import com.kangpaas.sdk.common.vo.PlatformResult;
 import com.kangpaas.sdk.common.vo.RequestPageVo;
 import com.kangpaas.sdk.common.vo.ResponsePageVo;
+import com.kangpaas.sdk.core.exception.ErrorCodeEnum;
 import ${param.voPackage}.${table.NameFU}Vo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -135,18 +135,12 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public PlatformResult batchSelectByIdList(List<Long> idList) {
-        try {
-            if (CollectionUtil.isEmpty(idList)) {
-                throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
-            }
+        if (CollectionUtil.isEmpty(idList)) {
+            throw new BusinessException(ErrorCodeEnum.SYS_PARAM_NULL);
+        }
 
-            List<${table.NameFU}Vo> ${table.NameFL}VoList = ${table.NameFL}Mapper.batchSelectByIdList(idList);
-            return PlatformResult.success(${table.NameFL}VoList);
-        }
-        catch (Exception ex) {
-            LOG.error(ErrorCodeEnum.MONITOR_LOG_TEMPLATE_DELETE_ERR.getMessage(), ex);
-            return PlatformResult.failure(ErrorCodeEnum.MONITOR_LOG_TEMPLATE_DELETE_ERR.getCode(), ErrorCodeEnum.MONITOR_LOG_TEMPLATE_DELETE_ERR.getMessage());
-        }
+        List<${table.NameFU}Vo> ${table.NameFL}VoList = ${table.NameFL}Mapper.batchSelectByIdList(idList);
+        return PlatformResult.success(${table.NameFL}VoList);
     }
 
     /**

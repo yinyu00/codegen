@@ -46,13 +46,13 @@ public class TableGeneratorTest {
 
         Map<String, String> params = new HashMap<>();
         params.put(FTLDIR, "templates/kangpaas");
-        params.put(AUTHOR, "xg.zhao");
+        params.put(AUTHOR, "jinw");
         params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-        params.put(BASE_PACKAGE, "com.kangpaas.monitormgnt");
-        params.put(VO_PACKAGE, "com.kangpaas.sdk.monitormgnt.vo");
-        params.put(BASE_URI, "/api/v1/monitormgnt/");
-        params.put(API_ID_PREFIX, "60105000");
-        params.put(MENU_ID, "60105000");
+        params.put(BASE_PACKAGE, "com.kangpaas.appsys");
+        params.put(VO_PACKAGE, "com.kangpaas.sdk.appsys.vo");
+        params.put(BASE_URI, "/api/v1/appsys/");
+        params.put(API_ID_PREFIX, "60104550");
+        params.put(MENU_ID, "60104550");
 
         tableGenerator.generate(table, params);
 
@@ -62,9 +62,9 @@ public class TableGeneratorTest {
 
     @Test
     public void batchGenerate() throws Exception {
-        List<String> tables = Arrays.asList("monitor_log_prov"
-//                , "monitor_log_source_type"
-//                , "monitor_log_prov_filter"
+        List<String> tables = Arrays.asList("app_layer"
+//                , "sys_template"
+//                , "sys_template_file"
 //                , "monitor_log_prov_input"
 //                , "monitor_log_prov_output"
         );
