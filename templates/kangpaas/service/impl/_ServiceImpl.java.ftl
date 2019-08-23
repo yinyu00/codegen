@@ -188,13 +188,16 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     * @return 校验结果
     */
     public PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo) {
-    List<${table.NameFU}Vo> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}(${table.NameFL}Vo);
+        Long originId = appLayerVo.get${table.NameFU}Id();
+        ${table.NameFL}Vo.set${table.NameFU}Id(null);
+
+        List<${table.NameFU}Vo> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}(${table.NameFL}Vo);
         if(CollectionUtil.isEmpty(${table.NameFL}List)) {
             return PlatformResult.success(CommonConstant.INT_ONE);  // 无重复记录
         }
 
         for(${table.NameFU}Vo ${table.NameFL} : ${table.NameFL}List) {
-            if(${table.NameFL}.get${table.NameFU}Id().equals(${table.NameFL}Vo.get${table.NameFU}Id())) {
+            if(${table.NameFL}.get${table.NameFU}Id().equals(originId)) {
                 continue; // 跳过相同id的记录
             }
 

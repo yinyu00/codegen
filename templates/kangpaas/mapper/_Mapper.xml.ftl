@@ -29,20 +29,24 @@
 
 
     <!-- SQL查询条件明确，禁止conditions(便于索引) -->
-    <sql id="conditions"><!-- Search Condition -->
+    <sql id="conditions"><!-- Search Condition, 主要用于列表等模糊查询 -->
         <trim prefix="where " prefixOverrides="and |or">
+<!--
+            <if test="columnName != null"> and upper(column___name) like CONCAT('%','${r"$"}{@com.kangpaas.common.core.utils.StringUtil@genFuzzyStr(columnName)}','%')</if>
+-->
 <#list columns as column>
             <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
-
 </#list>
         </trim>
     </sql>
     <!-- SQL查询条件明确，禁止conditions(便于索引) -->
-    <sql id="conditions2"><!-- Search Condition -->
+    <sql id="conditions2"><!-- Search Condition, 主要用户校验等精确查询 -->
         <trim prefix="where " prefixOverrides="and |or">
-<#list columns as column>
-    <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
-
+<!--
+            <if test="columnName != null"> and upper(column___name) = upper(${r"#"}{columnName})</if>
+-->
+            <#list columns as column>
+            <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
 </#list>
         </trim>
     </sql>
