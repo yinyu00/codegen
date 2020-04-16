@@ -39,17 +39,17 @@ public class TableGeneratorTest {
 
     public void generate(String tableName) throws Exception {
         Table table = new Table(tableName);
-
+        table.setSchema("d2");
         tableInitializer.initTable(table);
         tableInitializer.initColumn(table);
         tableInitializer.initPrimaryKey(table);
 
         Map<String, String> params = new HashMap<>();
-        params.put(FTLDIR, "templates/kangpaas");
+        params.put(FTLDIR, "templates/zhol");
         params.put(AUTHOR, "jinw");
         params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-        params.put(BASE_PACKAGE, "com.kangpaas.appsys");
-        params.put(VO_PACKAGE, "com.kangpaas.sdk.appsys.vo");
+        params.put(BASE_PACKAGE, "com.zghlj.d2");
+        params.put(VO_PACKAGE, "com.zghlj.d2.entity");
         params.put(BASE_URI, "/api/v1/appsys/");
         params.put(API_ID_PREFIX, "60104550");
         params.put(MENU_ID, "60104550");
@@ -62,7 +62,7 @@ public class TableGeneratorTest {
 
     @Test
     public void batchGenerate() throws Exception {
-        List<String> tables = Arrays.asList("app_layer"
+        List<String> tables = Arrays.asList("t_activity"
 //                , "sys_template"
 //                , "sys_template_file"
 //                , "monitor_log_prov_input"
