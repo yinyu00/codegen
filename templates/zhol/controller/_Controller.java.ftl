@@ -1,9 +1,11 @@
 package ${param.basePackage}.controller;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 
 import ${param.basePackage}.service.I${table.NameFU}Service;
 import ${param.voPackage}.bo.${table.NameFU}Bo;
+import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import ${param.voPackage}.vo.${table.NameFU}Vo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +23,7 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 @Api(value = "${table.comments}API", tags = "${table.comments}接口规格")
-@RequestMapping("${param.baseUri}${table.NameFL}")
+@RequestMapping("/${table.NameFL}")
 @RestController
 public class ${table.NameFU}Controller {
 
@@ -30,13 +32,16 @@ public class ${table.NameFU}Controller {
      */
     private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}Controller.class);
 
-    @Autowired
     private I${table.NameFU}Service ${table.NameFL}Service;
+    @Autowired
+    public void set${table.NameFU}Service(I${table.NameFU}Service ${table.NameFL}Service) {
+        this.${table.NameFL}Service = ${table.NameFL}Service;
+    }
 
-    @ApiOperation(value = "get${table.NameFU}List", notes = "查询列表")
-    @PostMapping(value = "/query")
-    public Page<${table.NameFU}Bo> select${table.NameFU}List(@RequestBody ${table.NameFU}Vo pageVo) {
-        return ${table.NameFL}Service.select${table.NameFU}List(pageVo);
+    @ApiOperation(value = "查询${table.comments}列表", notes = "查询${table.comments}列表")
+    @PostMapping(value = "/list")
+    public PageInfo<${table.NameFU}Bo> list(@RequestBody ${table.NameFU}SearchVo searchVo) {
+        return ${table.NameFL}Service.select${table.NameFU}List(searchVo);
     }
 
     @ApiOperation(value = "select${table.NameFU}", notes = "查询单个资源详情")

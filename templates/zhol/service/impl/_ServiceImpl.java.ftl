@@ -1,11 +1,12 @@
 package ${param.basePackage}.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import ${param.basePackage}.mapper.${table.NameFU}Mapper;
 import ${param.basePackage}.service.I${table.NameFU}Service;
 import ${param.voPackage}.bo.${table.NameFU}Bo;
+import ${param.voPackage}.po.${table.NameFU}Po;
+import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import ${param.voPackage}.vo.${table.NameFU}Vo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -32,8 +34,8 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
      */
     private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}ServiceImpl.class);
 
-    @Autowired
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
+    @Autowired
     public ${table.NameFU}ServiceImpl(${table.NameFU}Mapper ${table.NameFL}Mapper) {
         this.${table.NameFL}Mapper = ${table.NameFL}Mapper;
     }
@@ -45,7 +47,9 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
      */
     @Override
     public ${table.NameFU}Bo select${table.NameFU}ById(Long ${table.NameFL}Id) {
-        return null;
+        Assert.notNull(${table.NameFL}Id, "${table.NameFL}Id不能空");
+
+        return ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Id);
     }
 
     /**
@@ -56,7 +60,11 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public Integer insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        return null;
+        ${table.NameFU}Bo ${table.NameFL}Bo = new ${table.NameFU}Bo();
+
+        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Bo);
+
+        return ${table.NameFL}Mapper.insert(${table.NameFL}Bo);
     }
 
     /**
@@ -67,7 +75,11 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public Integer update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        return null;
+        ${table.NameFU}Bo ${table.NameFL}Bo = ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Vo.get${table.NameFU}Id());
+
+        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Bo);
+
+        return ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL}Bo);
     }
 
     /**
@@ -78,7 +90,7 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public Integer delete${table.NameFU}ById(Long ${table.NameFL}Id) {
-        return null;
+        return ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
     }
 
     /**
@@ -88,7 +100,7 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Page<${table.NameFU}Bo> batchSelectByIdList(List<Long> idList) {
+    public PageInfo<${table.NameFU}Bo> batchSelectByIdList(List<Long> idList) {
         return null;
     }
 
@@ -105,13 +117,19 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
 
     /**
      * 查询列表
-     * @param pageVo 分页查询条件
+     * @param searchVo 分页查询条件
      * @return 列表
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Page<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}Vo pageVo) {
-        return null;
+    public PageInfo<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}SearchVo searchVo) {
+        Integer pageNum = searchVo.getPage();
+        Integer pageSize = searchVo.getRows();
+        if (null != pageNum && null != pageSize) {
+            PageHelper.startPage(pageSize, pageNum);
+        }
+
+        return new PageInfo<${table.NameFU}Bo>(${table.NameFL}Mapper.select${table.NameFU}List(searchVo));
     }
 
 

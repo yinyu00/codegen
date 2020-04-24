@@ -12,6 +12,7 @@ import java.util.List;
 public class Table {
 
 
+    public String tableNamePrefix;
     public String Name;
     public String NameFL;
     public String NameFU;
@@ -46,10 +47,18 @@ public class Table {
         }
     }
 
-    public Table(String tableName) {
+    /**
+     * input:  tableName=t_user, tableNamePrefix=t
+     * output: nameFU=User, nameFL=user
+     * @param tableName
+     * @param tableNamePrefix
+     */
+    public Table(String tableName, String tableNamePrefix) {
         this.Name = tableName;
-        this.NameFU = GenUtil.getCamelCaseString(tableName, true).substring(1);
-        this.NameFL = GenUtil.getCamelCaseString(tableName, false).substring(1);
+        this.tableNamePrefix = tableNamePrefix;
+        String javaName = tableName.toUpperCase().replaceFirst(tableNamePrefix.toUpperCase(), "");
+        this.NameFU = GenUtil.getCamelCaseString(javaName, true);
+        this.NameFL = GenUtil.getCamelCaseString(javaName, false);
     }
 
     @Override
@@ -67,5 +76,13 @@ public class Table {
 
     public void setSchema(String schema) {
         this.schema = schema;
+    }
+
+    public String getTableNamePrefix() {
+        return tableNamePrefix;
+    }
+
+    public void setTableNamePrefix(String tableNamePrefix) {
+        this.tableNamePrefix = tableNamePrefix;
     }
 }

@@ -1,7 +1,8 @@
 package ${param.basePackage}.service;
 
-import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import ${param.voPackage}.bo.${table.NameFU}Bo;
+import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import ${param.voPackage}.vo.${table.NameFU}Vo;
 import java.util.List;
 
@@ -15,10 +16,10 @@ public interface I${table.NameFU}Service {
 
     /**
      * 查询列表
-     * @param pageVo 分页查询条件
+     * @param searchVo 分页查询条件
      * @return 列表
      */
-    Page<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}Vo pageVo);
+    PageInfo<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}SearchVo searchVo);
 
     /**
      * 根据id查看详情
@@ -53,7 +54,7 @@ public interface I${table.NameFU}Service {
      * @param idList 待查询记录Id数组
      * @return 查询结果
      */
-    Page<${table.NameFU}Bo> batchSelectByIdList(List<Long> idList);
+    PageInfo<${table.NameFU}Bo> batchSelectByIdList(List<Long> idList);
 
     /**
      * 批量删除

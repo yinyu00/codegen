@@ -4,6 +4,10 @@ public class GenUtil {
     public static String getCamelCaseString(String name, boolean firstUpperCase) {
         StringBuffer sb = new StringBuffer();
 
+        while(name.startsWith("_")) {
+            name = name.substring(1);
+        }
+
         name = name.toUpperCase();
         boolean nextUpperCase = firstUpperCase;
 

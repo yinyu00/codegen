@@ -1,11 +1,12 @@
 package ${param.basePackage}.service;
 
-import ${param.basePackage}.entity.${table.NameFU};
-import com.kangpaas.sdk.common.vo.PlatformResult;
-import ${param.voPackage}.${table.NameFU}Vo;
-import tk.mybatis.mapper.common.Mapper;
+import ${param.voPackage}.bo.${table.NameFU}Bo;
+import ${param.voPackage}.po.${table.NameFU}Po;
+import ${param.voPackage}.vo.${table.NameFU}SearchVo;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 
 /**
@@ -15,28 +16,28 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 @Component
-public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}> {
+public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}Bo> {
 
     /**
      * 根据对象模糊查询
      * @param ${table.NameFL}Vo 模糊查询条件
      * @return 列表
      */
-    List<${table.NameFU}Vo> select${table.NameFU}List(${table.NameFU}Vo ${table.NameFL}Vo);
+    List<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}SearchVo ${table.NameFL}Vo);
 
     /**
      * 根据对象精确查询
-     * @param ${table.NameFL}Vo 精确查询条件
+     * @param ${table.NameFL}Po 精确查询条件
      * @return 列表
      */
-    List<${table.NameFU}Vo> select${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo);
+    List<${table.NameFU}Po> select${table.NameFU}(${table.NameFU}Po ${table.NameFL}Po);
 
     /**
      * 根据主键批量查询
      * @param idList 查询Id列表
      * @return 列表
      */
-    List<${table.NameFU}Vo> batchSelectByIdList(@Param("idList") List<Long> idList);
+    List<${table.NameFU}Po> batchSelectByIdList(@Param("idList") List<Long> idList);
 
     /**
      * 批量删除记录
@@ -46,9 +47,9 @@ public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}> {
 
     /**
      * 存在性校验
-     * @param ${table.NameFL}Vo 校验对象
+     * @param ${table.NameFL}Po 校验对象
      * @return 校验结果
      */
-    PlatformResult exist(${table.NameFU}Vo ${table.NameFL}Vo);
+    Integer exist(${table.NameFU}Po ${table.NameFL}Po);
 
 }

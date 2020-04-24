@@ -3,7 +3,7 @@ package ${param.voPackage}.dto;
 import lombok.Data;
 import lombok.ToString;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * 功能描述: ${table.comments}
