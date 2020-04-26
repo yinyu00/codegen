@@ -125,7 +125,7 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
         Integer pageNum = searchVo.getPage();
         Integer pageSize = searchVo.getRows();
         if (null != pageNum && null != pageSize) {
-            PageHelper.startPage(pageSize, pageNum);
+            PageHelper.startPage(pageNum, pageSize);
         }
 
         return new PageInfo<>(${table.NameFL}Mapper.select${table.NameFU}List(searchVo));

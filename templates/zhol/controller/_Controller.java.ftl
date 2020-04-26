@@ -1,13 +1,13 @@
 package ${param.basePackage}.controller;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 import ${param.basePackage}.service.I${table.NameFU}Service;
-import ${param.voPackage}.bo.${table.NameFU}Bo;
 import ${param.voPackage}.po.${table.NameFU}Po;
 import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import ${param.voPackage}.vo.${table.NameFU}Vo;
+import com.zghlj.management.entity.vo.GeneralResponse;
+import com.zghlj.management.utils.ResponseUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -41,8 +41,19 @@ public class ${table.NameFU}Controller {
 
     @ApiOperation(value = "查询${table.comments}列表", notes = "查询${table.comments}列表")
     @PostMapping(value = "/list")
-    public PageInfo<${table.NameFU}Po> list(@RequestBody ${table.NameFU}SearchVo searchVo) {
-        return ${table.NameFL}Service.select${table.NameFU}List(searchVo);
+    public GeneralResponse list(@RequestBody ${table.NameFU}SearchVo searchVo) {
+        GeneralResponse response = new GeneralResponse();
+        PageInfo<${table.NameFU}Po> ${table.NameFL}s = ${table.NameFL}Service.select${table.NameFU}List(searchVo);
+
+        if(${table.NameFL}s != null) {
+            ResponseUtils.responseSuccess(response);
+            response.setTotal(${table.NameFL}s.getTotal());
+            response.setRows(${table.NameFL}s.getList());
+            return response;
+        }
+        else {
+            return (GeneralResponse) ResponseUtils.responseInit(response);
+        }
     }
 
     @ApiOperation(value = "select${table.NameFU}", notes = "查询单个资源详情")
@@ -62,6 +73,7 @@ public class ${table.NameFU}Controller {
             return ${table.NameFL}Service.insert${table.NameFU}(${table.NameFL}Vo);
         }
         catch (Exception ex) {
+            LOG.error("产生异常", ex);
             throw ex;
         }
     }
@@ -77,6 +89,7 @@ public class ${table.NameFU}Controller {
             return ${table.NameFL}Service.update${table.NameFU}(${table.NameFL}Vo);
         }
         catch (Exception ex) {
+            LOG.error("产生异常", ex);
             throw ex;
         }
     }
@@ -92,6 +105,7 @@ public class ${table.NameFU}Controller {
             return ${table.NameFL}Service.delete${table.NameFU}ById(id);
         }
         catch (Exception ex) {
+            LOG.error("产生异常", ex);
             throw ex;
         }
     }
@@ -107,6 +121,7 @@ public class ${table.NameFU}Controller {
             return ${table.NameFL}Service.batchDelByIdList(deleteIdListVo);
         }
         catch (Exception ex) {
+            LOG.error("产生异常", ex);
             throw ex;
         }
     }

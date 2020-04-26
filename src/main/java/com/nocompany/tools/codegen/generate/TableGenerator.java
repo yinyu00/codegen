@@ -90,6 +90,7 @@ public class TableGenerator {
 
     public Map<String,Object> initData(Table t) {
         Map<String,String> table = new HashMap<>();
+        table.put("Schema", t.getSchema());
         table.put("Name", t.getName());
         table.put("NameFL", t.NameFL);
         table.put("NameFU", t.NameFU);

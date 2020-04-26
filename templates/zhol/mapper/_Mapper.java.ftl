@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 @Component
-@DS(value = "base")
+@DS(value = "${table.Schema}")
 public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}Po> {
 
     /**
