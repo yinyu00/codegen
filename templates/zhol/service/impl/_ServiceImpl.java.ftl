@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import ${param.basePackage}.mapper.${table.NameFU}Mapper;
 import ${param.basePackage}.service.I${table.NameFU}Service;
-import ${param.voPackage}.bo.${table.NameFU}Bo;
 import ${param.voPackage}.po.${table.NameFU}Po;
 import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import ${param.voPackage}.vo.${table.NameFU}Vo;
@@ -46,7 +45,7 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
      * @return 操作结果
      */
     @Override
-    public ${table.NameFU}Bo select${table.NameFU}ById(Long ${table.NameFL}Id) {
+    public ${table.NameFU}Po select${table.NameFU}ById(Long ${table.NameFL}Id) {
         Assert.notNull(${table.NameFL}Id, "${table.NameFL}Id不能空");
 
         return ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Id);
@@ -60,11 +59,11 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public Integer insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        ${table.NameFU}Bo ${table.NameFL}Bo = new ${table.NameFU}Bo();
+        ${table.NameFU}Po ${table.NameFL}Po = new ${table.NameFU}Po();
 
-        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Bo);
+        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Po);
 
-        return ${table.NameFL}Mapper.insert(${table.NameFL}Bo);
+        return ${table.NameFL}Mapper.insert(${table.NameFL}Po);
     }
 
     /**
@@ -75,11 +74,11 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public Integer update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        ${table.NameFU}Bo ${table.NameFL}Bo = ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Vo.get${table.NameFU}Id());
+        ${table.NameFU}Po ${table.NameFL}Po = ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Vo.get${table.NameFU}Id());
 
-        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Bo);
+        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Po);
 
-        return ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL}Bo);
+        return ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL}Po);
     }
 
     /**
@@ -100,7 +99,7 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public PageInfo<${table.NameFU}Bo> batchSelectByIdList(List<Long> idList) {
+    public PageInfo<${table.NameFU}Po> batchSelectByIdList(List<Long> idList) {
         return null;
     }
 
@@ -122,14 +121,14 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public PageInfo<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}SearchVo searchVo) {
+    public PageInfo<${table.NameFU}Po> select${table.NameFU}List(${table.NameFU}SearchVo searchVo) {
         Integer pageNum = searchVo.getPage();
         Integer pageSize = searchVo.getRows();
         if (null != pageNum && null != pageSize) {
             PageHelper.startPage(pageSize, pageNum);
         }
 
-        return new PageInfo<${table.NameFU}Bo>(${table.NameFL}Mapper.select${table.NameFU}List(searchVo));
+        return new PageInfo<>(${table.NameFL}Mapper.select${table.NameFU}List(searchVo));
     }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${param.basePackage}.dao.${table.NameFU}Mapper">
-    <resultMap id="BaseResultMap" type="${param.basePackage}.entity.${table.NameFU}">
+<mapper namespace="${param.basePackage}.mapper.${table.NameFU}Mapper">
+    <resultMap id="BaseResultMap" type="${param.basePackage}.entity.po.${table.NameFU}Po">
         <!--
           WARNING - @mbg.generated
         -->
@@ -14,7 +14,33 @@
 </#list>
     </resultMap>
 
-    <resultMap id="voMap" type="${param.voPackage}.${table.NameFU}Vo">
+    <resultMap id="boMap" type="${param.voPackage}.bo.${table.NameFU}Bo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <#list columns as column>
+            <#if column.primaryKey>
+                <id column="${column.colName}" jdbcType="${column.dataTypeUpperCase}" property="${column.colNameFL}"/>
+            <#else>
+                <result column="${column.colName}" jdbcType="${column.dataTypeUpperCase}" property="${column.colNameFL}"/>
+            </#if>
+        </#list>
+    </resultMap>
+
+    <resultMap id="voMap" type="${param.voPackage}.vo.${table.NameFU}Vo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <#list columns as column>
+            <#if column.primaryKey>
+                <id column="${column.colName}" jdbcType="${column.dataTypeUpperCase}" property="${column.colNameFL}"/>
+            <#else>
+                <result column="${column.colName}" jdbcType="${column.dataTypeUpperCase}" property="${column.colNameFL}"/>
+            </#if>
+        </#list>
+    </resultMap>
+
+    <resultMap id="voSearchMap" type="${param.voPackage}.vo.${table.NameFU}SearchVo">
         <!--
           WARNING - @mbg.generated
         -->
@@ -60,14 +86,14 @@
     </#list>
     </sql>
 
-    <select id="select${table.NameFU}List" parameterType="${param.voPackage}.${table.NameFU}Vo" resultMap="voMap" >
+    <select id="select${table.NameFU}List" parameterType="${param.voPackage}.vo.${table.NameFU}SearchVo" resultMap="boMap" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}
         <include refid="conditions"/>
     </select>
 
-    <select id="select${table.NameFU}" parameterType="${param.voPackage}.${table.NameFU}Vo" resultMap="voMap" >
+    <select id="select${table.NameFU}" parameterType="${param.voPackage}.vo.${table.NameFU}SearchVo" resultMap="boMap" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}

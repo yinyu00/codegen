@@ -1,6 +1,5 @@
-package ${param.basePackage}.service;
+package ${param.basePackage}.mapper;
 
-import ${param.voPackage}.bo.${table.NameFU}Bo;
 import ${param.voPackage}.po.${table.NameFU}Po;
 import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import com.baomidou.dynamic.datasource.annotation.DS;
@@ -16,21 +15,22 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 @Component
-public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}Bo> {
+@DS(value = "base")
+public interface ${table.NameFU}Mapper extends Mapper<${table.NameFU}Po> {
 
     /**
      * 根据对象模糊查询
-     * @param ${table.NameFL}Vo 模糊查询条件
+     * @param ${table.NameFL}SearchVo 模糊查询条件
      * @return 列表
      */
-    List<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}SearchVo ${table.NameFL}Vo);
+    List<${table.NameFU}Po> select${table.NameFU}List(${table.NameFU}SearchVo ${table.NameFL}SearchVo);
 
     /**
      * 根据对象精确查询
-     * @param ${table.NameFL}Po 精确查询条件
+     * @param ${table.NameFL}SearchVo 精确查询条件
      * @return 列表
      */
-    List<${table.NameFU}Po> select${table.NameFU}(${table.NameFU}Po ${table.NameFL}Po);
+    List<${table.NameFU}Po> select${table.NameFU}(${table.NameFU}SearchVo ${table.NameFL}SearchVo);
 
     /**
      * 根据主键批量查询

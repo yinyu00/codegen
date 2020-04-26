@@ -1,7 +1,7 @@
 package ${param.basePackage}.service;
 
 import com.github.pagehelper.PageInfo;
-import ${param.voPackage}.bo.${table.NameFU}Bo;
+import ${param.voPackage}.po.${table.NameFU}Po;
 import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import ${param.voPackage}.vo.${table.NameFU}Vo;
 import java.util.List;
@@ -19,14 +19,14 @@ public interface I${table.NameFU}Service {
      * @param searchVo 分页查询条件
      * @return 列表
      */
-    PageInfo<${table.NameFU}Bo> select${table.NameFU}List(${table.NameFU}SearchVo searchVo);
+    PageInfo<${table.NameFU}Po> select${table.NameFU}List(${table.NameFU}SearchVo searchVo);
 
     /**
      * 根据id查看详情
      * @param ${table.NameFL}Id 物理主键
      * @return 实体对象
      */
-    ${table.NameFU}Bo select${table.NameFU}ById(Long ${table.NameFL}Id);
+    ${table.NameFU}Po select${table.NameFU}ById(Long ${table.NameFL}Id);
 
     /**
      * 插入记录
@@ -54,7 +54,7 @@ public interface I${table.NameFU}Service {
      * @param idList 待查询记录Id数组
      * @return 查询结果
      */
-    PageInfo<${table.NameFU}Bo> batchSelectByIdList(List<Long> idList);
+    PageInfo<${table.NameFU}Po> batchSelectByIdList(List<Long> idList);
 
     /**
      * 批量删除

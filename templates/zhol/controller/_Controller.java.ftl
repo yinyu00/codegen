@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 
 import ${param.basePackage}.service.I${table.NameFU}Service;
 import ${param.voPackage}.bo.${table.NameFU}Bo;
+import ${param.voPackage}.po.${table.NameFU}Po;
 import ${param.voPackage}.vo.${table.NameFU}SearchVo;
 import ${param.voPackage}.vo.${table.NameFU}Vo;
 import io.swagger.annotations.Api;
@@ -40,13 +41,13 @@ public class ${table.NameFU}Controller {
 
     @ApiOperation(value = "查询${table.comments}列表", notes = "查询${table.comments}列表")
     @PostMapping(value = "/list")
-    public PageInfo<${table.NameFU}Bo> list(@RequestBody ${table.NameFU}SearchVo searchVo) {
+    public PageInfo<${table.NameFU}Po> list(@RequestBody ${table.NameFU}SearchVo searchVo) {
         return ${table.NameFL}Service.select${table.NameFU}List(searchVo);
     }
 
     @ApiOperation(value = "select${table.NameFU}", notes = "查询单个资源详情")
     @GetMapping("/{id}")
-    public ${table.NameFU}Bo select${table.NameFU}ById(@PathVariable Long id) {
+    public ${table.NameFU}Po select${table.NameFU}ById(@PathVariable Long id) {
         return ${table.NameFL}Service.select${table.NameFU}ById(id);
     }
 
