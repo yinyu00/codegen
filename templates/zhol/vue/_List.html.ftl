@@ -140,11 +140,11 @@
     function show${table.NameFU}Info(id) {
         $('#${table.NameFL}Info').dialog({
             title : '新增/修改用户信息',
-            width : 280,
-            height : 200,
+            width : 480,
+            height : 600,
             closed : true,
             cache : false,
-            href : '/${table.NameFL}/page/${table.NameFU}Form?id=' + id,
+            href : '/${table.NameFL}/page/${table.NameFL}Form?id=' + id,
             modal : true
         });
         $('#${table.NameFL}Info').window('open');

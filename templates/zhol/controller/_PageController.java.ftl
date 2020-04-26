@@ -27,12 +27,12 @@ public class ${table.NameFU}PageController {
 
     @GetMapping("/${table.NameFL}List")
     public String ${table.NameFL}List(){
-        return "${table.Schema}/${table.NameFL}List";
+        return "${table.Schema}/${table.NameFU}List";
     }
 
     @RequestMapping("/${table.NameFL}Info")
     public ModelAndView ${table.NameFL}Info(@PathParam("id") Long id) {
-        ModelAndView mav = new ModelAndView("${table.Schema}/${table.NameFL}Form");
+        ModelAndView mav = new ModelAndView("${table.Schema}/${table.NameFU}Form");
         if (null != id) {
             ${table.NameFU}Po po = ${table.NameFL}Service.select${table.NameFU}ById(id);
             mav.addObject("${table.NameFL}", po);
