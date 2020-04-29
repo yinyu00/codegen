@@ -64,10 +64,11 @@ public class TableGeneratorTest {
     @Test
     public void batchGenerate() throws Exception {
         List<String> tables = Arrays.asList("t_user"
-//                , "sys_template"
-//                , "sys_template_file"
-//                , "monitor_log_prov_input"
-//                , "monitor_log_prov_output"
+                , "t_app"
+                , "t_rel_app_user"
+                , "t_wechat_service"
+                , "t_wechat_subscribe"
+                , "t_mobile_validate"
         );
         for (String tableName : tables) {
             generate(tableName);

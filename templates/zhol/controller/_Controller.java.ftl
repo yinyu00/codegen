@@ -45,7 +45,7 @@ public class ${table.NameFU}Controller {
         GeneralResponse response = new GeneralResponse();
         PageInfo<${table.NameFU}Po> ${table.NameFL}s = ${table.NameFL}Service.select${table.NameFU}List(searchVo);
 
-        if(${table.NameFL}s != null) {
+        if(${table.NameFL}s != null && !${table.NameFL}s.getList().isEmpty()) {
             ResponseUtils.responseSuccess(response);
             response.setTotal(${table.NameFL}s.getTotal());
             response.setRows(${table.NameFL}s.getList());
@@ -64,49 +64,55 @@ public class ${table.NameFU}Controller {
 
     @ApiOperation(value = "add${table.NameFU}", notes = "新增${table.comments}")
     @PostMapping
-    public Integer insert${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
+    public GeneralResponse insert${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
         if(LOG.isDebugEnabled()) {
             LOG.debug("${table.NameFU}Controller.insert${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
         }
 
+        GeneralResponse response = new GeneralResponse();
         try {
-            return ${table.NameFL}Service.insert${table.NameFU}(${table.NameFL}Vo);
+            ${table.NameFL}Service.insert${table.NameFU}(${table.NameFL}Vo);
+            return (GeneralResponse) ResponseUtils.responseSuccess(response);
         }
         catch (Exception ex) {
             LOG.error("产生异常", ex);
-            throw ex;
+            return (GeneralResponse) ResponseUtils.responseInit(response);
         }
     }
 
     @ApiOperation(value = "update${table.NameFU}", notes = "更新${table.comments}")
     @PutMapping
-    public Integer update${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
+    public GeneralResponse update${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
         if(LOG.isDebugEnabled()) {
             LOG.debug("${table.NameFU}Controller.update${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
         }
 
+        GeneralResponse response = new GeneralResponse();
         try {
-            return ${table.NameFL}Service.update${table.NameFU}(${table.NameFL}Vo);
+            ${table.NameFL}Service.update${table.NameFU}(${table.NameFL}Vo);
+            return (GeneralResponse) ResponseUtils.responseSuccess(response);
         }
         catch (Exception ex) {
             LOG.error("产生异常", ex);
-            throw ex;
+            return (GeneralResponse) ResponseUtils.responseInit(response);
         }
     }
 
     @ApiOperation(value = "delete${table.NameFU}", notes = "删除${table.comments}")
     @DeleteMapping("/{id}")
-    public Integer delete${table.NameFU}(@PathVariable Long id) {
+    public GeneralResponse delete${table.NameFU}(@PathVariable Long id) {
         if(LOG.isDebugEnabled()) {
             LOG.debug("${table.NameFU}Controller.delete${table.NameFU} 被触发, id = {}", id);
         }
 
+        GeneralResponse response = new GeneralResponse();
         try {
-            return ${table.NameFL}Service.delete${table.NameFU}ById(id);
+            ${table.NameFL}Service.delete${table.NameFU}ById(id);
+            return (GeneralResponse) ResponseUtils.responseSuccess(response);
         }
         catch (Exception ex) {
             LOG.error("产生异常", ex);
-            throw ex;
+            return (GeneralResponse) ResponseUtils.responseInit(response);
         }
     }
 

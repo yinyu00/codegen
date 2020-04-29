@@ -15,7 +15,7 @@
                 <td>
                     <input class="easyui-validatebox" type="text"
                            name="${column.colName}" id="${column.colName}" data-options="required:<#if column.nullable="YES">false<#else>true</#if>"
-                           onblur="" th:value='${r"$"}{${table.NameFL}?.${column.colName}}' />
+                           onblur="" th:value='${r"$"}{${table.NameFL}?.${column.colNameFL}}' />
                 </td>
             </tr>
             </#if>
@@ -40,42 +40,25 @@
             //$('#').css("background-color", "#eeeeee");
         }
         $('#btn_save_${table.NameFL}').bind('click', function() {
-            alert($('#uid').val())
+            console.log("record id is " + $('#<#list columns as column><#if column.primaryKey>${column.colNameFL}</#if></#list>').val());
+
             $.ajax({
-                url : '/user',
-                type: $('#uid').val()==undefined ? "POST" : "PUT",
+                url : '/${table.NameFL}',
+                type: $('#<#list columns as column><#if column.primaryKey>${column.colNameFL}</#if></#list>').val()==="" ? "POST" : "PUT",
                 contentType: "application/json",
                 dataType: "json",
                 data: JSON.stringify({
                 <#list columns as column>
-                <#if column.primaryKey == false>
-                    "${column.colName}": $('#${column.colName}').val(),
-                </#if>
+                    "${column.colNameFL}": $('#${column.colName}').val(),
                 </#list>
                 })//数据转换成JSON格式
-            }).done(function (data) {
-                var data = eval('(' + data + ')');
-                console.log(data.msg);
-                if (data.code=="000000") {
-                    $("#userGrid").datagrid("load", {
-                        // uid : $('#uid').val(),
-                        // username : $('#username').val(),
-                        // email : $('#email').val(),
-                        // mobile : $('#mobile').val(),
-                        // union_id : $('#union_id').val(),
-                        // password : $('#password').val(),
-                        // enable_flag : $('#enable_flag').val(),
-                        // certificate_type : $('#certificate_type').val(),
-                        // certificate_no : $('#certificate_no').val(),
-                        // create_date : $('#create_date').val(),
-                        // wechat_qrcode_fid : $('#wechat_qrcode_fid').val(),
-                        // wechat_head_image_url : $('#wechat_head_image_url').val(),
-                        // wechat_nickname : $('#wechat_nickname').val(),
-                        // mobile_visible_flag : $('#mobile_visible_flag').val(),
-                    });
-                    $('#userInfo').window('close');
+            }).done(function (resp) {
+                let data = eval(resp);
+                console.log(data);
+                if (data.code==="000000") {
+                    reload();
+                    $('#${table.NameFL}Info').window('close');
                 }
-            }).fail(function () {
             });
         });
         $('#btn_cancel_${table.NameFL}').bind('click', function() {

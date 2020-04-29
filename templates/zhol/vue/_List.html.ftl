@@ -15,7 +15,7 @@
                     <#list columns as column>
                     <th>${column.comments}:</th>
                     <td>
-                        <input name="${column.colName}" id="${column.colName}" />
+                        <input name="${column.colName}Param" id="${column.colName}Param" />
                     </td>
                     </#list>
                     -->
@@ -42,20 +42,20 @@
                 //console.log(param, success, error);
                 $.ajax({
                     type: "POST",
-                    url : '/user/list',
+                    url : '/${table.NameFL}/list',
                     contentType: "application/json",
                     dataType: "json",
                     data: JSON.stringify(param)//数据转换成JSON格式
                 }).done(function (data) {
-                    if (data.total!=0) {
+                    if (data.code==='000000') {
                         success(data);
                     }
                     else {
-                        $.messager.alert('');
+                        $.messager.alert('加载数据失败');
                         error();
                     }
                 }).fail(function () {
-
+                    $.messager.alert('加载数据失败');
                 });
             },
             iconCls : "icon-add",
@@ -103,7 +103,7 @@
                     handler : function() {
                         row = getSelected();
                         if (row) {
-                            show${table.NameFU}Info(row.uid);
+                            show${table.NameFU}Info(row.<#list columns as column><#if column.primaryKey>${column.colNameFL}</#if></#list>);
                         }
                     }
                 },
@@ -112,19 +112,14 @@
                     text : "删除",
                     iconCls : "icon-del",
                     handler : function() {
-                        row = getSelected();
-                        if (row) {
-                            pwdinit(row.uid);
-                        }
+                        del${table.NameFU}Info();
                     }
                 }
             ]
         });
 
         $('#btn_search_${table.NameFL}').bind('click', function() {
-            $("#${table.NameFL}Grid").datagrid("load", {
-                // "username": $('#username').val()
-            });
+            reload();
         });
     });
 
@@ -158,6 +153,35 @@
             return;
         } else
             return row;
+    }
+
+    //删除行
+    function del${table.NameFU}Info() {
+        var row = $('#${table.NameFL}Grid').datagrid('getSelected');
+        if (!row) {
+            alert("请选择数据");
+        } else {
+            if(confirm("确定要删除选中记录么？")){
+                $.ajax({
+                    type: "DELETE",
+                    url : '/${table.NameFL}/' + row.<#list columns as column><#if column.primaryKey>${column.colNameFL}</#if></#list>,
+                    contentType: "application/json",
+                    dataType: "json"
+                }).done(function (data) {
+                    reload();
+                }).fail(function () {
+                });
+            }
+        }
+    }
+
+    function reload() {
+        let loadParam = {};
+        <#list columns as column>
+        // if($('#${column.colNameFL}Param').val())  loadParam["${column.colNameFL}"] = $('#${column.colNameFL}Param').val();
+        </#list>
+
+        $("#${table.NameFL}Grid").datagrid("load", loadParam);
     }
 </script>
 </body>

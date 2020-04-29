@@ -30,7 +30,7 @@ public class ${table.NameFU}PageController {
         return "${table.Schema}/${table.NameFU}List";
     }
 
-    @RequestMapping("/${table.NameFL}Info")
+    @RequestMapping("/${table.NameFL}Form")
     public ModelAndView ${table.NameFL}Info(@PathParam("id") Long id) {
         ModelAndView mav = new ModelAndView("${table.Schema}/${table.NameFU}Form");
         if (null != id) {
