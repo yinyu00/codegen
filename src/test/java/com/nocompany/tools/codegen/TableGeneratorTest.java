@@ -12,13 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import static com.nocompany.tools.codegen.constant.Params.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class TableGeneratorTest {
 
@@ -39,18 +40,18 @@ public class TableGeneratorTest {
 
     public void generate(String tableName) throws Exception {
         Table table = new Table(tableName, "t");
-        table.setSchema("base");
+        table.setSchema("legend_oa");
         tableInitializer.initTable(table);
         tableInitializer.initColumn(table);
         tableInitializer.initPrimaryKey(table);
 
         Map<String, String> params = new HashMap<>();
 //        params.put(FTLDIR, "templates/kangpaas");
-        params.put(FTLDIR, "templates/zhol");
+        params.put(FTLDIR, "templates/oa");
         params.put(AUTHOR, "jinw");
         params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-        params.put(BASE_PACKAGE, "com.zghlj.management.base");
-        params.put(VO_PACKAGE, "com.zghlj.management.base.entity");
+        params.put(BASE_PACKAGE, "com.legend.oa.api.hr");
+        params.put(VO_PACKAGE, "com.legend.oa.api.hr.model");
         params.put(BASE_URI, "/api/v1/appsys/");
         params.put(API_ID_PREFIX, "60104550");
         params.put(MENU_ID, "60104550");
@@ -63,12 +64,12 @@ public class TableGeneratorTest {
 
     @Test
     public void batchGenerate() throws Exception {
-        List<String> tables = Arrays.asList("t_user"
-                , "t_app"
-                , "t_rel_app_user"
-                , "t_wechat_service"
-                , "t_wechat_subscribe"
-                , "t_mobile_validate"
+        List<String> tables = Arrays.asList("hr_user"
+                , "hr_user_pay"
+//                , "t_rel_app_user"
+//                , "t_wechat_service"
+//                , "t_wechat_subscribe"
+//                , "t_mobile_validate"
         );
         for (String tableName : tables) {
             generate(tableName);
