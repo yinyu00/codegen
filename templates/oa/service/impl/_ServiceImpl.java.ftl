@@ -69,13 +69,10 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     @Override
     public int update(${table.NameFU} ${table.NameFL}) {
-        ${table.NameFU} ${table.NameFL}Po = ${table.NameFL}Mapper.getById(${table.NameFL}.getId());
+        ${table.NameFL}.setUpdateBy(SubjectUtil.getUserId());
+        ${table.NameFL}.setUpdateDate(new Date());
 
-        BeanUtils.copyProperties(${table.NameFL}, ${table.NameFL}Po);
-        ${table.NameFL}Po.setUpdateBy(SubjectUtil.getUserId());
-        ${table.NameFL}Po.setUpdateDate(new Date());
-
-        return ${table.NameFL}Mapper.update(${table.NameFL}Po);
+        return ${table.NameFL}Mapper.update(${table.NameFL});
     }
 
     /**

@@ -14,22 +14,20 @@
 
     <!--查询单个-->
     <select id="getById" resultType="${param.basePackage}.model.${param.module}.${table.NameFU}">
-        select
-        <include refid="columns"/>
-        from ${table.Name}
-        where
-        <#list columns as column><#if column.primaryKey> ${column.colName} = ${r"#"}{id} </#if></#list>
+        SELECT <include refid="columns"/>
+          FROM ${table.Name}
+         WHERE <#list columns as column><#if column.primaryKey> ${column.colName} = ${r"#"}{id} </#if></#list>
     </select>
 
     <!--新增-->
     <insert id="insert" parameterType="${param.basePackage}.model.${param.module}.${table.NameFU}">
-        insert into ${table.Name}
+        INSERT INTO ${table.Name}
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <#list columns as column>
             <if test="${column.colNameFL} != null">`${column.colName}`,</if>
             </#list>
         </trim>
-        values
+        VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <#list columns as column>
             <if test="${column.colNameFL} != null">${r"#"}{${column.colNameFL}},</if>
@@ -40,44 +38,47 @@
 
     <!--修改-->
     <update id="update" parameterType="${param.basePackage}.model.${param.module}.${table.NameFU}">
-        update ${table.Name}
+        UPDATE ${table.Name}
         <set>
             <#list columns as column>
                 <#if !column.primaryKey>
                     <#if column.dbType == 'Date'>
-                        <if test="${column.colNameFL} != null">
-                            `${column.colName}` = ${r"#"}{${column.colNameFL}},
-                        </if>
+            <if test="${column.colNameFL} != null">
+                `${column.colName}` = ${r"#"}{${column.colNameFL}},
+            </if>
                     <#else>
-                        <if test="${column.colNameFL} != null and ${column.colNameFL} != ''">
-                            `${column.colName}` = ${r"#"}{${column.colNameFL}},
-                        </if>
+            <if test="${column.colNameFL} != null and ${column.colNameFL} != ''">
+                `${column.colName}` = ${r"#"}{${column.colNameFL}},
+            </if>
                     </#if>
                 </#if>
             </#list>
         </set>
-        where `id` = ${r"#"}{id}
+         WHERE `id` = ${r"#"}{id}
     </update>
 
     <select id="queryByCondition" resultType="${param.basePackage}.model.${param.module}.${table.NameFU}" >
-        SELECT
-        <include refid="columns"/>
-        FROM ${table.Name}
+        SELECT <include refid="columns"/>
+          FROM `${table.Name}`
+         WHERE `del_flag` = 0
+        <if test="${table.NameFL}Name != null and ${table.NameFL}Name != ''">
+           AND `name` = ${r"#"}{${table.NameFL}Name}
+        </if>
     </select>
 
-    <!--通过主键删除-->
+    <!--主键删除-->
     <delete id="deleteById" parameterType="long">
-        update ${table.Name} set `del_flag` = 1 where
-        <#list columns as column><#if column.primaryKey>${column.colName}</#if></#list>
-         = ${r"#"}{id}
+        UPDATE `${table.Name}`
+           SET `del_flag` = 1
+         WHERE <#list columns as column><#if column.primaryKey>`${column.colName}`</#if></#list> = ${r"#"}{id}
     </delete>
 
     <!--批量删除-->
     <delete id="batchDel">
-        UPDATE ${table.Name} set del_flag = 1
-        WHERE
-        <#list columns as column><#if column.primaryKey> ${column.colName} </#if></#list>
-        IN <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
+        UPDATE `${table.Name}`
+           SET `del_flag` = 1
+         WHERE <#list columns as column><#if column.primaryKey>`${column.colName}`</#if></#list> IN
+        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
         ${r"#"}{item}
         </foreach>
     </delete>

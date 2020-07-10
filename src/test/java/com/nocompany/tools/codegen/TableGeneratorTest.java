@@ -39,7 +39,7 @@ public class TableGeneratorTest {
     }
 
     public void generate(String tableName) throws Exception {
-        Table table = new Table(tableName, "t");
+        Table table = new Table(tableName, "hr");
         table.setSchema("legend_oa");
         tableInitializer.initTable(table);
         tableInitializer.initColumn(table);
@@ -65,12 +65,11 @@ public class TableGeneratorTest {
 
     @Test
     public void batchGenerate() throws Exception {
-        List<String> tables = Arrays.asList("hr_user"
+        List<String> tables = Arrays.asList("hr_user_pay"
+//                , "hr_user"
 //                , "hr_user_pay"
-//                , "t_rel_app_user"
-//                , "t_wechat_service"
-//                , "t_wechat_subscribe"
-//                , "t_mobile_validate"
+//                , "hr_user_work"
+//                , "hr_user_study"
         );
         for (String tableName : tables) {
             generate(tableName);
