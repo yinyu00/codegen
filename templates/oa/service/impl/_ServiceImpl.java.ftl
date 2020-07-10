@@ -1,11 +1,10 @@
 package ${param.basePackage}.service.impl;
 
-import com.blueneedles.common.mybatis.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import ${param.basePackage}.mapper.${table.NameFU}Mapper;
-import ${param.basePackage}.service.I${table.NameFU}Service;
-import ${param.voPackage}.po.${table.NameFU}Po;
-import ${param.voPackage}.vo.${table.NameFU}SearchVo;
-import ${param.voPackage}.vo.${table.NameFU}Vo;
+import ${param.basePackage}.service.${table.NameFU}Service;
+import ${param.voPackage}.${table.NameFU};
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 @Service
-public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
+public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
 
     /**
      * LOGGER日志
@@ -39,67 +38,52 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
     }
 
     /**
-     * 根据id查看详情
-     * @param ${table.NameFL}Id 物理主键
+     * 根据id加载数据
+     * @param id 物理主键
      * @return 操作结果
      */
     @Override
-    public ${table.NameFU}Po select${table.NameFU}ById(Long ${table.NameFL}Id) {
-        Assert.notNull(${table.NameFL}Id, "${table.NameFL}Id不能空");
+    public ${table.NameFU} getById(Long id) {
+        Assert.notNull(id, "id不能空");
 
-        return ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Id);
+        return ${table.NameFL}Mapper.getById(id);
     }
 
     /**
      * 插入记录
-     * @param ${table.NameFL}Vo 插入对象
+     * @param ${table.NameFL} 插入对象
      * @return 操作结果
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Integer insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        ${table.NameFU}Po ${table.NameFL}Po = new ${table.NameFU}Po();
-
-        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Po);
-
-        return ${table.NameFL}Mapper.insert(${table.NameFL}Po);
+    public int insert(${table.NameFU} ${table.NameFL}) {
+        return ${table.NameFL}Mapper.insert(${table.NameFL});
     }
 
     /**
      * 更新记录
-     * @param ${table.NameFL}Vo 更新对象
+     * @param ${table.NameFL} 更新对象
      * @return 更新结果
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Integer update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        ${table.NameFU}Po ${table.NameFL}Po = ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Vo.get${table.NameFU}Id());
+    public int update(${table.NameFU} ${table.NameFL}) {
+        ${table.NameFU} ${table.NameFL}Po = ${table.NameFL}Mapper.getById(${table.NameFL}.getId());
 
-        BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Po);
+        BeanUtils.copyProperties(${table.NameFL}, ${table.NameFL}Po);
 
-        return ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL}Po);
+        return ${table.NameFL}Mapper.update(${table.NameFL}Po);
     }
 
     /**
      * 单个删除
-     * @param ${table.NameFL}Id 待删除记录主键
+     * @param id 待删除记录主键
      * @return 删除结果
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Integer delete${table.NameFU}ById(Long ${table.NameFL}Id) {
-        return ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
-    }
-
-    /**
-     * 批量查询
-     * @param idList 待查询记录Id数组
-     * @return 查询结果
-     */
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    @Override
-    public Page<${table.NameFU}Po> batchSelectByIdList(List<Long> idList) {
-        return null;
+    public int deleteById(Long id) {
+        return ${table.NameFL}Mapper.deleteById(id);
     }
 
     /**
@@ -109,34 +93,21 @@ public class ${table.NameFU}ServiceImpl implements I${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Integer batchDelByIdList(List<Long> idList) {
-        return null;
+    public int batchDel(List<Long> idList) {
+        return 0;
     }
 
     /**
      * 查询列表
-     * @param searchVo 分页查询条件
+     * @param ${table.NameFL}Name 分页查询条件
      * @return 列表
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Page<${table.NameFU}Po> select${table.NameFU}List(${table.NameFU}SearchVo searchVo) {
-        Integer pageNum = searchVo.getPageNum();
-        Integer pageSize = searchVo.getPageSize();
-        if (null != pageNum && null != pageSize) {
-            PageHelper.startPage(pageNum, pageSize);
-        }
+    public PageInfo<${table.NameFU}> queryByCondition(String ${table.NameFL}Name, int pageIndex, int pageSize) {
+        PageHelper.startPage(pageIndex, pageSize);
 
-        return new Page<>(${table.NameFL}Mapper.select${table.NameFU}List(searchVo));
+        return new PageInfo<>(${table.NameFL}Mapper.queryByCondition(${table.NameFL}Name));
     }
 
-
-    /**
-    * 存在性校验
-    * @param ${table.NameFL}Vo 校验对象
-    * @return 校验结果
-    */
-    public Integer exist(${table.NameFU}Vo ${table.NameFL}Vo) {
-        return null;
-    }
 }

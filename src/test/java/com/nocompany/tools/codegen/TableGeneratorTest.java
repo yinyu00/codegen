@@ -50,8 +50,8 @@ public class TableGeneratorTest {
         params.put(FTLDIR, "templates/oa");
         params.put(AUTHOR, "jinw");
         params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-        params.put(BASE_PACKAGE, "com.legend.oa.api.hr");
-        params.put(VO_PACKAGE, "com.legend.oa.api.hr.model");
+        params.put(BASE_PACKAGE, "com.legend.oa.core.hr");
+        params.put(VO_PACKAGE, "com.legend.oa.core.model.hr");
         params.put(BASE_URI, "/api/v1/appsys/");
         params.put(API_ID_PREFIX, "60104550");
         params.put(MENU_ID, "60104550");
