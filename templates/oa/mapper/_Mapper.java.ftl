@@ -1,6 +1,6 @@
-package ${param.basePackage}.mapper;
+package ${param.basePackage}.mapper.${param.module};
 
-import ${param.voPackage}.${table.NameFU};
+import ${param.basePackage}.model.${param.module}.${table.NameFU};
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;

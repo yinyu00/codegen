@@ -1,7 +1,7 @@
-package ${param.basePackage}.service;
+package ${param.basePackage}.service.${param.module};
 
 import com.github.pagehelper.PageInfo;
-import ${param.voPackage}.${table.NameFU};
+import ${param.basePackage}.model.${param.module}.${table.NameFU};
 import java.util.List;
 
 /**

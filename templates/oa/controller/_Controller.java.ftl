@@ -1,17 +1,15 @@
-package ${param.basePackage}.controller;
+package ${param.basePackage}.controller.${param.module};
 
 import com.github.pagehelper.PageInfo;
 
-import ${param.basePackage}.service.I${table.NameFU}Service;
-import ${param.voPackage}.po.${table.NameFU}Po;
-import ${param.voPackage}.vo.${table.NameFU}SearchVo;
-import ${param.voPackage}.vo.${table.NameFU}Vo;
-import com.zghlj.management.entity.vo.GeneralResponse;
-import com.zghlj.management.utils.ResponseUtils;
+import com.legend.common.LegendResponse;
+import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
+import ${param.basePackage}.model.${param.module}.${table.NameFU};
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,120 +24,103 @@ import java.util.List;
 @Api(value = "${table.comments}API", tags = "${table.comments}接口规格")
 @RequestMapping("/${table.NameFL}")
 @RestController
+@Slf4j
 public class ${table.NameFU}Controller {
 
-    /**
-     * LOGGER日志
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}Controller.class);
-
-    private I${table.NameFU}Service ${table.NameFL}Service;
+    private ${table.NameFU}Service ${table.NameFL}Service;
     @Autowired
-    public void set${table.NameFU}Service(I${table.NameFU}Service ${table.NameFL}Service) {
+    public void set${table.NameFU}Service(${table.NameFU}Service ${table.NameFL}Service) {
         this.${table.NameFL}Service = ${table.NameFL}Service;
     }
 
-    @ApiOperation(value = "查询${table.comments}列表", notes = "查询${table.comments}列表")
-    @PostMapping(value = "/list")
-    public GeneralResponse list(@RequestBody ${table.NameFU}SearchVo searchVo) {
-        GeneralResponse response = new GeneralResponse();
-        PageInfo<${table.NameFU}Po> ${table.NameFL}s = ${table.NameFL}Service.select${table.NameFU}List(searchVo);
 
-        if(${table.NameFL}s != null && !${table.NameFL}s.getList().isEmpty()) {
-            ResponseUtils.responseSuccess(response);
-            response.setTotal(${table.NameFL}s.getTotal());
-            response.setRows(${table.NameFL}s.getList());
-            return response;
-        }
-        else {
-            return (GeneralResponse) ResponseUtils.responseInit(response);
-        }
+    @ApiOperation(value = "分页查询${table.comments}", notes = "查询单个${table.comments}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "${table.NameFL}Name", value = "查询条件"),
+        @ApiImplicitParam(name = "pageIndex", value = "当前页码", defaultValue = "1"),
+        @ApiImplicitParam(name = "pageSize" , value = "页面条数", defaultValue = "10"),
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
+    @PostMapping("/list")
+    public LegendResponse<PageInfo<${table.NameFU}>> list(
+        @RequestParam(value = "${table.NameFL}Name", required = false) String ${table.NameFL}Name,
+        @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
+        @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+        return LegendResponse.ok(${table.NameFL}Service.queryByCondition(${table.NameFL}Name, pageIndex, pageSize));
     }
 
-    @ApiOperation(value = "select${table.NameFU}", notes = "查询单个资源详情")
+
+    @ApiOperation(value = "查询单个${table.comments}", notes = "查询单个${table.comments}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
     @GetMapping("/{id}")
-    public ${table.NameFU}Po select${table.NameFU}ById(@PathVariable Long id) {
-        return ${table.NameFL}Service.select${table.NameFU}ById(id);
+    public ${table.NameFU} getById(@PathVariable Long id) {
+        return ${table.NameFL}Service.getById(id);
     }
 
-    @ApiOperation(value = "add${table.NameFU}", notes = "新增${table.comments}")
+    @ApiOperation(value = "新增${table.comments}", notes = "新增${table.comments}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
     @PostMapping
-    public GeneralResponse insert${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
-        if(LOG.isDebugEnabled()) {
-            LOG.debug("${table.NameFU}Controller.insert${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
+    public LegendResponse<String> insert(@RequestBody ${table.NameFU} ${table.NameFL}) {
+        if(log.isDebugEnabled()) {
+            log.debug("${table.NameFU}Controller.insert 被触发, ${table.NameFL} = {}", ${table.NameFL});
         }
 
-        GeneralResponse response = new GeneralResponse();
-        try {
-            ${table.NameFL}Service.insert${table.NameFU}(${table.NameFL}Vo);
-            return (GeneralResponse) ResponseUtils.responseSuccess(response);
+        if (${table.NameFL}Service.insert(${table.NameFL}) > 0) {
+            return LegendResponse.ok("添加${table.comments}成功");
         }
-        catch (Exception ex) {
-            LOG.error("产生异常", ex);
-            return (GeneralResponse) ResponseUtils.responseInit(response);
-        }
+        return LegendResponse.error("添加${table.comments}失败");
     }
 
-    @ApiOperation(value = "update${table.NameFU}", notes = "更新${table.comments}")
+    @ApiOperation(value = "更新${table.comments}", notes = "更新${table.comments}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
     @PutMapping
-    public GeneralResponse update${table.NameFU}(@RequestBody ${table.NameFU}Vo ${table.NameFL}Vo) {
-        if(LOG.isDebugEnabled()) {
-            LOG.debug("${table.NameFU}Controller.update${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
+    public LegendResponse<String> update${table.NameFU}(@RequestBody ${table.NameFU} ${table.NameFL}) {
+        if(log.isDebugEnabled()) {
+            log.debug("${table.NameFU}Controller.update 被触发, ${table.NameFL} = {}", ${table.NameFL});
         }
 
-        GeneralResponse response = new GeneralResponse();
-        try {
-            ${table.NameFL}Service.update${table.NameFU}(${table.NameFL}Vo);
-            return (GeneralResponse) ResponseUtils.responseSuccess(response);
+        if (${table.NameFL}Service.update(${table.NameFL}) > 0) {
+            return LegendResponse.ok("修改${table.comments}成功");
         }
-        catch (Exception ex) {
-            LOG.error("产生异常", ex);
-            return (GeneralResponse) ResponseUtils.responseInit(response);
-        }
+        return LegendResponse.error("修改${table.comments}失败");
     }
 
-    @ApiOperation(value = "delete${table.NameFU}", notes = "删除${table.comments}")
+    @ApiOperation(value = "删除${table.NameFU}", notes = "删除${table.comments}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
     @DeleteMapping("/{id}")
-    public GeneralResponse delete${table.NameFU}(@PathVariable Long id) {
-        if(LOG.isDebugEnabled()) {
-            LOG.debug("${table.NameFU}Controller.delete${table.NameFU} 被触发, id = {}", id);
+    public LegendResponse<String> deleteById(@PathVariable Long id) {
+        if(log.isDebugEnabled()) {
+            log.debug("${table.NameFU}Controller.delete 被触发, id = {}", id);
         }
 
-        GeneralResponse response = new GeneralResponse();
-        try {
-            ${table.NameFL}Service.delete${table.NameFU}ById(id);
-            return (GeneralResponse) ResponseUtils.responseSuccess(response);
+        if (${table.NameFL}Service.deleteById(id) > 0) {
+            return LegendResponse.ok("删除${table.comments}成功");
         }
-        catch (Exception ex) {
-            LOG.error("产生异常", ex);
-            return (GeneralResponse) ResponseUtils.responseInit(response);
-        }
+        return LegendResponse.error("删除${table.comments}失败");
     }
 
-    @ApiOperation(value = "batchDelete${table.NameFU}", notes = "批量删除${table.comments}")
+    @ApiOperation(value = "批量删除${table.comments}", notes = "批量删除${table.comments}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
     @DeleteMapping("/batchDel")
-    public Integer batchDel(@RequestBody List<Long> deleteIdListVo) {
-        if(LOG.isDebugEnabled()) {
-            LOG.debug("${table.NameFU}Controller.batchDel 被触发, deleteIdListVo = {}", deleteIdListVo);
+    public LegendResponse<String> batchDel(@RequestBody List<Long> ids) {
+        if(log.isDebugEnabled()) {
+            log.debug("${table.NameFU}Controller.batchDel 被触发, ids = {}", ids);
         }
 
-        try {
-            return ${table.NameFL}Service.batchDelByIdList(deleteIdListVo);
+        if (${table.NameFL}Service.batchDel(ids) > 0) {
+            return LegendResponse.ok("批量删除${table.comments}成功");
         }
-        catch (Exception ex) {
-            LOG.error("产生异常", ex);
-            throw ex;
-        }
-    }
-
-    @ApiOperation(value = "check${table.NameFU}Exist", notes = "存在性校验")
-    @PostMapping("/exist")
-    public Integer exist(@RequestBody ${table.NameFU}Vo vo) {
-        if(LOG.isDebugEnabled()) {
-            LOG.debug("${table.NameFU}Controller.exist 被触发, vo = {}", vo);
-        }
-
-        return ${table.NameFL}Service.exist(vo);
+        return LegendResponse.error("批量删除${table.comments}失败");
     }
 
 }

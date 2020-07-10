@@ -50,8 +50,9 @@ public class TableGeneratorTest {
         params.put(FTLDIR, "templates/oa");
         params.put(AUTHOR, "jinw");
         params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-        params.put(BASE_PACKAGE, "com.legend.oa.core.hr");
-        params.put(VO_PACKAGE, "com.legend.oa.core.model.hr");
+        params.put(BASE_PACKAGE, "com.legend.oa.core");
+        params.put(VO_PACKAGE, "com.legend.oa.core.model");
+        params.put("module", "hr");
         params.put(BASE_URI, "/api/v1/appsys/");
         params.put(API_ID_PREFIX, "60104550");
         params.put(MENU_ID, "60104550");
@@ -65,7 +66,7 @@ public class TableGeneratorTest {
     @Test
     public void batchGenerate() throws Exception {
         List<String> tables = Arrays.asList("hr_user"
-                , "hr_user_pay"
+//                , "hr_user_pay"
 //                , "t_rel_app_user"
 //                , "t_wechat_service"
 //                , "t_wechat_subscribe"

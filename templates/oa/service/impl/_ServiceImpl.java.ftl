@@ -1,20 +1,20 @@
-package ${param.basePackage}.service.impl;
+package ${param.basePackage}.service.${param.module}.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import ${param.basePackage}.mapper.${table.NameFU}Mapper;
-import ${param.basePackage}.service.${table.NameFU}Service;
-import ${param.voPackage}.${table.NameFU};
+import ${param.basePackage}.mapper.${param.module}.${table.NameFU}Mapper;
+import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
+import ${param.basePackage}.model.${param.module}.${table.NameFU};
+import com.legend.oa.core.util.IdWorkerUtils;
+import com.legend.oa.core.util.SubjectUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,9 +54,11 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL} 插入对象
      * @return 操作结果
      */
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int insert(${table.NameFU} ${table.NameFL}) {
+        ${table.NameFL}.setId(IdWorkerUtils.getFlowIdWorkerInstance().nextId());
+        ${table.NameFL}.setCreateBy(SubjectUtil.getUserId());
+        ${table.NameFL}.setCreateDate(new Date());
         return ${table.NameFL}Mapper.insert(${table.NameFL});
     }
 
@@ -65,12 +67,13 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param ${table.NameFL} 更新对象
      * @return 更新结果
      */
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int update(${table.NameFU} ${table.NameFL}) {
         ${table.NameFU} ${table.NameFL}Po = ${table.NameFL}Mapper.getById(${table.NameFL}.getId());
 
         BeanUtils.copyProperties(${table.NameFL}, ${table.NameFL}Po);
+        ${table.NameFL}Po.setUpdateBy(SubjectUtil.getUserId());
+        ${table.NameFL}Po.setUpdateDate(new Date());
 
         return ${table.NameFL}Mapper.update(${table.NameFL}Po);
     }
@@ -80,7 +83,6 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @param id 待删除记录主键
      * @return 删除结果
      */
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int deleteById(Long id) {
         return ${table.NameFL}Mapper.deleteById(id);
@@ -88,13 +90,12 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
 
     /**
      * 批量删除
-     * @param idList 待删除Id数组
+     * @param ids 待删除Id数组
      * @return 删除结果
      */
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public int batchDel(List<Long> idList) {
-        return 0;
+    public int batchDel(List<Long> ids) {
+        return ${table.NameFL}Mapper.batchDel(ids);
     }
 
     /**
