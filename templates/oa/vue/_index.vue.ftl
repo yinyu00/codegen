@@ -16,10 +16,11 @@
       @select="onSelected"
       @select-all="onSelected"
     >
+      <el-table-column type="selection" width="55" />
 <#list columns as column>
-      <el-table-column prop="${column.colNameFL}" width="50" />
+      <el-table-column prop="${column.colNameFL}" label="${column.comments}" />
 </#list>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-button size="mini" type="primary" icon="el-icon-edit" @click="showForm(scope.row)" />
           <el-popconfirm title="确定删除本条数据吗？" class="el-popconfirm" @onConfirm="handleRemove(scope.row)">
@@ -37,15 +38,29 @@
       :before-close="cancelSubmit"
       :visible.sync="formVisible"
       :title="form.id?'修改${table.comments}':'新增${table.comments}'"
-      width="570px"
+      width="70vw"
     >
-      <el-form ref="form" :inline="true" :model="form" :rules="rules" size="small" label-width="66px">
+      <el-form ref="form" :inline="true" :model="form.${table.NameFL}" :rules="rules" size="small" label-width="88px">
         <el-input v-model="form.${table.NameFL}.id" type="hidden" />
-
+        <!--
+        <el-select v-model="form.${table.NameFL}.xxx" placeholder="请选择" style="width: 80%" clearable>
+          <el-option v-for="item in xxxList" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
+        -->
 <#list columns as column>
+<#if column.dbType == 'Date'>
+        <el-form-item label="${column.comments}" prop="${column.colNameFL}">
+          <el-date-picker
+            v-model="form.${table.NameFL}.${column.colNameFL}"
+            type="date"
+            placeholder="选择日期"
+          />
+        </el-form-item>
+<#else>
         <el-form-item label="${column.comments}" prop="${column.colNameFL}">
           <el-input v-model="form.${table.NameFL}.${column.colNameFL}" />
         </el-form-item>
+</#if>
 </#list>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -85,109 +100,125 @@ export default {
 </#list>
         }
       },
-      created() {
-        this.getList()
-      },
-      methods: {
-        /**
-         * 显示表单
-         */
-        showForm(data) {
-        },
-        /**
-         * 提交表单
-         */
-        submit() {
-          this.formLoading = true
-          if (this.form.id) {
-            api.${table.NameFL}.update(this.form).then(response => {
-              this.$isuccess('修改${table.comments}成功', () => {
-                this.getList()
-                this.resetForm()
-              })
-            }).finally(() => {
-              this.formLoading = false
-              this.formVisible = false
-            })
-          } else {
-            api.${table.NameFL}.add(this.form).then(response => {
-              this.$isuccess('添加${table.comments}成功', () => {
-                this.getList()
-                this.resetForm()
-              })
-            }).finally(() => {
-              this.formLoading = false
-              this.formVisible = false
-            })
-          }
-        },
-        /**
-         * 取消提交
-         */
-        cancelSubmit() {
+      rules: {
+<#list columns as column>
+<#if column.nullable == 'NO'>
+        ${column.colNameFL}: [
+          { required: true, message: '请输入${column.comments}', trigger: 'blur' }
+        ],
+</#if>
+</#list>
+      }
+    }
+  },
+  created() {
+    this.getList()
+  },
+  methods: {
+    /**
+     * 显示表单
+     */
+    showForm(data) {
+      if (data && data.id) {
+        // 设置双向绑定的值
+<#list columns as column>
+        this.form.${table.NameFL}.${column.colNameFL} = data.${column.colNameFL}
+</#list>
+      }
+      this.formVisible = true
+    },
+    /**
+     * 提交表单
+     */
+    submit() {
+      this.formLoading = true
+      if (this.form.id) {
+        api.${table.NameFL}.update(this.form.${table.NameFL}).then(response => {
+          this.$isuccess('修改${table.comments}成功', () => {
+            this.getList()
+            this.resetForm()
+          })
+        }).finally(() => {
           this.formLoading = false
           this.formVisible = false
-          this.resetForm()
-        },
-        /**
-         * 选中行删除
-         */
-        handleRemove(data) {
-          this.loading = true
-          api.${table.NameFL}.remove(data.id).then(() => {
-            this.$isuccess('删除${table.comments}成功', () => {
-              this.getList()
-              this.ids = []
+        })
+      } else {
+        api.${table.NameFL}.add(this.form.${table.NameFL}).then(response => {
+          this.$isuccess('添加${table.comments}成功', () => {
+            this.getList()
+            this.resetForm()
+          })
+        }).finally(() => {
+          this.formLoading = false
+          this.formVisible = false
+        })
+      }
+    },
+    /**
+     * 取消提交
+     */
+    cancelSubmit() {
+      this.formLoading = false
+      this.formVisible = false
+      this.resetForm()
+    },
+    /**
+     * 选中行删除
+     */
+    handleRemove(data) {
+      this.loading = true
+      api.${table.NameFL}.remove(data.id).then(() => {
+        this.$isuccess('删除${table.comments}成功', () => {
+          this.getList()
+          this.ids = []
+        })
+      }).finally(() => {
+        this.loading = false
+      })
+    },
+    /**
+     * 获取数据列表
+     */
+    getList() {
+      this.loading = true
+      api.${table.NameFL}.list(this.search).then(response => {
+        this.total = parseInt(response.data.total)
+        this.list = response.data.list
+      }).finally(() => {
+        this.loading = false
+      })
+    },
+    /**
+     * 重置表单
+     */
+    resetForm() {
+      this.form.${table.NameFL} = {}
+    },
+    /**
+     * 行复选框选中时
+     */
+    onSelected(selection) {
+      this.ids = selection.map((v) => {
+        return v.id
+      })
+    },
+    /**
+     * 批量删除
+     */
+    handelBatchRemove() {
+      const that = this
+      if (that.ids.length) {
+        that.$iconfirm('确定要删除选中的记录？', '提示', () => {
+          that.loading = true
+          api.${table.NameFL}.batchRemove(that.ids).then(() => {
+            that.$isuccess('批量删除${table.comments}成功', () => {
+              that.getList()
+              that.ids = []
             })
           }).finally(() => {
             this.loading = false
           })
-        },
-        /**
-         * 获取数据列表
-         */
-        getList() {
-          this.loading = true
-          api.${table.NameFL}.list(this.search).then(response => {
-            this.total = parseInt(response.data.total)
-            this.list = response.data.list
-          }).finally(() => {
-            this.loading = false
-          })
-        },
-        /**
-         * 重置表单
-         */
-        resetForm() {
-          this.form.${table.NameFL} = {}
-        },
-        /**
-         * 行复选框选中时
-         */
-        onSelected(selection) {
-          this.ids = selection.map((v) => {
-            return v.id
-          })
-        },
-        /**
-         * 批量删除
-         */
-        handelBatchRemove() {
-          const that = this
-          if (that.ids.length) {
-            that.$iconfirm('确定要删除选中的记录？', '提示', () => {
-              that.loading = true
-              api.${table.NameFL}.batchRemove(that.ids).then(() => {
-                that.$isuccess('批量删除${table.comments}成功', () => {
-                  that.getList()
-                  that.ids = []
-                })
-              }).finally(() => {
-                this.loading = false
-              })
-            })
-          }
-        }
+        })
       }
     }
   }

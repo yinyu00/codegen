@@ -47,7 +47,7 @@ export default {
          */
         remove: (id) => {
             return request({
-                url: '/${param.module}/${table.NameFL}/' + Qs.stringify({ id }),
+                url: '/${param.module}/${table.NameFL}/' + id,
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
