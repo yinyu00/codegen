@@ -15,33 +15,33 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = {
-        "com.nocompany.tools.codegen"
+    "com.nocompany.tools.codegen"
 })
 @PropertySource(value = "application.properties")
 public class CodeGenConfiguration {
 
-    @Bean
-    public TableInitializer tableInitializer() {
-        return new MysqlTableInitializer();
-    }
+  @Bean
+  public TableInitializer tableInitializer() {
+    return new MysqlTableInitializer();
+  }
 
-    @Autowired
-    Environment env;
-    public void setEnv(Environment env) {
-        this.env = env;
-    }
+  @Autowired
+  Environment env;
+  public void setEnv(Environment env) {
+    this.env = env;
+  }
 
-    @Bean
-    public DataSource dataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(env.getProperty("spring.datasource.url"));
-        dataSource.setUsername(env.getProperty("spring.datasource.username"));// 用户名
-        dataSource.setPassword(env.getProperty("spring.datasource.password"));// 密码
-        return dataSource;
-    }
+  @Bean
+  public DataSource dataSource() {
+    DruidDataSource dataSource = new DruidDataSource();
+    dataSource.setUrl(env.getProperty("spring.datasource.url"));
+    dataSource.setUsername(env.getProperty("spring.datasource.username"));// 用户名
+    dataSource.setPassword(env.getProperty("spring.datasource.password"));// 密码
+    return dataSource;
+  }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
+  @Bean
+  public JdbcTemplate jdbcTemplate() {
+    return new JdbcTemplate(dataSource());
+  }
 }

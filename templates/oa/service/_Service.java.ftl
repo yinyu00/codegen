@@ -49,10 +49,10 @@ public interface ${table.NameFU}Service {
     int batchDel(List<Long> idList);
 
     /**
-    * 查询列表
-    * @param ${table.NameFL}Name 分页查询条件
-    * @return 列表
-    */
+     * 查询列表
+     * @param ${table.NameFL}Name 分页查询条件
+     * @return 列表
+     */
     PageInfo<${table.NameFU}> queryByCondition(String ${table.NameFL}Name, int pageIndex, int pageSize);
 
 }

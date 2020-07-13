@@ -7,9 +7,7 @@ import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
 import ${param.basePackage}.model.${param.module}.${table.NameFU};
 import com.legend.oa.core.util.IdWorkerUtils;
 import com.legend.oa.core.util.SubjectUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -24,12 +22,8 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 @Service
+@Slf4j
 public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
-
-    /**
-     * LOGGER日志
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}ServiceImpl.class);
 
     private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
     @Autowired
@@ -63,7 +57,7 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     }
 
     /**
-     * 更新记录
+* 更新记录
      * @param ${table.NameFL} 更新对象
      * @return 更新结果
      */

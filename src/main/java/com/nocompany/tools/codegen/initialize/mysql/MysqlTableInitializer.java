@@ -14,70 +14,71 @@ import java.util.Map;
 
 //@Profile(value = "mysql")
 public class MysqlTableInitializer implements TableInitializer {
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+  @Autowired
+  JdbcTemplate jdbcTemplate;
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
 
-    public void initTable(Table table) {
-        String sql = "select * from information_schema.tables where table_schema='"+table.getSchema()+"' and table_name = '" + table.getName() + "'";
+  public void initTable(Table table) {
+    String sql = "select * from information_schema.tables where table_schema='"+table.getSchema()+"' and table_name = '" + table.getName() + "'";
 
-        Map<String, Object> tableMap = jdbcTemplate.queryForMap(sql);
-        table.setComments((String)tableMap.get("TABLE_COMMENT"));
-    }
+    Map<String, Object> tableMap = jdbcTemplate.queryForMap(sql);
+    table.setComments((String)tableMap.get("TABLE_COMMENT"));
+  }
 
-    public void initColumn(Table table) {
-        String sql = "select * from information_schema.columns where table_schema='"+table.getSchema()+"' and table_name = '" + table.getName() + "'";
+  public void initColumn(Table table) {
+    String sql = "select * from information_schema.columns where table_schema='"+table.getSchema()+"' and table_name = '" + table.getName() + "'";
 
-        List columnList = jdbcTemplate.query(sql, new RowMapper<Column>() {
-            public Column mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Column column = new Column();
-                column.setColName(rs.getString("COLUMN_NAME"));
-                column.setDataType(rs.getString("DATA_TYPE"));
-                switch (column.getDataType()) {
-                    case "tinyint":
-                    case "int":
-                    case "bigint":
-                    case "float":
-                    case "decimal":
-                    case "double":
-                        column.setDataLength(rs.getInt("NUMERIC_PRECISION"));
-                        break;
+    List columnList = jdbcTemplate.query(sql, new RowMapper<Column>() {
+      public Column mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Column column = new Column();
+        column.setColName(rs.getString("COLUMN_NAME"));
+        column.setDataType(rs.getString("DATA_TYPE"));
+        switch (column.getDataType()) {
+          case "tinyint":
+          case "int":
+          case "bigint":
+          case "float":
+          case "decimal":
+          case "double":
+            column.setDataLength(rs.getInt("NUMERIC_PRECISION"));
+            break;
 
-                    case "char":
-                    case "varchar":
-                    case "text":
-                        column.setDataLength(rs.getInt("CHARACTER_MAXIMUM_LENGTH"));
-                        break;
+          case "char":
+          case "varchar":
+          case "text":
+            column.setDataLength(rs.getInt("CHARACTER_MAXIMUM_LENGTH"));
+            break;
 
-                    case "datetime":
-                    case "time":
-                    case "timestamp":
-                        column.setDataLength(20);
-                        break;
+          case "date":
+          case "datetime":
+          case "time":
+          case "timestamp":
+            column.setDataLength(20);
+            break;
 
-                    default:
-                        throw new UnsupportedOperationException("找不到字段映射长度");
+          default:
+            throw new UnsupportedOperationException("找不到字段映射长度");
 
-                }
-                column.setDataLength(0);
-                column.setNullable(rs.getString("IS_NULLABLE"));
-                column.setComments(rs.getString("COLUMN_COMMENT"));
+        }
+        column.setDataLength(0);
+        column.setNullable(rs.getString("IS_NULLABLE"));
+        column.setComments(rs.getString("COLUMN_COMMENT"));
 
-                // 是否主键
-                if("PRI".equals(rs.getString("COLUMN_KEY"))) {
-                    column.setPrimaryKey(true);
-                }
-                return column;
-            }
-        });
+        // 是否主键
+        if("PRI".equals(rs.getString("COLUMN_KEY"))) {
+          column.setPrimaryKey(true);
+        }
+        return column;
+      }
+    });
 
-        table.setColumnList(columnList);
-    }
+    table.setColumnList(columnList);
+  }
 
-    public void initPrimaryKey(Table table) {
+  public void initPrimaryKey(Table table) {
 
-    }
+  }
 }

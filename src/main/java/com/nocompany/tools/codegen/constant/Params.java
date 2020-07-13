@@ -6,18 +6,18 @@ package com.nocompany.tools.codegen.constant;
  */
 public interface Params {
 
-    String AUTHOR = "author";
+  String AUTHOR = "author";
 
-    String DATE = "date";
+  String DATE = "date";
 
-    String FTLDIR = "ftlDir";
+  String FTLDIR = "ftlDir";
 
-    String BASE_PACKAGE = "basePackage";
+  String BASE_PACKAGE = "basePackage";
 
-    String VO_PACKAGE = "voPackage";
+  String VO_PACKAGE = "voPackage";
 
-    String BASE_URI = "baseUri";
+  String BASE_URI = "baseUri";
 
-    String API_ID_PREFIX = "apiIdPrefix";
-    String MENU_ID = "menuId";
+  String API_ID_PREFIX = "apiIdPrefix";
+  String MENU_ID = "menuId";
 }

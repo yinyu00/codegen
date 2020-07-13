@@ -15,22 +15,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class TableInitializerTest {
 
-    /* 日志类 */
-    private static final Logger logger = LoggerFactory.getLogger(TableInitializerTest.class);
+  /* 日志类 */
+  private static final Logger logger = LoggerFactory.getLogger(TableInitializerTest.class);
 
-    @Autowired
-    TableInitializer tableInitializer;
-    public void setTableInitializer(TableInitializer tableInitializer) {
-        this.tableInitializer = tableInitializer;
-    }
+  @Autowired
+  TableInitializer tableInitializer;
+  public void setTableInitializer(TableInitializer tableInitializer) {
+    this.tableInitializer = tableInitializer;
+  }
 
-    @Test
-    public void initColumn() {
-        Table table = new Table("auth_position", "");
-        tableInitializer.initColumn(table);
-        tableInitializer.initPrimaryKey(table);
+  @Test
+  public void initColumn() {
+    Table table = new Table("auth_position", "");
+    tableInitializer.initColumn(table);
+    tableInitializer.initPrimaryKey(table);
 
-        logger.info("table = {}", table);
-    }
+    logger.info("table = {}", table);
+  }
 
 }
