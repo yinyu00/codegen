@@ -37,14 +37,14 @@
       :close-on-click-modal="false"
       :before-close="cancelSubmit"
       :visible.sync="formVisible"
-      :title="form.id?'修改${table.comments}':'新增${table.comments}'"
+      :title="form.${table.NameFL}.id?'修改${table.comments}':'新增${table.comments}'"
       width="70vw"
     >
       <el-form ref="form" :inline="true" :model="form.${table.NameFL}" :rules="rules" size="small" label-width="88px">
         <el-input v-model="form.${table.NameFL}.id" type="hidden" />
         <!--
         <el-select v-model="form.${table.NameFL}.xxx" placeholder="请选择" style="width: 80%" clearable>
-          <el-option v-for="item in xxxList" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in xxxList" :key="item.dictValue" :label="item.dictKey" :value="item.dictValue" />
         </el-select>
         -->
 <#list columns as column>
@@ -132,7 +132,7 @@ export default {
      */
     submit() {
       this.formLoading = true
-      if (this.form.id) {
+      if (this.form.${table.NameFL}.id) {
         api.${table.NameFL}.update(this.form.${table.NameFL}).then(response => {
           this.$isuccess('修改${table.comments}成功', () => {
             this.getList()
@@ -192,7 +192,11 @@ export default {
      * 重置表单
      */
     resetForm() {
-      this.form.${table.NameFL} = {}
+      this.form.${table.NameFL} = {
+<#list columns as column>
+        ${column.colNameFL}: '',
+</#list>
+      }
     },
     /**
      * 行复选框选中时
