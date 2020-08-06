@@ -36,6 +36,8 @@ public class Column {
         return "BIGINT";
 
       case "text":
+      case "longtext":
+      case "longblob":
         return "String";
 
       case "datetime":
@@ -110,6 +112,8 @@ public class Column {
       case "char":
       case "varchar":
       case "text":
+      case "longtext":
+      case "longblob":
         return "String";
 
       case "date":
@@ -119,6 +123,7 @@ public class Column {
         return "Date";
 
       default:
+        System.out.println(getDataType());
         throw new java.lang.UnsupportedOperationException();
     }
 

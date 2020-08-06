@@ -43,7 +43,7 @@ public class TableGeneratorTest {
     if(StringUtils.isEmpty(tableName))
       return;
 
-    Table table = new Table(tableName, "hr");
+    Table table = new Table(tableName, "act");
     table.setSchema("legend_oa");
     tableInitializer.initTable(table);
     tableInitializer.initColumn(table);
@@ -56,7 +56,7 @@ public class TableGeneratorTest {
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
     params.put(BASE_PACKAGE, "com.legend.oa.core");
     params.put(VO_PACKAGE, "com.legend.oa.core.model");
-    params.put("module", "hr");
+    params.put("module", "flowable");
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -70,12 +70,15 @@ public class TableGeneratorTest {
   @Test
   public void batchGenerate() throws Exception {
     List<String> tables = Arrays.asList(""
-        , "hr_user"
-        , "hr_user_pay"
-        , "hr_user_study"
-        , "hr_user_work"
+//        , "hr_user"
+//        , "hr_user_pay"
+//        , "hr_user_study"
+//        , "hr_user_work"
 //        , "hr_year_holiday"
 //        , "sys_dict_param"
+        , "act_de_model"
+        , "act_ru_task"
+        , "act_extension_form_def"
     );
     for (String tableName : tables) {
       generate(tableName);

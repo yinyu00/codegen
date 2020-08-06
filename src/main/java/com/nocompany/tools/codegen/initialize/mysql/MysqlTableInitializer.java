@@ -52,6 +52,11 @@ public class MysqlTableInitializer implements TableInitializer {
             column.setDataLength(rs.getInt("CHARACTER_MAXIMUM_LENGTH"));
             break;
 
+          case "longtext":
+          case "longblob":
+              column.setDataLength(Integer.MAX_VALUE);
+              break;
+
           case "date":
           case "datetime":
           case "time":
@@ -60,6 +65,7 @@ public class MysqlTableInitializer implements TableInitializer {
             break;
 
           default:
+            System.out.println(column.getDataType());
             throw new UnsupportedOperationException("找不到字段映射长度");
 
         }
