@@ -15,6 +15,20 @@ import java.util.List;
 public interface ${table.NameFU}Service extends IService<${table.NameFU}> {
 
     /**
+     * 新增记录
+     * @param ${table.NameFL} 新增对象
+     * @return 操作结果
+     */
+    boolean insert(${table.NameFU} ${table.NameFL});
+
+    /**
+     * 更新记录
+     * @param ${table.NameFL} 更新对象
+     * @return 更新结果
+     */
+    boolean update(${table.NameFU} ${table.NameFL});
+
+    /**
      * 批量删除
      * @param idList 待删除资源Id数组
      * @return 删除结果

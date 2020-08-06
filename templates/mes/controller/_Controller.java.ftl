@@ -69,7 +69,7 @@ public class ${table.NameFU}Controller {
             log.debug("${table.NameFU}Controller.insert 被触发, ${table.NameFL} = {}", ${table.NameFL});
         }
 
-        if (${table.NameFL}Service.saveOrUpdate(${table.NameFL})) {
+        if (${table.NameFL}Service.insert(${table.NameFL})) {
             return LegendResponse.ok("添加${table.comments}成功");
         }
         return LegendResponse.error("添加${table.comments}失败");
@@ -85,7 +85,7 @@ public class ${table.NameFU}Controller {
             log.debug("${table.NameFU}Controller.update 被触发, ${table.NameFL} = {}", ${table.NameFL});
         }
 
-        if (${table.NameFL}Service.saveOrUpdate(${table.NameFL})) {
+        if (${table.NameFL}Service.update(${table.NameFL})) {
             return LegendResponse.ok("修改${table.comments}成功");
         }
         return LegendResponse.error("修改${table.comments}失败");

@@ -20,7 +20,7 @@ import lombok.ToString;
 * @author ${param.author}
 * @version 1.0 ${param.date}
 */
-@Alias("Args")
+@Alias("${table.NameFU}")
 @ApiModel(description = "${table.comments}对象")
 @Data
 @TableName("${table.Name}")
