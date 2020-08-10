@@ -51,18 +51,18 @@ public class TableGeneratorTest {
     }
 
     Table table = new Table(tableName, prefix);
-    table.setSchema("legend-mes");
+    table.setSchema("legend-oa-new");
     tableInitializer.initTable(table);
     tableInitializer.initColumn(table);
     tableInitializer.initPrimaryKey(table);
 
     Map<String, String> params = new HashMap<>();
-    params.put(FTLDIR, "templates/mes");
+    params.put(FTLDIR, "templates/legend_oa");
     params.put(AUTHOR, "jinw");
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-    params.put(BASE_PACKAGE, "com.legend.mes");
-    params.put(VO_PACKAGE, "com.legend.mes.model");
-    params.put("module", "mes");
+    params.put(BASE_PACKAGE, "com.legend.oa.core");
+    params.put(VO_PACKAGE, "com.legend.oa.core.model");
+    params.put("module", "sys");
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -76,15 +76,9 @@ public class TableGeneratorTest {
   @Test
   public void batchGenerate() throws Exception {
     List<String> tables = Arrays.asList(""
-        , "mes_product_category,mes"
-        , "mes_product,mes"
-        , ""
-        , ""
-        , ""
-        , ""
-        , ""
-        , ""
-        , ""
+        , "sys_menu,sys"
+        , "sys_region,sys"
+        , "sys_role,sys"
         , ""
     );
     for (String tableName : tables) {

@@ -102,6 +102,8 @@ public class Column {
     switch(this.getDataType()) {
 
       case "tinyint":
+        return "int";
+
       case "int":
       case "bigint":
       case "float":

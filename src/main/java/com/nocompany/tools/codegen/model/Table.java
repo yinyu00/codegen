@@ -43,6 +43,9 @@ public class Table {
 
   public void setComments(String comments) {
     if(StringUtils.isNotBlank(comments)) {
+      if(comments.endsWith("表")) {
+        comments = comments.substring(0,comments.length()-1);
+      }
       this.comments = comments;
     }
   }
