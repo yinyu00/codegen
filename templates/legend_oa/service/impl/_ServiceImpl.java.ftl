@@ -11,7 +11,7 @@ import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
 import ${param.basePackage}.model.${param.module}.${table.NameFU};
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -36,7 +36,9 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
 
         QueryWrapper<${table.NameFU}> wrapper = new QueryWrapper<>();
-        if(!StringUtils.isEmpty(${table.NameFL}Name)) wrapper.eq("${table.NameFL}_name", ${table.NameFL}Name);
+        if(StringUtils.isNotEmpty(${table.NameFL}Name)) {
+            wrapper.eq("${table.NameFL}_name", ${table.NameFL}Name);
+        }
 
         return baseMapper.selectPage(page, wrapper);
     }
