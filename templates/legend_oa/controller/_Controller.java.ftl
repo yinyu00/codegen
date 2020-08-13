@@ -34,7 +34,7 @@ public class ${table.NameFU}Controller {
     }
 
 
-    @ApiOperation(value = "分页查询${table.comments}", notes = "查询单个${table.comments}")
+    @ApiOperation(value = "分页查询${table.comments}", notes = "分页查询${table.comments}")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "${table.NameFL}Name", value = "查询条件"),
         @ApiImplicitParam(name = "pageIndex", value = "当前页码", defaultValue = "1"),
@@ -55,7 +55,7 @@ public class ${table.NameFU}Controller {
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @GetMapping("/{id}")
-    public ${table.NameFU} getById(@PathVariable Long id) {
+    public ${table.NameFU} getById(@PathVariable String id) {
         return ${table.NameFL}Service.getById(id);
     }
 
@@ -91,12 +91,12 @@ public class ${table.NameFU}Controller {
         return LegendResponse.error("修改${table.comments}失败");
     }
 
-    @ApiOperation(value = "删除${table.NameFU}", notes = "删除${table.comments}")
+    @ApiOperation(value = "删除${table.comments}", notes = "删除${table.comments}")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @DeleteMapping("/{id}")
-    public LegendResponse<String> deleteById(@PathVariable Long id) {
+    public LegendResponse<String> deleteById(@PathVariable String id) {
         if(log.isDebugEnabled()) {
             log.debug("${table.NameFU}Controller.delete 被触发, id = {}", id);
         }

@@ -12,6 +12,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.ibatis.type.Alias;
 
+import java.util.Date;
+
 /**
 * 功能描述: ${table.comments}
 *
@@ -27,7 +29,7 @@ import org.apache.ibatis.type.Alias;
 public class ${table.NameFU} extends BaseModel {
 
 <#list columns as column>
-<#if column.colName != 'id' && column.colName != 'create_by' && column.colName != 'create_time' && column.colName != 'update_by' && column.colName != 'update_time' && column.colName != 'del_flag' >
+<#if column.colName?lower_case != 'id' && column.colName?lower_case != 'create_by' && column.colName?lower_case != 'create_time' && column.colName?lower_case != 'update_by' && column.colName?lower_case != 'update_time' && column.colName?lower_case != 'del_flag' >
     /**
      * ${column.comments}
      */

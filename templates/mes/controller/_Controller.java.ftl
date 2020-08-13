@@ -34,9 +34,9 @@ public class ${table.NameFU}Controller {
     }
 
 
-    @ApiOperation(value = "分页查询${table.comments}", notes = "查询单个${table.comments}")
+    @ApiOperation(value = "分页查询${table.comments}", notes = "分页查询${table.comments}")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "${table.NameFL}Name", value = "查询条件"),
+        @ApiImplicitParam(name = "${table.NameFL}Name", value = "查询名称"),
         @ApiImplicitParam(name = "pageIndex", value = "当前页码", defaultValue = "1"),
         @ApiImplicitParam(name = "pageSize" , value = "页面条数", defaultValue = "10"),
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
@@ -91,12 +91,12 @@ public class ${table.NameFU}Controller {
         return LegendResponse.error("修改${table.comments}失败");
     }
 
-    @ApiOperation(value = "删除${table.NameFU}", notes = "删除${table.comments}")
+    @ApiOperation(value = "删除${table.comments}", notes = "删除${table.comments}")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @DeleteMapping("/{id}")
-    public LegendResponse<String> deleteById(@PathVariable Long id) {
+    public LegendResponse<String> deleteById(@PathVariable String id) {
         if(log.isDebugEnabled()) {
             log.debug("${table.NameFU}Controller.delete 被触发, id = {}", id);
         }
@@ -112,7 +112,7 @@ public class ${table.NameFU}Controller {
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @DeleteMapping("/batchDel")
-    public LegendResponse<String> batchDel(@RequestBody List<Long> ids) {
+    public LegendResponse<String> batchDel(@RequestBody List<String> ids) {
         if(log.isDebugEnabled()) {
             log.debug("${table.NameFU}Controller.batchDel 被触发, ids = {}", ids);
         }
