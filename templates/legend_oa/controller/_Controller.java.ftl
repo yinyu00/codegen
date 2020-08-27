@@ -36,17 +36,17 @@ public class ${table.NameFU}Controller {
 
     @ApiOperation(value = "分页查询${table.comments}", notes = "分页查询${table.comments}")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "${table.NameFL}Name", value = "查询条件"),
+        @ApiImplicitParam(name = "query", value = "查询条件"),
         @ApiImplicitParam(name = "pageIndex", value = "当前页码", defaultValue = "1"),
         @ApiImplicitParam(name = "pageSize" , value = "页面条数", defaultValue = "10"),
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @PostMapping("/list")
     public LegendResponse<IPage<${table.NameFU}>> list(
-        @RequestParam(value = "${table.NameFL}Name", required = false) String ${table.NameFL}Name,
+        @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
-        return LegendResponse.ok(${table.NameFL}Service.queryByCondition(${table.NameFL}Name, pageIndex, pageSize));
+        return LegendResponse.ok(${table.NameFL}Service.listBySQL(query, pageIndex, pageSize));
     }
 
 
@@ -56,7 +56,7 @@ public class ${table.NameFU}Controller {
     })
     @GetMapping("/{id}")
     public ${table.NameFU} getById(@PathVariable String id) {
-        return ${table.NameFL}Service.getById(id);
+        return ${table.NameFL}Service.selectOneById(id);
     }
 
     @ApiOperation(value = "新增${table.comments}", notes = "新增${table.comments}")

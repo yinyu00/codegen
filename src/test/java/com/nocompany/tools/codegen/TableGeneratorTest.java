@@ -51,7 +51,7 @@ public class TableGeneratorTest {
     }
 
     Table table = new Table(tableName, prefix);
-    table.setSchema("legend-oa-new");
+    table.setSchema("legend-erp");
     tableInitializer.initTable(table);
     tableInitializer.initColumn(table);
     tableInitializer.initPrimaryKey(table);
@@ -60,9 +60,9 @@ public class TableGeneratorTest {
     params.put(FTLDIR, "templates/legend_oa");
     params.put(AUTHOR, "jinw");
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-    params.put(BASE_PACKAGE, "com.legend.oa.core");
-    params.put(VO_PACKAGE, "com.legend.oa.core.model");
-    params.put("module", "hr");
+    params.put(BASE_PACKAGE, "com.legend.erp.core");
+    params.put(VO_PACKAGE, "com.legend.erp.core.model");
+    params.put("module", "wms");
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -76,20 +76,39 @@ public class TableGeneratorTest {
   @Test
   public void batchGenerate() throws Exception {
     List<String> tables = Arrays.asList(""
-//        , "sys_menu,sys"
-//        , "sys_region,sys"
-//        , "sys_role,sys"
-//        , "sys_user,sys"
-          , "hr_over_time,hr"
-          , "hr_special_time,hr"
-          , "hr_user,hr"
-          , "hr_user_pact,hr"
-          , "hr_user_pay,hr"
-          , "hr_user_rewd_punish,hr"
-          , "hr_user_study,hr"
-          , "hr_user_work,hr"
-          , "hr_year_holiday,hr"
+//            ,"crm_company_contact,crm"
+//            ,"crm_contract,crm"
+//            ,"crm_customer,crm"
+//            ,"crm_supplier,crm"
+//            ,"crm_supplier_address,crm"
+//            ,"ord_proofing_request,ord"
 
+//            ,"prd_material,prd"
+//            ,"prd_produce_param,prd"
+//            ,"prd_product,prd"
+//            ,"prd_product_bom,prd"
+//            ,"prd_product_category,prd"
+//            ,"prd_product_equipment,prd"
+//            ,"prd_production_craft,prd"
+//            ,"prd_production_line,prd"
+//            ,"prd_production_process,prd"
+//            ,"prd_production_process_param,prd"
+
+//            ,"rel_prod_craft_process,rel"
+//            ,"rel_prod_line_equip,rel"
+//            ,"rel_production_process_in,rel"
+//            ,"rel_production_process_out,rel"
+//            ,"scm_material_batch,scm"
+//            ,"scm_material_safety_stock,scm"
+
+//            ,"wms_ware_house,wms"
+//            ,"wms_ware_house_position,wms"
+            ,"wms_stock_in_warrant,wms"
+//            ,"wms_stock_in_detail,wms"
+//            ,"wms_stock_out_warrant,wms"
+//            ,"wms_stock_out_detail,wms"
+//            ,"wms_storage_detail,wms"
+//            ,"wms_storage_log,wms"
     );
     for (String tableName : tables) {
       generate(tableName);

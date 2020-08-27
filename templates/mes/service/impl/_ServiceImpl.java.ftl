@@ -57,7 +57,7 @@ public class ${table.NameFU}ServiceImpl  extends ServiceImpl<${table.NameFU}Mapp
      * @return 删除结果
      */
     @Override
-    public int batchDel(List<Long> ids) {
+    public int batchDel(List<String> ids) {
         return baseMapper.batchDel(ids);
     }
 

@@ -18,6 +18,6 @@ public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
      * 批量删除记录
      * @param idList 删除Id列表
      */
-    int batchDel(@Param("idList") List<Long> idList);
+    int batchDel(@Param("idList") List<String> idList);
 
 }

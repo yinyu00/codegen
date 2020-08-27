@@ -4,7 +4,6 @@ import com.legend.framework.mybatis.core.conditions.query.QueryWrapper;
 import com.legend.framework.mybatis.core.metadata.IPage;
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import com.legend.framework.mybatis.extension.service.impl.BaseServiceImpl;
-import com.legend.framework.shiro.util.SubjectUtil;
 
 import ${param.basePackage}.mapper.${param.module}.${table.NameFU}Mapper;
 import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
@@ -28,19 +27,34 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
 
     /**
      * 查询列表
-     * @param ${table.NameFL}Name 分页查询条件
+     * @param query 查询参数
+     * @param pageIndex 当前页码
+     * @param pageSize 每页记录数
      * @return 列表
      */
     @Override
-    public IPage<${table.NameFU}> queryByCondition(String ${table.NameFL}Name, int pageIndex, int pageSize) {
+    public IPage<${table.NameFU}> listByWrapper(String query, int pageIndex, int pageSize) {
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
 
         QueryWrapper<${table.NameFU}> wrapper = new QueryWrapper<>();
-        if(StringUtils.isNotEmpty(${table.NameFL}Name)) {
-            wrapper.eq("${table.NameFL}_name", ${table.NameFL}Name);
+        if(StringUtils.isNotEmpty(query)) {
+            wrapper.eq("${table.NameFL}_name", query);
         }
 
         return baseMapper.selectPage(page, wrapper);
+    }
+
+    /**
+     * 查询列表
+     * @param query 查询参数
+     * @param pageIndex 当前页码
+     * @param pageSize 每页记录数
+     * @return 列表
+     */
+    @Override
+    public IPage<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize) {
+        Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
+        return baseMapper.listBySQL(page, query);
     }
 
     /**
@@ -52,4 +66,14 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
     public int batchDel(List<String> ids) {
         return baseMapper.batchDel(ids);
     }
+
+    /**
+     * 查询单条记录
+     * @param id 编号
+     * @return ${table.NameFU}
+     */
+    public ${table.NameFU} selectOneById(String id) {
+        return baseMapper.selectOneById(id);
+    }
+
 }

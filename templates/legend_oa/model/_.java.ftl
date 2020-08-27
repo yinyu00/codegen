@@ -1,7 +1,7 @@
 package ${param.voPackage}.${param.module};
 
 import com.legend.framework.mybatis.annotation.TableName;
-import com.legend.oa.core.model.BaseModel;
+import ${param.voPackage}.BaseModel;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,7 +21,7 @@ import java.util.Date;
 * @version 1.0 ${param.date}
 */
 @Alias("${table.NameFU}")
-@ApiModel(description = "${table.comments}对象")
+@ApiModel(description = "${table.comments}")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("${table.Name}")

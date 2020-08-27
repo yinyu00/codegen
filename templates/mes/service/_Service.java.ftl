@@ -33,7 +33,7 @@ public interface ${table.NameFU}Service extends IService<${table.NameFU}> {
      * @param idList 待删除资源Id数组
      * @return 删除结果
      */
-    int batchDel(List<Long> idList);
+    int batchDel(List<String> idList);
 
     /**
      * 查询列表

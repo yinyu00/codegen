@@ -2,6 +2,7 @@ package ${param.basePackage}.mapper.${param.module};
 
 import com.legend.framework.mybatis.core.mapper.BaseMapper;
 import ${param.basePackage}.model.${param.module}.${table.NameFU};
+import com.legend.framework.mybatis.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,11 +14,25 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
+    /**
+     * 查询单条记录
+     * @param id 编号
+     * @return StockInWarrant
+     */
+    ${table.NameFU} selectOneById(@Param("id") String id);
+
 
     /**
      * 批量删除记录
      * @param idList 删除Id列表
      */
     int batchDel(@Param("idList") List<String> idList);
+
+    /**
+     * 查询列表
+     * @param page 分页参数
+     * @param query 查询参数
+     */
+    IPage<${table.NameFU}> listBySQL(IPage<${table.NameFU}> page, @Param("query") String query);
 
 }

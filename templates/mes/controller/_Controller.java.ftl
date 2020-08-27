@@ -55,7 +55,7 @@ public class ${table.NameFU}Controller {
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @GetMapping("/{id}")
-    public ${table.NameFU} getById(@PathVariable Long id) {
+    public ${table.NameFU} getById(@PathVariable String id) {
         return ${table.NameFL}Service.getById(id);
     }
 

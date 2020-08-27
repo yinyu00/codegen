@@ -21,7 +21,7 @@ import lombok.ToString;
 * @version 1.0 ${param.date}
 */
 @Alias("${table.NameFU}")
-@ApiModel(description = "${table.comments}对象")
+@ApiModel(description = "${table.comments}")
 @Data
 @TableName("${table.Name}")
 @ToString

@@ -15,10 +15,17 @@ import java.util.List;
 public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
     /**
      * 查询列表
-     * @param ${table.NameFL}Name 分页查询条件
+     * @param query 查询条件
      * @return 列表
      */
-    IPage<${table.NameFU}> queryByCondition(String ${table.NameFL}Name, int pageIndex, int pageSize);
+    IPage<${table.NameFU}> listByWrapper(String query, int pageIndex, int pageSize);
+
+    /**
+     * 查询列表
+     * @param query 查询参数
+     * @return 列表
+     */
+    IPage<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize);
 
     /**
      * 批量删除
@@ -26,5 +33,13 @@ public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
      * @return 删除结果
      */
     int batchDel(List<String> idList);
+
+    /**
+     * 查询单条记录
+     * @param id 编号
+     * @return ${table.NameFU}
+     */
+    ${table.NameFU} selectOneById(String id);
+
 
 }
