@@ -3,6 +3,7 @@ package ${param.basePackage}.service.${param.module};
 import com.legend.framework.mybatis.core.metadata.IPage;
 import com.legend.framework.mybatis.extension.service.BaseService;
 import ${param.basePackage}.model.${param.module}.${table.NameFU};
+import ${param.basePackage}.model.${param.module}.${table.NameFU}SV;
 
 import java.util.List;
 
@@ -26,6 +27,13 @@ public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
      * @return 列表
      */
     IPage<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize);
+
+    /**
+     * 查询列表
+     * @param query 查询条件
+     * @return 列表
+     */
+    List<${table.NameFU}SV> select(String query);
 
     /**
      * 批量删除

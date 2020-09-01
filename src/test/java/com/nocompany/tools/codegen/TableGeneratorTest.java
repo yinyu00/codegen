@@ -62,7 +62,7 @@ public class TableGeneratorTest {
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
     params.put(BASE_PACKAGE, "com.legend.erp.core");
     params.put(VO_PACKAGE, "com.legend.erp.core.model");
-    params.put("module", "wms");
+    params.put("module", "crm");
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -78,7 +78,7 @@ public class TableGeneratorTest {
     List<String> tables = Arrays.asList(""
 //            ,"crm_company_contact,crm"
 //            ,"crm_contract,crm"
-//            ,"crm_customer,crm"
+            ,"crm_customer,crm"
 //            ,"crm_supplier,crm"
 //            ,"crm_supplier_address,crm"
 //            ,"ord_proofing_request,ord"
@@ -103,7 +103,7 @@ public class TableGeneratorTest {
 
 //            ,"wms_ware_house,wms"
 //            ,"wms_ware_house_position,wms"
-            ,"wms_stock_in_warrant,wms"
+//            ,"wms_stock_in_warrant,wms"
 //            ,"wms_stock_in_detail,wms"
 //            ,"wms_stock_out_warrant,wms"
 //            ,"wms_stock_out_detail,wms"

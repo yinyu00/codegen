@@ -8,6 +8,7 @@ import com.legend.framework.mybatis.extension.service.impl.BaseServiceImpl;
 import ${param.basePackage}.mapper.${param.module}.${table.NameFU}Mapper;
 import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
 import ${param.basePackage}.model.${param.module}.${table.NameFU};
+import ${param.basePackage}.model.${param.module}.${table.NameFU}SV;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +56,15 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
     public IPage<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize) {
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
         return baseMapper.listBySQL(page, query);
+    }
+
+    /**
+     * 查询列表
+     * @param query 查询条件
+     * @return 列表
+     */
+    public List<${table.NameFU}SV> select(String query) {
+        return baseMapper.select(query);
     }
 
     /**

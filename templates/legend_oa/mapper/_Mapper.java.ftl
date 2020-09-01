@@ -2,6 +2,7 @@ package ${param.basePackage}.mapper.${param.module};
 
 import com.legend.framework.mybatis.core.mapper.BaseMapper;
 import ${param.basePackage}.model.${param.module}.${table.NameFU};
+import ${param.basePackage}.model.${param.module}.${table.NameFU}SV;
 import com.legend.framework.mybatis.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,5 +35,11 @@ public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
      * @param query 查询参数
      */
     IPage<${table.NameFU}> listBySQL(IPage<${table.NameFU}> page, @Param("query") String query);
+
+    /**
+     * 查询列表
+     * @param query 查询参数
+     */
+    List<${table.NameFU}SV> select(@Param("query") String query);
 
 }

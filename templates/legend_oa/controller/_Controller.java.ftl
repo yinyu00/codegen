@@ -5,11 +5,13 @@ import com.legend.framework.mybatis.core.metadata.IPage;
 
 import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
 import ${param.basePackage}.model.${param.module}.${table.NameFU};
+import ${param.basePackage}.model.${param.module}.${table.NameFU}SV;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +35,6 @@ public class ${table.NameFU}Controller {
         this.${table.NameFL}Service = ${table.NameFL}Service;
     }
 
-
     @ApiOperation(value = "分页查询${table.comments}", notes = "分页查询${table.comments}")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "query", value = "查询条件"),
@@ -49,14 +50,24 @@ public class ${table.NameFU}Controller {
         return LegendResponse.ok(${table.NameFL}Service.listBySQL(query, pageIndex, pageSize));
     }
 
+    @ApiOperation(value = "查询${table.comments}, 仅返回编码和名称", notes = "查询${table.comments}, 仅返回编码和名称")
+    @ApiImplicitParams({
+    @ApiImplicitParam(name = "query", value = "查询条件"),
+    @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
+    @PostMapping("/select")
+    public LegendResponse<List<${table.NameFU}SV>> select(
+            @RequestParam(value = "query", required = false) String query) {
+        return LegendResponse.ok(${table.NameFL}Service.select(query));
+    }
 
     @ApiOperation(value = "查询单个${table.comments}", notes = "查询单个${table.comments}")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @GetMapping("/{id}")
-    public ${table.NameFU} getById(@PathVariable String id) {
-        return ${table.NameFL}Service.selectOneById(id);
+    public LegendResponse<${table.NameFU}> getById(@PathVariable String id) {
+        return LegendResponse.ok(${table.NameFL}Service.selectOneById(id));
     }
 
     @ApiOperation(value = "新增${table.comments}", notes = "新增${table.comments}")
@@ -69,33 +80,18 @@ public class ${table.NameFU}Controller {
             log.debug("${table.NameFU}Controller.insert 被触发, ${table.NameFL} = {}", ${table.NameFL});
         }
 
-        if (${table.NameFL}Service.save(${table.NameFL})) {
+        boolean result = StringUtils.isEmpty(${table.NameFL}.getId()) ? ${table.NameFL}Service.save(${table.NameFL}) : ${table.NameFL}Service.updateById(${table.NameFL});
+        if (result) {
             return LegendResponse.ok("添加${table.comments}成功");
         }
         return LegendResponse.error("添加${table.comments}失败");
-    }
-
-    @ApiOperation(value = "更新${table.comments}", notes = "更新${table.comments}")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
-    })
-    @PutMapping
-    public LegendResponse<String> update${table.NameFU}(@RequestBody ${table.NameFU} ${table.NameFL}) {
-        if(log.isDebugEnabled()) {
-            log.debug("${table.NameFU}Controller.update 被触发, ${table.NameFL} = {}", ${table.NameFL});
-        }
-
-        if (${table.NameFL}Service.updateById(${table.NameFL})) {
-            return LegendResponse.ok("修改${table.comments}成功");
-        }
-        return LegendResponse.error("修改${table.comments}失败");
     }
 
     @ApiOperation(value = "删除${table.comments}", notes = "删除${table.comments}")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
-    @DeleteMapping("/{id}")
+    @PostMapping("/del/{id}")
     public LegendResponse<String> deleteById(@PathVariable String id) {
         if(log.isDebugEnabled()) {
             log.debug("${table.NameFU}Controller.delete 被触发, id = {}", id);
@@ -111,7 +107,7 @@ public class ${table.NameFU}Controller {
     @ApiImplicitParams({
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
-    @DeleteMapping("/batchDel")
+    @PostMapping("/batchDel")
     public LegendResponse<String> batchDel(@RequestBody List<String> ids) {
         if(log.isDebugEnabled()) {
             log.debug("${table.NameFU}Controller.batchDel 被触发, ids = {}", ids);
