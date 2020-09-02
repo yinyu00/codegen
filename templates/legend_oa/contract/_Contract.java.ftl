@@ -1,4 +1,4 @@
-package ${param.basePackage}.contract.feign;
+package ${param.basePackage}.contract.feign.${param.module};
 
 import com.legend.framework.common.response.LegendResponse;
 import com.legend.framework.mybatis.core.metadata.IPage;
@@ -19,29 +19,28 @@ import java.util.List;
  * @author ${param.author}
  * @version 1.0 ${param.date}
  */
-@ConditionalOnClass(FeignClient.class)
-@FeignClient(name = "${table.NameFL}")
-public class ${table.NameFU}Controller {
+@FeignClient(name = "legend-oa")
+public interface ${table.NameFU}Contract {
 
-    @PostMapping("/list")
+    @PostMapping("/${param.module}/${table.NameFL}/list")
     LegendResponse<IPage<${table.NameFU}>> list(
         @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize);
 
-    @PostMapping("/select")
+    @PostMapping("/${param.module}/${table.NameFL}/select")
     LegendResponse<List<${table.NameFU}SV>> select(@RequestParam(value = "query", required = false) String query);
 
-    @GetMapping("/{id}")
-    LegendResponse<${table.NameFU}> getById(@PathVariable String id);
+    @GetMapping("/${param.module}/${table.NameFL}/{id}")
+    LegendResponse<${table.NameFU}> getById(@PathVariable("id") String id);
 
-    @PostMapping
+    @PostMapping("/${param.module}/${table.NameFL}")
     LegendResponse<String> insert(@RequestBody ${table.NameFU} ${table.NameFL});
 
-    @PostMapping("/del/{id}")
-    LegendResponse<String> deleteById(@PathVariable String id);
+    @PostMapping("/${param.module}/${table.NameFL}/del/{id}")
+    LegendResponse<String> deleteById(@PathVariable("id") String id);
 
-    @PostMapping("/batchDel")
+    @PostMapping("/${param.module}/${table.NameFL}/batchDel")
     LegendResponse<String> batchDel(@RequestBody List<String> ids);
 
 }
