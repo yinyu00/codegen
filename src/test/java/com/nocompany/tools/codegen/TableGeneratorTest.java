@@ -51,7 +51,7 @@ public class TableGeneratorTest {
     }
 
     Table table = new Table(tableName, prefix);
-    table.setSchema("legend-erp");
+    table.setSchema("legend-oa");
     tableInitializer.initTable(table);
     tableInitializer.initColumn(table);
     tableInitializer.initPrimaryKey(table);
@@ -60,9 +60,9 @@ public class TableGeneratorTest {
     params.put(FTLDIR, "templates/legend_oa");
     params.put(AUTHOR, "jinw");
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-    params.put(BASE_PACKAGE, "com.legend.erp.core");
-    params.put(VO_PACKAGE, "com.legend.erp.core.model");
-    params.put("module", "crm");
+    params.put(BASE_PACKAGE, "com.legend.oa");
+    params.put(VO_PACKAGE, "com.legend.oa.contract.model");
+    params.put("module", "sys");
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -76,9 +76,11 @@ public class TableGeneratorTest {
   @Test
   public void batchGenerate() throws Exception {
     List<String> tables = Arrays.asList(""
+            ,"sys_dict,sys"
+
 //            ,"crm_company_contact,crm"
 //            ,"crm_contract,crm"
-            ,"crm_customer,crm"
+//            ,"crm_customer,crm"
 //            ,"crm_supplier,crm"
 //            ,"crm_supplier_address,crm"
 //            ,"ord_proofing_request,ord"

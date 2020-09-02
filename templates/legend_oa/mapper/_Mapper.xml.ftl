@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${param.basePackage}.mapper.${param.module}.${table.NameFU}Mapper">
-    <resultMap id="boMap" type="${param.basePackage}.model.${param.module}.${table.NameFU}">
+<mapper namespace="${param.basePackage}.core.mapper.${param.module}.${table.NameFU}Mapper">
+    <resultMap id="boMap" type="${param.basePackage}.contract.model.${param.module}.${table.NameFU}">
         <#list columns as column>
             <#if column.primaryKey>
         <id column="${column.colName}" jdbcType="${column.dataTypeUpperCase}" property="${column.colNameFL}"/>
@@ -11,7 +11,7 @@
         </#list>
     </resultMap>
 
-    <resultMap id="svMap" type="${param.basePackage}.model.${param.module}.${table.NameFU}SV">
+    <resultMap id="svMap" type="${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
     </resultMap>

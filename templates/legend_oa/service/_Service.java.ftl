@@ -1,9 +1,9 @@
-package ${param.basePackage}.service.${param.module};
+package ${param.basePackage}.core.service.${param.module};
 
 import com.legend.framework.mybatis.core.metadata.IPage;
 import com.legend.framework.mybatis.extension.service.BaseService;
-import ${param.basePackage}.model.${param.module}.${table.NameFU};
-import ${param.basePackage}.model.${param.module}.${table.NameFU}SV;
+import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
+import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package ${param.basePackage}.controller.${param.module};
+package ${param.basePackage}.api.controller.${param.module};
 
 import com.legend.framework.common.response.LegendResponse;
 import com.legend.framework.mybatis.core.metadata.IPage;
 
-import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
-import ${param.basePackage}.model.${param.module}.${table.NameFU};
-import ${param.basePackage}.model.${param.module}.${table.NameFU}SV;
+import ${param.basePackage}.core.service.${param.module}.${table.NameFU}Service;
+import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
+import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

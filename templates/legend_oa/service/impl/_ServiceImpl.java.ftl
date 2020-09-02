@@ -1,14 +1,14 @@
-package ${param.basePackage}.service.${param.module}.impl;
+package ${param.basePackage}.core.service.${param.module}.impl;
 
 import com.legend.framework.mybatis.core.conditions.query.QueryWrapper;
 import com.legend.framework.mybatis.core.metadata.IPage;
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import com.legend.framework.mybatis.extension.service.impl.BaseServiceImpl;
 
-import ${param.basePackage}.mapper.${param.module}.${table.NameFU}Mapper;
-import ${param.basePackage}.service.${param.module}.${table.NameFU}Service;
-import ${param.basePackage}.model.${param.module}.${table.NameFU};
-import ${param.basePackage}.model.${param.module}.${table.NameFU}SV;
+import ${param.basePackage}.core.mapper.${param.module}.${table.NameFU}Mapper;
+import ${param.basePackage}.core.service.${param.module}.${table.NameFU}Service;
+import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
+import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang.StringUtils;
