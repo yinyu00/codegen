@@ -1,7 +1,7 @@
 package ${param.basePackage}.api.controller.feign.${param.module};
 
 import com.legend.framework.common.response.LegendResponse;
-import com.legend.framework.mybatis.core.metadata.IPage;
+import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 
 import ${param.basePackage}.contract.feign.${param.module}.${table.NameFU}Contract;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
@@ -43,7 +43,7 @@ public class ${table.NameFU}FeignController {
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @PostMapping("/list")
-    public LegendResponse<IPage<${table.NameFU}>> list(
+    public LegendResponse<Page<${table.NameFU}>> list(
         @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {

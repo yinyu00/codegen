@@ -1,7 +1,6 @@
 package ${param.basePackage}.core.service.${param.module}.impl;
 
 import com.legend.framework.mybatis.core.conditions.query.QueryWrapper;
-import com.legend.framework.mybatis.core.metadata.IPage;
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import com.legend.framework.mybatis.extension.service.impl.BaseServiceImpl;
 
@@ -34,7 +33,7 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
      * @return 列表
      */
     @Override
-    public IPage<${table.NameFU}> listByWrapper(String query, int pageIndex, int pageSize) {
+    public Page<${table.NameFU}> listByWrapper(String query, int pageIndex, int pageSize) {
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
 
         QueryWrapper<${table.NameFU}> wrapper = new QueryWrapper<>();
@@ -53,7 +52,7 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
      * @return 列表
      */
     @Override
-    public IPage<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize) {
+    public Page<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize) {
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
         return baseMapper.listBySQL(page, query);
     }

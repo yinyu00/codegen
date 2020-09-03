@@ -1,6 +1,6 @@
 package ${param.basePackage}.core.service.${param.module};
 
-import com.legend.framework.mybatis.core.metadata.IPage;
+import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import com.legend.framework.mybatis.extension.service.BaseService;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
@@ -19,14 +19,14 @@ public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
      * @param query 查询条件
      * @return 列表
      */
-    IPage<${table.NameFU}> listByWrapper(String query, int pageIndex, int pageSize);
+    Page<${table.NameFU}> listByWrapper(String query, int pageIndex, int pageSize);
 
     /**
      * 查询列表
      * @param query 查询参数
      * @return 列表
      */
-    IPage<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize);
+    Page<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize);
 
     /**
      * 查询列表

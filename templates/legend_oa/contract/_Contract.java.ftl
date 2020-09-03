@@ -1,7 +1,7 @@
 package ${param.basePackage}.contract.feign.${param.module};
 
 import com.legend.framework.common.response.LegendResponse;
-import com.legend.framework.mybatis.core.metadata.IPage;
+import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
@@ -23,7 +23,7 @@ import java.util.List;
 public interface ${table.NameFU}Contract {
 
     @PostMapping("/${param.module}/${table.NameFL}/list")
-    LegendResponse<IPage<${table.NameFU}>> list(
+    LegendResponse<Page<${table.NameFU}>> list(
         @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize);

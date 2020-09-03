@@ -51,7 +51,7 @@ public class TableGeneratorTest {
     }
 
     Table table = new Table(tableName, prefix);
-    table.setSchema("legend-oa");
+    table.setSchema("legend-erp");
     tableInitializer.initTable(table);
     tableInitializer.initColumn(table);
     tableInitializer.initPrimaryKey(table);
@@ -62,7 +62,7 @@ public class TableGeneratorTest {
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
     params.put(BASE_PACKAGE, "com.legend.oa");
     params.put(VO_PACKAGE, "com.legend.oa.contract.model");
-    params.put("module", "sys");
+    params.put("module", "prd");
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -76,9 +76,9 @@ public class TableGeneratorTest {
   @Test
   public void batchGenerate() throws Exception {
     List<String> tables = Arrays.asList(""
-            ,"sys_dict,sys"
-            ,"sys_organization,sys"
-            ,"sys_user,sys"
+//            ,"sys_dict,sys"
+//            ,"sys_organization,sys"
+//            ,"sys_user,sys"
 
 //            ,"crm_company_contact,crm"
 //            ,"crm_contract,crm"
@@ -91,7 +91,7 @@ public class TableGeneratorTest {
 //            ,"prd_produce_param,prd"
 //            ,"prd_product,prd"
 //            ,"prd_product_bom,prd"
-//            ,"prd_product_category,prd"
+            ,"prd_product_category,prd"
 //            ,"prd_product_equipment,prd"
 //            ,"prd_production_craft,prd"
 //            ,"prd_production_line,prd"

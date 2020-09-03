@@ -3,7 +3,7 @@ package ${param.basePackage}.core.mapper.${param.module};
 import com.legend.framework.mybatis.core.mapper.BaseMapper;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
-import com.legend.framework.mybatis.core.metadata.IPage;
+import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
      * @param page 分页参数
      * @param query 查询参数
      */
-    IPage<${table.NameFU}> listBySQL(IPage<${table.NameFU}> page, @Param("query") String query);
+    Page<${table.NameFU}> listBySQL(Page<${table.NameFU}> page, @Param("query") String query);
 
     /**
      * 查询列表
