@@ -3,6 +3,8 @@ package ${param.basePackage}.api.controller.feign.${param.module};
 import com.legend.framework.common.vo.ComboBoxVo;
 import com.legend.framework.common.response.LegendResponse;
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
+import com.legend.framework.shiro.util.SubjectUtil;
+import com.legend.oa.contract.model.sys.User;
 
 import ${param.basePackage}.contract.feign.${param.module}.${table.NameFU}Contract;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
@@ -15,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +40,6 @@ public class ${table.NameFU}FeignController {
 
     @ApiOperation(value = "分页查询${table.comments}", notes = "分页查询${table.comments}")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "companyId", value = "租户编号"),
         @ApiImplicitParam(name = "query", value = "查询条件"),
         @ApiImplicitParam(name = "pageIndex", value = "当前页码", defaultValue = "1"),
         @ApiImplicitParam(name = "pageSize" , value = "页面条数", defaultValue = "10"),
@@ -45,11 +47,11 @@ public class ${table.NameFU}FeignController {
     })
     @PostMapping("/list")
     public LegendResponse<Page<${table.NameFU}>> list(
-        @RequestParam(value = "companyId") String companyId,
         @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
-        return ${table.NameFL}Contract.list(companyId, query, pageIndex, pageSize);
+        User user = SubjectUtil.getUser(User.class);
+        return ${table.NameFL}Contract.list(user.getPrimaryCompanyId(), query, pageIndex, pageSize);
     }
 
     @ApiOperation(value = "查询${table.comments}, 仅返回编码和名称", notes = "查询${table.comments}, 仅返回编码和名称")
@@ -60,9 +62,9 @@ public class ${table.NameFU}FeignController {
     })
     @PostMapping("/select")
     public LegendResponse<List<ComboBoxVo>> select(
-            @RequestParam(value = "companyId") String companyId,
             @RequestParam(value = "query", required = false) String query) {
-        return ${table.NameFL}Contract.select(companyId, query);
+        User user = SubjectUtil.getUser(User.class);
+        return ${table.NameFL}Contract.select(user.getPrimaryCompanyId(), query);
     }
 
     @ApiOperation(value = "查询单个${table.comments}", notes = "查询单个${table.comments}")
@@ -80,6 +82,16 @@ public class ${table.NameFU}FeignController {
     })
     @PostMapping
     public LegendResponse<String> insert(@RequestBody ${table.NameFU} ${table.NameFL}) {
+        User user = SubjectUtil.getUser(User.class);
+        if (StringUtils.isEmpty(${table.NameFL}.getId())) {
+            ${table.NameFL}.setCompanyId(user.getPrimaryCompanyId());
+            ${table.NameFL}.setCreateBy(user.getId());
+            ${table.NameFL}.setCreateTime(new Date());
+        } else {
+            ${table.NameFL}.setUpdateBy(user.getId());
+            ${table.NameFL}.setUpdateTime(new Date());
+        }
+
         return ${table.NameFL}Contract.insert(${table.NameFL});
     }
 

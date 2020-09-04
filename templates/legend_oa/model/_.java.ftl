@@ -1,7 +1,7 @@
 package ${param.voPackage}.${param.module};
 
 import com.legend.framework.mybatis.annotation.TableName;
-import ${param.voPackage}.BaseModel;
+import com.legend.framework.mybatis.core.model.BaseModel;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -29,7 +29,7 @@ import java.util.Date;
 public class ${table.NameFU} extends BaseModel {
 
 <#list columns as column>
-<#if column.colName?lower_case != 'id' && column.colName?lower_case != 'create_by' && column.colName?lower_case != 'create_time' && column.colName?lower_case != 'update_by' && column.colName?lower_case != 'update_time' && column.colName?lower_case != 'del_flag' >
+<#if column.colName?lower_case != 'id' && column.colName?lower_case != 'company_id' && column.colName?lower_case != 'create_by' && column.colName?lower_case != 'create_time' && column.colName?lower_case != 'update_by' && column.colName?lower_case != 'update_time' && column.colName?lower_case != 'del_flag' >
     /**
      * ${column.comments}
      */
