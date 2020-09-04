@@ -11,11 +11,6 @@
         </#list>
     </resultMap>
 
-    <resultMap id="svMap" type="${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV">
-        <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-    </resultMap>
-
     <!-- 集成列 -->
     <sql id="columns">
         <#assign x = 0>
@@ -40,15 +35,17 @@
         SELECT <include refid="columns"/>
           FROM ${table.Name} t
          WHERE t.`del_flag` = 0
+           AND t.`company_id` = ${r"#"}{company_id}
 <if test="query != null and query != ''">
            AND t.`name` = ${r"#"}{query}
 </if>
     </select>
 
-    <select id="select" parameterType="java.lang.String" resultMap="svMap" >
+    <select id="select" parameterType="java.lang.String" resultMap="boMap" >
         SELECT <include refid="columns"/>
-        FROM ${table.Name} t
+         FROM ${table.Name} t
         WHERE t.`del_flag` = 0
+          AND t.`company_id` = ${r"#"}{company_id}
         <if test="query != null and query != ''">
             AND t.`name` like '%${r"#"}{query}%'
         </if>

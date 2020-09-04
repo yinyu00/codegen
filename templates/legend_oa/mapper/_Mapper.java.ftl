@@ -2,7 +2,6 @@ package ${param.basePackage}.core.mapper.${param.module};
 
 import com.legend.framework.mybatis.core.mapper.BaseMapper;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
-import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,15 +30,17 @@ public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
 
     /**
      * 查询列表
+     * @param companyId 租户编号
      * @param page 分页参数
      * @param query 查询参数
      */
-    Page<${table.NameFU}> listBySQL(Page<${table.NameFU}> page, @Param("query") String query);
+    Page<${table.NameFU}> listBySQL(Page<${table.NameFU}> page, @Param("companyId") String companyId, @Param("query") String query);
 
     /**
      * 查询列表
+     * @param companyId 租户编号
      * @param query 查询参数
      */
-    List<${table.NameFU}SV> select(@Param("query") String query);
+    List<${table.NameFU}> select(@Param("companyId") String companyId, @Param("query") String query);
 
 }

@@ -1,9 +1,9 @@
 package ${param.basePackage}.core.service.${param.module};
 
+import com.legend.framework.common.vo.ComboBoxVo;
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import com.legend.framework.mybatis.extension.service.BaseService;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
-import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
 
 import java.util.List;
 
@@ -16,24 +16,27 @@ import java.util.List;
 public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
     /**
      * 查询列表
+     * @param companyId 租户编号
      * @param query 查询条件
      * @return 列表
      */
-    Page<${table.NameFU}> listByWrapper(String query, int pageIndex, int pageSize);
+    Page<${table.NameFU}> listByWrapper(String companyId, String query, int pageIndex, int pageSize);
 
     /**
      * 查询列表
+     * @param companyId 租户编号
      * @param query 查询参数
      * @return 列表
      */
-    Page<${table.NameFU}> listBySQL(String query, int pageIndex, int pageSize);
+    Page<${table.NameFU}> listBySQL(String companyId, String query, int pageIndex, int pageSize);
 
     /**
      * 查询列表
+     * @param companyId 租户编号
      * @param query 查询条件
      * @return 列表
      */
-    List<${table.NameFU}SV> select(String query);
+    List<ComboBoxVo> select(String companyId, String query);
 
     /**
      * 批量删除

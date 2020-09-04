@@ -1,11 +1,11 @@
 package ${param.basePackage}.api.controller.feign.${param.module};
 
+import com.legend.framework.common.vo.ComboBoxVo;
 import com.legend.framework.common.response.LegendResponse;
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 
 import ${param.basePackage}.contract.feign.${param.module}.${table.NameFU}Contract;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
-import ${param.basePackage}.contract.model.${param.module}.${table.NameFU}SV;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -37,6 +37,7 @@ public class ${table.NameFU}FeignController {
 
     @ApiOperation(value = "分页查询${table.comments}", notes = "分页查询${table.comments}")
     @ApiImplicitParams({
+        @ApiImplicitParam(name = "companyId", value = "租户编号"),
         @ApiImplicitParam(name = "query", value = "查询条件"),
         @ApiImplicitParam(name = "pageIndex", value = "当前页码", defaultValue = "1"),
         @ApiImplicitParam(name = "pageSize" , value = "页面条数", defaultValue = "10"),
@@ -44,21 +45,24 @@ public class ${table.NameFU}FeignController {
     })
     @PostMapping("/list")
     public LegendResponse<Page<${table.NameFU}>> list(
+        @RequestParam(value = "companyId") String companyId,
         @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
-        return ${table.NameFL}Contract.list(query, pageIndex, pageSize);
+        return ${table.NameFL}Contract.list(companyId, query, pageIndex, pageSize);
     }
 
     @ApiOperation(value = "查询${table.comments}, 仅返回编码和名称", notes = "查询${table.comments}, 仅返回编码和名称")
     @ApiImplicitParams({
-    @ApiImplicitParam(name = "query", value = "查询条件"),
-    @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+        @ApiImplicitParam(name = "companyId", value = "租户编号"),
+        @ApiImplicitParam(name = "query", value = "查询条件"),
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @PostMapping("/select")
-    public LegendResponse<List<${table.NameFU}SV>> select(
+    public LegendResponse<List<ComboBoxVo>> select(
+            @RequestParam(value = "companyId") String companyId,
             @RequestParam(value = "query", required = false) String query) {
-        return ${table.NameFL}Contract.select(query);
+        return ${table.NameFL}Contract.select(companyId, query);
     }
 
     @ApiOperation(value = "查询单个${table.comments}", notes = "查询单个${table.comments}")

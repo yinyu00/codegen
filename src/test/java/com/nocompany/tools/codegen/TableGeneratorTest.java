@@ -50,8 +50,10 @@ public class TableGeneratorTest {
       prefix = arr[1];
     }
 
+    String module = "wms";
+
     Table table = new Table(tableName, prefix);
-    table.setSchema("legend-erp");
+    table.setSchema("legend-" + module);
     tableInitializer.initTable(table);
     tableInitializer.initColumn(table);
     tableInitializer.initPrimaryKey(table);
@@ -60,9 +62,9 @@ public class TableGeneratorTest {
     params.put(FTLDIR, "templates/legend_oa");
     params.put(AUTHOR, "jinw");
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-    params.put(BASE_PACKAGE, "com.legend.oa");
-    params.put(VO_PACKAGE, "com.legend.oa.contract.model");
-    params.put("module", "prd");
+    params.put(BASE_PACKAGE, "com.legend." + module);
+    params.put(VO_PACKAGE, "com.legend." + module + ".contract.model");
+    params.put("module", module);
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -91,7 +93,7 @@ public class TableGeneratorTest {
 //            ,"prd_produce_param,prd"
 //            ,"prd_product,prd"
 //            ,"prd_product_bom,prd"
-            ,"prd_product_category,prd"
+//            ,"prd_product_category,prd"
 //            ,"prd_product_equipment,prd"
 //            ,"prd_production_craft,prd"
 //            ,"prd_production_line,prd"
@@ -105,7 +107,7 @@ public class TableGeneratorTest {
 //            ,"scm_material_batch,scm"
 //            ,"scm_material_safety_stock,scm"
 
-//            ,"wms_ware_house,wms"
+            ,"wms_ware_house,wms"
 //            ,"wms_ware_house_position,wms"
 //            ,"wms_stock_in_warrant,wms"
 //            ,"wms_stock_in_detail,wms"
