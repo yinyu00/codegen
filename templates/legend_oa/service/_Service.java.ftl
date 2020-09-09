@@ -52,5 +52,10 @@ public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
      */
     ${table.NameFU} selectOneById(String id);
 
+    /**
+     * 批量添加
+     * @param ${table.NameFL}List 批处理数据
+     */
+    void batchInsert(List<${table.NameFU}> ${table.NameFL}List);
 
 }

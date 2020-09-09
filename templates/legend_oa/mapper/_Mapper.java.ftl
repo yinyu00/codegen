@@ -43,4 +43,9 @@ public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
      */
     List<${table.NameFU}> select(@Param("companyId") String companyId, @Param("query") String query);
 
+    /**
+     * 批量新增
+     * @param list 批处理数据
+     */
+    void batchInsert(@Param("list") List<${table.NameFU}> list);
 }

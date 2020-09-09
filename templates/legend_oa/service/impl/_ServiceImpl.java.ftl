@@ -98,4 +98,11 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
         return baseMapper.selectOneById(id);
     }
 
+    /**
+     * 批量添加
+     * @param ${table.NameFL}List 批处理数据
+     */
+    public void batchInsert(List<${table.NameFU}> ${table.NameFL}List) {
+    }
+
 }

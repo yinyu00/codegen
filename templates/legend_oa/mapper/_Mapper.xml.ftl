@@ -31,7 +31,8 @@
         </foreach>
     </delete>
 
-    <select id="listBySQL" parameterType="java.lang.String" resultMap="boMap" >
+    <!-- 关联查询 -->
+    <select id="listBySQL" parameterType="java.lang.String" resultMap="boMap">
         SELECT <include refid="columns"/>
           FROM ${table.Name} t
          WHERE t.`del_flag` = 0
@@ -41,7 +42,8 @@
 </if>
     </select>
 
-    <select id="select" parameterType="java.lang.String" resultMap="boMap" >
+    <!-- 查询KV -->
+    <select id="select" parameterType="java.lang.String" resultMap="boMap">
         SELECT <include refid="columns"/>
          FROM ${table.Name} t
         WHERE t.`del_flag` = 0
@@ -52,9 +54,33 @@
         limit 50
     </select>
 
-    <select id="selectOneById" parameterType="java.lang.String" resultMap="boMap" >
+    <!-- 查询单个 -->
+    <select id="selectOneById" parameterType="java.lang.String" resultMap="boMap">
         SELECT <include refid="columns"/>
         FROM ${table.Name} t
         WHERE t.`del_flag` = 0 AND t.`id` = ${r"#"}{id}
     </select>
+
+    <!-- 批量插入 -->
+    <insert id ="batchInsert" parameterType="java.util.List">
+        insert into ${table.Name} (
+            <#assign x = 0>
+            <#assign size = columns?size>
+            <#list columns as column>
+            <#assign x = x+1>
+            `${column.colName}`<#if x lt size>,</#if>
+            </#list>
+        )
+        values
+         <foreach collection ="list" item="item" index= "index" separator =",">
+         (
+             <#assign x = 0>
+             <#assign size = columns?size>
+             <#list columns as column>
+             <#assign x = x+1>
+             ${r"#"}{item.${column.colNameFL}}<#if x lt size>,</#if>
+             </#list>
+         )
+         </foreach>
+    </insert>
 </mapper>
