@@ -58,4 +58,11 @@ public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
      */
     void batchInsert(List<${table.NameFU}> ${table.NameFL}List);
 
+    /**
+     * 查询列表
+     * @param ids 编号
+     * @return 列表
+     */
+    List<${table.NameFU}> selectByIds(List<String> ids);
+
 }

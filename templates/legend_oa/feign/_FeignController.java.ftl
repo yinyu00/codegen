@@ -113,4 +113,13 @@ public class ${table.NameFU}FeignController {
         return ${table.NameFL}Contract.batchDel(ids);
     }
 
+    @ApiOperation(value = "根据编号批量查询${table.comments},", notes = "根据编号批量查询${table.comments}")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "ids", value = "编号列表"),
+        @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
+    })
+    @PostMapping("/selectByIds")
+    public LegendResponse<List<${table.NameFU}>> selectByIds(@RequestBody List<String> ids) {
+        return ${table.NameFL}Contract.selectByIds(ids);
+    }
 }

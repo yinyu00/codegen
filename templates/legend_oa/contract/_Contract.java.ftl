@@ -45,4 +45,6 @@ public interface ${table.NameFU}Contract {
     @PostMapping("/${param.module}/${table.NameFL}/batchDel")
     LegendResponse<String> batchDel(@RequestBody List<String> ids);
 
+    @PostMapping("/selectByIds")
+    LegendResponse<List<${table.NameFU}>> selectByIds(@RequestBody List<String> ids);
 }

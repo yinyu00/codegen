@@ -60,6 +60,10 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
     @Override
     public Page<${table.NameFU}> listBySQL(String companyId, String query, int pageIndex, int pageSize) {
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
+        if(StringUtils.isNotEmpty(query)) {
+            query = "%" + query + "%";
+        }
+
         return baseMapper.listBySQL(page, companyId, query);
     }
 
@@ -105,4 +109,12 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
     public void batchInsert(List<${table.NameFU}> ${table.NameFL}List) {
     }
 
+    /**
+     * 查询列表
+     * @param ids 编号
+     * @return 列表
+     */
+    public List<${table.NameFU}> selectByIds(List<String> ids) {
+        return baseMapper.selectByIds(ids);
+    }
 }

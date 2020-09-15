@@ -50,10 +50,11 @@ public class TableGeneratorTest {
       prefix = arr[1];
     }
 
-    String module = "erp";
+    String module = "oa";
+    String secondModel = "sys";
 
     Table table = new Table(tableName, prefix);
-    table.setSchema("legend-" + module);
+    table.setSchema("legend-" + module + "-new");
     tableInitializer.initTable(table);
     tableInitializer.initColumn(table);
     tableInitializer.initPrimaryKey(table);
@@ -64,7 +65,7 @@ public class TableGeneratorTest {
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
     params.put(BASE_PACKAGE, "com.legend." + module);
     params.put(VO_PACKAGE, "com.legend." + module + ".contract.model");
-    params.put("module", "prd");
+    params.put("module", secondModel);
     params.put(BASE_URI, "/api/v1/appsys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
@@ -80,7 +81,7 @@ public class TableGeneratorTest {
     List<String> tables = Arrays.asList(""
 //            ,"sys_dict,sys"
 //            ,"sys_organization,sys"
-//            ,"sys_user,sys"
+            ,"sys_user,sys"
 
 //            ,"crm_company_contact,crm"
 //            ,"crm_contract,crm"
@@ -91,7 +92,7 @@ public class TableGeneratorTest {
 
 //            ,"prd_material,prd"
 //            ,"prd_produce_param,prd"
-            ,"prd_product,prd"
+//            ,"prd_product,prd"
 //            ,"prd_product_bom,prd"
 //            ,"prd_product_category,prd"
 //            ,"prd_product_equipment,prd"
@@ -119,6 +120,14 @@ public class TableGeneratorTest {
 //            ,"wms_stock_out_detail,wms"
 //            ,"wms_storage_detail,wms"
 //            ,"wms_storage_log,wms"
+//            ,"wms_material_req,wms"
+//            ,"wms_material_req_detail,wms"
+//            ,"wms_material_return,wms"
+//            ,"wms_material_return_detail,wms"
+//            ,"wms_storage_check,wms"
+//            ,"wms_storage_check_detail,wms"
+
+//            ,"mes_work_order,mes"
     );
     for (String tableName : tables) {
       generate(tableName);

@@ -38,7 +38,7 @@
          WHERE t.`del_flag` = 0
            AND t.`company_id` = ${r"#"}{companyId}
 <if test="query != null and query != ''">
-           AND t.`name` = ${r"#"}{query}
+           AND t.`name` like ${r"#"}{query}
 </if>
     </select>
 
@@ -49,7 +49,7 @@
         WHERE t.`del_flag` = 0
           AND t.`company_id` = ${r"#"}{companyId}
         <if test="query != null and query != ''">
-            AND t.`name` like '%${r"#"}{query}%'
+            AND t.`name` like ${r"#"}{query}
         </if>
         limit 50
     </select>
