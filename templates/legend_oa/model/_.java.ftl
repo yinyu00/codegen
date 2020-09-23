@@ -1,5 +1,7 @@
 package ${param.voPackage}.${param.module};
 
+import com.legend.framework.mybatis.annotation.FieldStrategy;
+import com.legend.framework.mybatis.annotation.TableField;
 import com.legend.framework.mybatis.annotation.TableName;
 import com.legend.framework.mybatis.core.model.BaseModel;
 
@@ -34,6 +36,9 @@ public class ${table.NameFU} extends BaseModel {
      * ${column.comments}
      */
     @ApiModelProperty("${column.comments}")
+<#if column.dbType == 'Long'>
+    @TableField(updateStrategy= FieldStrategy.IGNORED)
+</#if>
     private ${column.dbType} ${column.colNameFL};
 
 </#if>
