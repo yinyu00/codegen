@@ -4,6 +4,7 @@ import com.legend.framework.mybatis.core.mapper.BaseMapper;
 import ${param.basePackage}.contract.model.${param.module}.${table.NameFU};
 import com.legend.framework.mybatis.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @author ${param.author}
  * @version 1.0 ${param.date}
  */
+@Repository
 public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
     /**
      * 查询单条记录

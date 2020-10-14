@@ -69,7 +69,7 @@ public class MysqlTableInitializer implements TableInitializer {
             throw new UnsupportedOperationException("找不到字段映射长度");
 
         }
-        column.setDataLength(0);
+//        column.setDataLength(0);
         column.setNullable(rs.getString("IS_NULLABLE"));
         column.setComments(rs.getString("COLUMN_COMMENT"));
 

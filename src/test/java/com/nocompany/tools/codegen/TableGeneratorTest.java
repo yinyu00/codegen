@@ -51,7 +51,7 @@ public class TableGeneratorTest {
     }
 
     String module = "wms";
-    String secondModel = "prd";
+    String secondModel = "wms";
 
     Table table = new Table(tableName, prefix);
     table.setSchema("legend-" + module + "");
@@ -61,7 +61,7 @@ public class TableGeneratorTest {
 
     Map<String, String> params = new HashMap<>();
     params.put(FTLDIR, "templates/legend_oa");
-    params.put(AUTHOR, "jinw");
+    params.put(AUTHOR, "jinwei");
     params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
     params.put(BASE_PACKAGE, "com.legend." + module);
     params.put(VO_PACKAGE, "com.legend." + module + ".contract.model");
@@ -110,7 +110,7 @@ public class TableGeneratorTest {
 //            ,"scm_material_batch,scm"
 //            ,"scm_material_safety_stock,scm"
 
-            ,"wms_ware_house,wms"
+//            ,"wms_ware_house,wms"
 //            ,"wms_ware_house_area,wms"
 //            ,"wms_ware_house_rank,wms"
 //            ,"wms_ware_house_floor,wms"
@@ -128,8 +128,12 @@ public class TableGeneratorTest {
 //            ,"wms_material_return_detail,wms"
 //            ,"wms_storage_check,wms"
 //            ,"wms_storage_check_detail,wms"
+            ,"wms_stock_in_req,wms"
+            ,"wms_stock_in_req_detail,wms"
 
 //            ,"mes_work_order,mes"
+//            ,"mes_work_order_process,mes"
+//            ,"mes_work_order_process_log,mes"
 //            ,"mes_spot_check,mes"
 //            ,"mes_spot_check_detail,mes"
     );

@@ -79,7 +79,7 @@ public class ${table.NameFU}Controller {
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @PostMapping
-    public LegendResponse<String> insert(@RequestBody ${table.NameFU} ${table.NameFL}) {
+    public LegendResponse<String> insert(@RequestBody @Valid ${table.NameFU} ${table.NameFL}) {
         if(log.isDebugEnabled()) {
             log.debug("${table.NameFU}Controller.insert 被触发, ${table.NameFL} = {}", ${table.NameFL});
         }

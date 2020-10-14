@@ -14,6 +14,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.ibatis.type.Alias;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -38,6 +40,12 @@ public class ${table.NameFU} extends BaseModel {
     @ApiModelProperty("${column.comments}")
 <#if column.dbType == 'Long'>
     @TableField(updateStrategy= FieldStrategy.IGNORED)
+</#if>
+<#if column.nullable == "NO">
+    @NotNull(message = "${column.colNameFL} 不能为空")
+</#if>
+<#if column.dataTypeUpperCase == "VARCHAR">
+    @Size(max = ${column.dataLength})
 </#if>
     private ${column.dbType} ${column.colNameFL};
 
