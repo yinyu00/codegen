@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -70,7 +71,7 @@ public class ${table.NameFU}Controller {
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @GetMapping("/{id}")
-    public LegendResponse<${table.NameFU}> getById(@PathVariable String id) {
+    public LegendResponse<${table.NameFU}> getById(@PathVariable("id") String id) {
         return LegendResponse.ok(${table.NameFL}Service.selectOneById(id));
     }
 

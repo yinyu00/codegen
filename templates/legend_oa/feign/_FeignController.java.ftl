@@ -72,7 +72,7 @@ public class ${table.NameFU}FeignController {
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @GetMapping("/{id}")
-    public LegendResponse<${table.NameFU}> getById(@PathVariable String id) {
+    public LegendResponse<${table.NameFU}> getById(@PathVariable("id") String id) {
         return ${table.NameFL}Contract.getById(id);
     }
 
