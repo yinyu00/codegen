@@ -40,6 +40,7 @@
 <if test="query != null and query != ''">
            AND t.`name` like ${r"#"}{query}
 </if>
+         ORDER BY t.create_time desc
     </select>
 
     <!-- 查询KV -->
