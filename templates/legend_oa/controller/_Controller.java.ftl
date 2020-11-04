@@ -38,7 +38,7 @@ public class ${table.NameFU}Controller {
 
     @ApiOperation(value = "分页查询${table.comments}", notes = "分页查询${table.comments}")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "companyId", value = "租户编号"),
+        @ApiImplicitParam(name = "tenantId", value = "租户编号"),
         @ApiImplicitParam(name = "query", value = "查询条件"),
         @ApiImplicitParam(name = "pageIndex", value = "当前页码", defaultValue = "1"),
         @ApiImplicitParam(name = "pageSize" , value = "页面条数", defaultValue = "10"),
@@ -46,24 +46,24 @@ public class ${table.NameFU}Controller {
     })
     @PostMapping("/list")
     public LegendResponse<Page<${table.NameFU}>> list(
-        @RequestParam(value = "companyId", required = false) String companyId,
+        @RequestParam(value = "tenantId", required = false) String tenantId,
         @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
-        return LegendResponse.ok(${table.NameFL}Service.listBySQL(companyId, query, pageIndex, pageSize));
+        return LegendResponse.ok(${table.NameFL}Service.listBySQL(tenantId, query, pageIndex, pageSize));
     }
 
     @ApiOperation(value = "查询${table.comments}, 仅返回编码和名称", notes = "查询${table.comments}, 仅返回编码和名称")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "companyId", value = "租户编号"),
+        @ApiImplicitParam(name = "tenantId", value = "租户编号"),
         @ApiImplicitParam(name = "query", value = "查询条件"),
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
     @PostMapping("/select")
     public LegendResponse<List<ComboBoxVo>> select(
-            @RequestParam(value = "companyId", required = false) String companyId,
+            @RequestParam(value = "tenantId", required = false) String tenantId,
             @RequestParam(value = "query", required = false) String query) {
-        return LegendResponse.ok(${table.NameFL}Service.select(companyId, query));
+        return LegendResponse.ok(${table.NameFL}Service.select(tenantId, query));
     }
 
     @ApiOperation(value = "查询单个${table.comments}", notes = "查询单个${table.comments}")

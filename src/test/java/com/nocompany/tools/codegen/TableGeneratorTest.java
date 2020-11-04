@@ -50,8 +50,8 @@ public class TableGeneratorTest {
       prefix = arr[1];
     }
 
-    String module = "wms";
-    String secondModel = "wms";
+    String module = "erp";
+    String secondModel = "sys";
 
     Table table = new Table(tableName, prefix);
     table.setSchema("legend-" + module + "");
@@ -66,7 +66,7 @@ public class TableGeneratorTest {
     params.put(BASE_PACKAGE, "com.legend." + module);
     params.put(VO_PACKAGE, "com.legend." + module + ".contract.model");
     params.put("module", secondModel);
-    params.put(BASE_URI, "/api/v1/appsys/");
+    params.put(BASE_URI, "/api/v1/sys/");
     params.put(API_ID_PREFIX, "60104550");
     params.put(MENU_ID, "60104550");
 
@@ -89,6 +89,8 @@ public class TableGeneratorTest {
 //            ,"crm_supplier,crm"
 //            ,"crm_supplier_address,crm"
 //            ,"ord_proofing_request,ord"
+//            ,"bpm_user,bpm"
+//            ,"bpm_role,bpm"
 
 //            ,"prd_material,prd"
 //            ,"prd_produce_param,prd"
@@ -128,14 +130,17 @@ public class TableGeneratorTest {
 //            ,"wms_material_return_detail,wms"
 //            ,"wms_storage_check,wms"
 //            ,"wms_storage_check_detail,wms"
-            ,"wms_stock_in_req,wms"
-            ,"wms_stock_in_req_detail,wms"
+//            ,"wms_stock_in_req,wms"
+//            ,"wms_stock_in_req_detail,wms"
 
 //            ,"mes_work_order,mes"
 //            ,"mes_work_order_process,mes"
 //            ,"mes_work_order_process_log,mes"
 //            ,"mes_spot_check,mes"
 //            ,"mes_spot_check_detail,mes"
+
+            ,"sys_menu,sys"
+            ,"sys_role_menu,sys"
     );
     for (String tableName : tables) {
       generate(tableName);

@@ -16,27 +16,27 @@ import java.util.List;
 public interface ${table.NameFU}Service extends BaseService<${table.NameFU}> {
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param query 查询条件
      * @return 列表
      */
-    Page<${table.NameFU}> listByWrapper(String companyId, String query, int pageIndex, int pageSize);
+    Page<${table.NameFU}> listByWrapper(String tenantId, String query, int pageIndex, int pageSize);
 
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param query 查询参数
      * @return 列表
      */
-    Page<${table.NameFU}> listBySQL(String companyId, String query, int pageIndex, int pageSize);
+    Page<${table.NameFU}> listBySQL(String tenantId, String query, int pageIndex, int pageSize);
 
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param query 查询条件
      * @return 列表
      */
-    List<ComboBoxVo> select(String companyId, String query);
+    List<ComboBoxVo> select(String tenantId, String query);
 
     /**
      * 批量删除

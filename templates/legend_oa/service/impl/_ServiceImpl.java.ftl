@@ -30,18 +30,18 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
 
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param query 查询参数
      * @param pageIndex 当前页码
      * @param pageSize 每页记录数
      * @return 列表
      */
     @Override
-    public Page<${table.NameFU}> listByWrapper(String companyId, String query, int pageIndex, int pageSize) {
+    public Page<${table.NameFU}> listByWrapper(String tenantId, String query, int pageIndex, int pageSize) {
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
 
         QueryWrapper<${table.NameFU}> wrapper = new QueryWrapper<>();
-        wrapper.eq("company_id", companyId);
+        wrapper.eq("tenant_id", tenantId);
         if(StringUtils.isNotEmpty(query)) {
             wrapper.eq("${table.NameFL}_name", query);
         }
@@ -51,30 +51,30 @@ public class ${table.NameFU}ServiceImpl  extends BaseServiceImpl<${table.NameFU}
 
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param query 查询参数
      * @param pageIndex 当前页码
      * @param pageSize 每页记录数
      * @return 列表
      */
     @Override
-    public Page<${table.NameFU}> listBySQL(String companyId, String query, int pageIndex, int pageSize) {
+    public Page<${table.NameFU}> listBySQL(String tenantId, String query, int pageIndex, int pageSize) {
         Page<${table.NameFU}> page = new Page<>(pageIndex, pageSize);
         if(StringUtils.isNotEmpty(query)) {
             query = "%" + query + "%";
         }
 
-        return baseMapper.listBySQL(page, companyId, query);
+        return baseMapper.listBySQL(page, tenantId, query);
     }
 
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param query 查询条件
      * @return 列表
      */
-    public List<ComboBoxVo> select(String companyId, String query) {
-        List<${table.NameFU}> ${table.NameFL}List = baseMapper.select(companyId, query);
+    public List<ComboBoxVo> select(String tenantId, String query) {
+        List<${table.NameFU}> ${table.NameFL}List = baseMapper.select(tenantId, query);
 
         List<ComboBoxVo> result = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(${table.NameFL}List)) {

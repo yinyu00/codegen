@@ -105,6 +105,7 @@ public class Column {
         return "int";
 
       case "int":
+      case "smallint":
       case "bigint":
       case "float":
       case "decimal":

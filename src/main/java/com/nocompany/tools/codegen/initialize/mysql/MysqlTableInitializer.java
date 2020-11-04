@@ -38,6 +38,7 @@ public class MysqlTableInitializer implements TableInitializer {
         column.setDataType(rs.getString("DATA_TYPE"));
         switch (column.getDataType()) {
           case "tinyint":
+          case "smallint":
           case "int":
           case "bigint":
           case "float":

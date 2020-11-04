@@ -36,7 +36,7 @@
         SELECT <include refid="columns"/>
           FROM ${table.Name} t
          WHERE t.`del_flag` = 0
-           AND t.`company_id` = ${r"#"}{companyId}
+           AND t.`tenant_id` = ${r"#"}{tenantId}
 <if test="query != null and query != ''">
            AND t.`name` like ${r"#"}{query}
 </if>
@@ -48,7 +48,7 @@
         SELECT <include refid="columns"/>
          FROM ${table.Name} t
         WHERE t.`del_flag` = 0
-          AND t.`company_id` = ${r"#"}{companyId}
+          AND t.`tenant_id` = ${r"#"}{tenantId}
         <if test="query != null and query != ''">
             AND t.`name` like ${r"#"}{query}
         </if>

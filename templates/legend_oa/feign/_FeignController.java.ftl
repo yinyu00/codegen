@@ -51,12 +51,12 @@ public class ${table.NameFU}FeignController {
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
         User user = SubjectUtil.getUser(User.class);
-        return ${table.NameFL}Contract.list(user.getPrimaryCompanyId(), query, pageIndex, pageSize);
+        return ${table.NameFL}Contract.list(user.getTenantId(), query, pageIndex, pageSize);
     }
 
     @ApiOperation(value = "查询${table.comments}, 仅返回编码和名称", notes = "查询${table.comments}, 仅返回编码和名称")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "companyId", value = "租户编号"),
+        @ApiImplicitParam(name = "tenantId", value = "租户编号"),
         @ApiImplicitParam(name = "query", value = "查询条件"),
         @ApiImplicitParam(name = "Authorization", required = true, dataType = "string", value = "access_token", paramType = "header")
     })
@@ -64,7 +64,7 @@ public class ${table.NameFU}FeignController {
     public LegendResponse<List<ComboBoxVo>> select(
             @RequestParam(value = "query", required = false) String query) {
         User user = SubjectUtil.getUser(User.class);
-        return ${table.NameFL}Contract.select(user.getPrimaryCompanyId(), query);
+        return ${table.NameFL}Contract.select(user.getTenantId(), query);
     }
 
     @ApiOperation(value = "查询单个${table.comments}", notes = "查询单个${table.comments}")
@@ -84,12 +84,10 @@ public class ${table.NameFU}FeignController {
     public LegendResponse<String> insert(@RequestBody ${table.NameFU} ${table.NameFL}) {
         User user = SubjectUtil.getUser(User.class);
         if (StringUtils.isEmpty(${table.NameFL}.getId())) {
-            ${table.NameFL}.setCompanyId(user.getPrimaryCompanyId());
+            ${table.NameFL}.setTenantId(user.getTenantId());
             ${table.NameFL}.setCreateBy(user.getId());
-            ${table.NameFL}.setCreateTime(new Date());
         } else {
             ${table.NameFL}.setUpdateBy(user.getId());
-            ${table.NameFL}.setUpdateTime(new Date());
         }
 
         return ${table.NameFL}Contract.insert(${table.NameFL});

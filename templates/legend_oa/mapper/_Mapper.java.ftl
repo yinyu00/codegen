@@ -32,18 +32,18 @@ public interface ${table.NameFU}Mapper extends BaseMapper<${table.NameFU}> {
 
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param page 分页参数
      * @param query 查询参数
      */
-    Page<${table.NameFU}> listBySQL(Page<${table.NameFU}> page, @Param("companyId") String companyId, @Param("query") String query);
+    Page<${table.NameFU}> listBySQL(Page<${table.NameFU}> page, @Param("tenantId") String tenantId, @Param("query") String query);
 
     /**
      * 查询列表
-     * @param companyId 租户编号
+     * @param tenantId 租户编号
      * @param query 查询参数
      */
-    List<${table.NameFU}> select(@Param("companyId") String companyId, @Param("query") String query);
+    List<${table.NameFU}> select(@Param("tenantId") String tenantId, @Param("query") String query);
 
     /**
      * 批量新增

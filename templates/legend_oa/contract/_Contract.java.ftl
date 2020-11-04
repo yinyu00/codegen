@@ -23,14 +23,14 @@ public interface ${table.NameFU}Contract {
 
     @PostMapping("/${param.module}/${table.NameFL}/list")
     LegendResponse<Page<${table.NameFU}>> list(
-        @RequestParam(value = "companyId", required = false) String companyId,
+        @RequestParam(value = "tenantId", required = false) String tenantId,
         @RequestParam(value = "query", required = false) String query,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
         @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize);
 
     @PostMapping("/${param.module}/${table.NameFL}/select")
     LegendResponse<List<ComboBoxVo>> select(
-        @RequestParam(value = "companyId", required = false) String companyId,
+        @RequestParam(value = "tenantId", required = false) String tenantId,
         @RequestParam(value = "query", required = false) String query);
 
     @GetMapping("/${param.module}/${table.NameFL}/{id}")
