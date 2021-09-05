@@ -1,19 +1,22 @@
 package ${param.basePackage}.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import cn.hutool.core.collection.CollUtil;
+import cn.vpclub.bulk.common.constant.CommonConstant;
+import cn.vpclub.bulk.common.constant.ErrorCodeEnum;
+import cn.vpclub.bulk.common.util.OperatorUtil;
+import cn.vpclub.bulk.common.util.ResultUtil;
+import cn.vpclub.bulk.common.vo.RequestPageVo;
 import cn.vpclub.common.exception.RenException;
+import cn.vpclub.common.page.PageData;
 import cn.vpclub.common.utils.Result;
 
 import ${param.basePackage}.dao.${table.NameFU}Mapper;
 import ${param.basePackage}.entity.${table.NameFU}Entity;
 import ${param.basePackage}.service.${table.NameFU}Service;
 import ${param.voPackage}.${table.NameFU}Vo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,19 +30,11 @@ import java.util.List;
  * @version 1.0 ${param.date}
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor
+@Slf4j
 public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
 
-    /**
-     * LOGGER日志
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(${table.NameFU}ServiceImpl.class);
-
-    @Autowired
-    private ${table.NameFU}Mapper ${table.NameFL}Mapper ;
-    public ${table.NameFU}ServiceImpl(${table.NameFU}Mapper ${table.NameFL}Mapper) {
-        this.${table.NameFL}Mapper = ${table.NameFL}Mapper;
-    }
+    private final ${table.NameFU}Mapper ${table.NameFL}Mapper ;
 
     /**
      * 根据id查看详情
@@ -53,13 +48,11 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
         }
 
         ${table.NameFU}Vo ${table.NameFL}Vo = new ${table.NameFU}Vo();
-        ${table.NameFU} ${table.NameFL} = ${table.NameFL}Mapper.selectByPrimaryKey(${table.NameFL}Id);
-        if (${table.NameFL} != null) {
-            BeanUtils.copyProperties(${table.NameFL}, ${table.NameFL}Vo);
-        } else {
-            return Result.success();
+        ${table.NameFU}Entity ${table.NameFL}Entity = ${table.NameFL}Mapper.selectById(${table.NameFL}Id);
+        if (${table.NameFL}Entity != null) {
+            BeanUtils.copyProperties(${table.NameFL}Entity, ${table.NameFL}Vo);
         }
-        return Result.success(${table.NameFL}Vo);
+        return ResultUtil.ok(${table.NameFL}Vo);
     }
 
     /**
@@ -69,19 +62,18 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Result insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
+    public Result<Integer> insert${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
         if (null == ${table.NameFL}Vo) {
             throw new RenException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
-        OperatorUtil.insert(${table.NameFL}Vo);
-
         ${table.NameFU}Entity ${table.NameFL}Entity = new ${table.NameFU}Entity();
         BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Entity);
 
-        ${table.NameFL}Mapper.insert(${table.NameFL});
+        OperatorUtil.insert(${table.NameFL}Entity);
+        int result = ${table.NameFL}Mapper.insert(${table.NameFL}Entity);
 
-        return Result.success();
+        return ResultUtil.ok(result);
     }
 
     /**
@@ -91,19 +83,18 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Result update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
-        if (${table.NameFL}Vo == null || ${table.NameFL}Vo.get${table.NameFU}Id() == null) {
+    public Result<Integer> update${table.NameFU}(${table.NameFU}Vo ${table.NameFL}Vo) {
+        if (${table.NameFL}Vo == null || ${table.NameFL}Vo.getId() == null) {
             throw new RenException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
-
-        OperatorUtil.update(${table.NameFL}Vo);
 
         ${table.NameFU}Entity ${table.NameFL}Entity = new ${table.NameFU}Entity();
         BeanUtils.copyProperties(${table.NameFL}Vo, ${table.NameFL}Entity);
 
-        ${table.NameFL}Mapper.updateByPrimaryKey(${table.NameFL});
+        OperatorUtil.update(${table.NameFL}Entity);
+        int result = ${table.NameFL}Mapper.updateById(${table.NameFL}Entity);
 
-        return Result.success();
+        return ResultUtil.ok(result);
     }
 
     /**
@@ -113,14 +104,14 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Result delete${table.NameFU}ById(Long ${table.NameFL}Id) {
+    public Result<Integer> delete${table.NameFU}ById(Long ${table.NameFL}Id) {
         if (null ==  ${table.NameFL}Id) {
             throw new RenException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
-        ${table.NameFL}Mapper.deleteByPrimaryKey(${table.NameFL}Id);
+        int result = ${table.NameFL}Mapper.deleteById(${table.NameFL}Id);
 
-        return Result.success();
+        return ResultUtil.ok(result);
     }
 
     /**
@@ -130,13 +121,13 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Result batchSelectByIdList(List<Long> idList) {
-        if (CollectionUtil.isEmpty(idList)) {
+    public Result<List<${table.NameFU}Entity>> batchSelectByIdList(List<Long> idList) {
+        if (CollUtil.isEmpty(idList)) {
             throw new RenException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
-        List<${table.NameFU}Vo> ${table.NameFL}VoList = ${table.NameFL}Mapper.batchSelectByIdList(idList);
-        return Result.success(${table.NameFL}VoList);
+        List<${table.NameFU}Entity> ${table.NameFL}EntityList = ${table.NameFL}Mapper.selectBatchIds(idList);
+        return ResultUtil.ok(${table.NameFL}EntityList);
     }
 
     /**
@@ -146,14 +137,25 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
-    public Result batchDelByIdList(List<Long> idList) {
-        if (CollectionUtil.isEmpty(idList)) {
+    public Result<Integer> batchDelByIdList(List<Long> idList) {
+        if (CollUtil.isEmpty(idList)) {
             throw new RenException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
-        ${table.NameFL}Mapper.batchDelByIdList(idList);
+        int result = ${table.NameFL}Mapper.deleteBatchIds(idList);
 
-        return Result.success();
+        return ResultUtil.ok(result);
+    }
+
+
+    /**
+     * 查询列表
+     * @param pageVo 分页查询条件
+     * @return 列表
+     */
+    @Override
+    public Result<PageData<${table.NameFU}Vo>> listBySql(RequestPageVo<${table.NameFU}Vo> pageVo) {
+        return null;
     }
 
     /**
@@ -162,20 +164,9 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
      * @return 列表
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public Result<ResponsePageVo<${table.NameFU}Vo>> select${table.NameFU}List(RequestPageVo<${table.NameFU}Vo> pageVo) {
-        if (pageVo == null) {
-            return Result.success();
-        }
-        ${table.NameFU}Vo ${table.NameFL}Vo = new ${table.NameFU}Vo();
-        if (pageVo.getData() != null) {
-            BeanUtils.copyProperties(pageVo.getData(), ${table.NameFL}Vo);
-        }
-        PageHelper.startPage(pageVo.getPageNo(), pageVo.getPageSize());
-        List<${table.NameFU}Vo> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}List(${table.NameFL}Vo);
-        return Result.success(${table.NameFL}List, new PageInfo(${table.NameFL}List).getTotal());
+    public Result<PageData<${table.NameFU}Vo>> listByWrapper(RequestPageVo<${table.NameFU}Vo> pageVo) {
+        return null;
     }
-
 
     /**
     * 存在性校验
@@ -183,22 +174,27 @@ public class ${table.NameFU}ServiceImpl implements ${table.NameFU}Service {
     * @return 校验结果
     */
     public Result exist(${table.NameFU}Vo ${table.NameFL}Vo) {
-        Long originId = appLayerVo.get${table.NameFU}Id();
-        ${table.NameFL}Vo.set${table.NameFU}Id(null);
+        Long originId = ${table.NameFL}Vo.getId();
+        ${table.NameFL}Vo.setId(null);
 
-        List<${table.NameFU}Vo> ${table.NameFL}List = ${table.NameFL}Mapper.select${table.NameFU}(${table.NameFL}Vo);
-        if(CollectionUtil.isEmpty(${table.NameFL}List)) {
-            return Result.success(CommonConstant.INT_ONE);  // 无重复记录
+        RequestPageVo<${table.NameFU}Vo> queryVo = new RequestPageVo<>();
+        queryVo.setInstance(${table.NameFL}Vo);
+        queryVo.setCurrent(1);
+        queryVo.setSize(10);
+
+        List<${table.NameFU}Vo> ${table.NameFL}List = listByWrapper(queryVo).getData().getRecords();
+        if(CollUtil.isEmpty(${table.NameFL}List)) {
+            return ResultUtil.ok(CommonConstant.INT_ONE);  // 无重复记录
         }
 
         for(${table.NameFU}Vo ${table.NameFL} : ${table.NameFL}List) {
-            if(${table.NameFL}.get${table.NameFU}Id().equals(originId)) {
+            if(${table.NameFL}.getId().equals(originId)) {
                 continue; // 跳过相同id的记录
             }
 
-            return Result.success(CommonConstant.INT_ZERO); // 有重复记录
+            return ResultUtil.ok(CommonConstant.INT_ZERO); // 有重复记录
         }
 
-        return Result.success(CommonConstant.INT_ONE);  // 无重复记录
+        return ResultUtil.ok(CommonConstant.INT_ONE);  // 无重复记录
     }
 }
