@@ -22,14 +22,14 @@ public class MysqlTableInitializer implements TableInitializer {
     }
 
     public void initTable(Table table) {
-        String sql = "select * from information_schema.tables where table_schema='jijiajia' and table_name = '" + table.getName() + "'";
+        String sql = "select * from information_schema.tables where table_schema='" + table.getSchema() + "' and table_name = '" + table.getName() + "'";
 
         Map<String, Object> tableMap = jdbcTemplate.queryForMap(sql);
         table.setComments((String)tableMap.get("TABLE_COMMENT"));
     }
 
     public void initColumn(Table table) {
-        String sql = "select * from information_schema.columns where table_schema='jijiajia' and table_name = '" + table.getName() + "'";
+        String sql = "select * from information_schema.columns where table_schema='" + table.getSchema() + "' and table_name = '" + table.getName() + "'";
 
         List columnList = jdbcTemplate.query(sql, new RowMapper<Column>() {
             public Column mapRow(ResultSet rs, int rowNum) throws SQLException {

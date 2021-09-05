@@ -16,6 +16,7 @@ public class Table {
     public String NameFL;
     public String NameFU;
     public String comments = "";
+    private String schema;
 
     private List<Column> columnList = new ArrayList<Column>();
 
@@ -45,7 +46,8 @@ public class Table {
         }
     }
 
-    public Table(String tableName) {
+    public Table(String schema, String tableName) {
+        this.schema = schema;
         this.Name = tableName;
         this.NameFU = GenUtil.getCamelCaseString(tableName, true);
         this.NameFL = GenUtil.getCamelCaseString(tableName, false);
@@ -58,5 +60,9 @@ public class Table {
         sb.append(", columnList=").append(columnList);
         sb.append('}');
         return sb.toString();
+    }
+
+    public String getSchema() {
+        return schema;
     }
 }

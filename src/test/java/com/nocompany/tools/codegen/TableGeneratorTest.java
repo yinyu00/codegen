@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static com.nocompany.tools.codegen.constant.Params.*;
@@ -30,6 +31,18 @@ public class TableGeneratorTest {
     @Autowired
     TableGenerator tableGenerator;
 
+    @Value("${db.schema}")
+    private String schema;
+
+    @Value("${db.template}")
+    private String template;
+
+    @Value("${db.base.package}")
+    private String basePackage;
+
+    @Value("${db.vo.package}")
+    private String voPackage;
+
     public void setTableInitializer(TableInitializer tableInitializer) {
         this.tableInitializer = tableInitializer;
     }
@@ -37,20 +50,20 @@ public class TableGeneratorTest {
         this.tableGenerator = tableGenerator;
     }
 
-    public void generate(String tableName) throws Exception {
-        Table table = new Table(tableName);
+    public void generate(String schema, String tableName) throws Exception {
+        Table table = new Table(schema, tableName);
 
         tableInitializer.initTable(table);
         tableInitializer.initColumn(table);
         tableInitializer.initPrimaryKey(table);
 
         Map<String, String> params = new HashMap<>();
-        params.put(FTLDIR, "templates/kangpaas");
+        params.put(FTLDIR, "templates/" + template);
         params.put(AUTHOR, "jinw");
         params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
-        params.put(BASE_PACKAGE, "com.kangpaas.appsys");
-        params.put(VO_PACKAGE, "com.kangpaas.sdk.appsys.vo");
-        params.put(BASE_URI, "/api/v1/appsys/");
+        params.put(BASE_PACKAGE, basePackage);
+        params.put(VO_PACKAGE, voPackage);
+        params.put(BASE_URI, "/api/");
         params.put(API_ID_PREFIX, "60104550");
         params.put(MENU_ID, "60104550");
 
@@ -62,15 +75,17 @@ public class TableGeneratorTest {
 
     @Test
     public void batchGenerate() throws Exception {
-        List<String> tables = Arrays.asList("accreditation_info"
-                , "advert_info"
+        List<String> tables = Arrays.asList(
+                "advert_info"
+//                , "accreditation_info"
 //                , "sys_template_file"
 //                , "monitor_log_prov_input"
 //                , "monitor_log_prov_output"
         );
         for (String tableName : tables) {
-            generate(tableName);
+            generate(schema, tableName);
         }
+
     }
 
 }
