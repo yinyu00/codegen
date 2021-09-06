@@ -76,7 +76,7 @@ public class TableGeneratorTest {
     @Test
     public void batchGenerate() throws Exception {
         List<String> tables = Arrays.asList(
-                "advert_info"
+                "company_contract"
 //                , "accreditation_info"
 //                , "sys_template_file"
 //                , "monitor_log_prov_input"

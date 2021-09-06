@@ -4,6 +4,7 @@ import ${param.basePackage}.entity.${table.NameFU}Entity;
 import ${param.basePackage}.vo.${table.NameFU}Vo;
 import ${param.basePackage}.service.${table.NameFU}Service;
 import cn.vpclub.bulk.common.vo.RequestPageVo;
+import cn.vpclub.bulk.common.util.ResultUtil;
 import cn.vpclub.common.page.PageData;
 import cn.vpclub.common.utils.Result;
 
@@ -33,13 +34,13 @@ public class ${table.NameFU}Controller {
     @ApiOperation(value = "get${table.NameFU}List", notes = "查询列表")
     @PostMapping(value = "/query")
     public Result<PageData<${table.NameFU}Vo>> select${table.NameFU}List(@RequestBody RequestPageVo<${table.NameFU}Vo> pageVo) {
-        return ${table.NameFL}Service.listBySql(pageVo);
+        return ResultUtil.ok(${table.NameFL}Service.listBySql(pageVo));
     }
 
     @ApiOperation(value = "select${table.NameFU}", notes = "查询单个资源详情")
     @GetMapping("/{id}")
     public Result<${table.NameFU}Vo> select${table.NameFU}ById(@PathVariable Long id) {
-        return ${table.NameFL}Service.select${table.NameFU}ById(id);
+        return ResultUtil.ok(${table.NameFL}Service.select${table.NameFU}ById(id));
     }
 
     @ApiOperation(value = "add${table.NameFU}", notes = "新增${table.comments}")
@@ -49,7 +50,7 @@ public class ${table.NameFU}Controller {
             log.debug("AppLayerController.insert${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
         }
 
-        return ${table.NameFL}Service.insert${table.NameFU}(${table.NameFL}Vo);
+        return ResultUtil.ok(${table.NameFL}Service.insert${table.NameFU}(${table.NameFL}Vo));
     }
 
     @ApiOperation(value = "update${table.NameFU}", notes = "更新${table.comments}")
@@ -59,7 +60,7 @@ public class ${table.NameFU}Controller {
             log.debug("AppLayerController.update${table.NameFU} 被触发, ${table.NameFL}Vo = {}", ${table.NameFL}Vo);
         }
 
-        return ${table.NameFL}Service.update${table.NameFU}(${table.NameFL}Vo);
+        return ResultUtil.ok(${table.NameFL}Service.update${table.NameFU}(${table.NameFL}Vo));
     }
 
     @ApiOperation(value = "delete${table.NameFU}", notes = "删除${table.comments}")
@@ -69,7 +70,7 @@ public class ${table.NameFU}Controller {
             log.debug("AppLayerController.delete${table.NameFU} 被触发, id = {}", id);
         }
 
-        return ${table.NameFL}Service.delete${table.NameFU}ById(id);
+        return ResultUtil.ok(${table.NameFL}Service.delete${table.NameFU}ById(id));
     }
 
     @ApiOperation(value = "batchDelete${table.NameFU}", notes = "批量删除${table.comments}")
@@ -79,7 +80,7 @@ public class ${table.NameFU}Controller {
             log.debug("AppLayerController.batchDel 被触发, deleteIdList = {}", deleteIdList);
         }
 
-        return ${table.NameFL}Service.batchDelByIdList(deleteIdList);
+        return ResultUtil.ok(${table.NameFL}Service.batchDelByIdList(deleteIdList));
     }
 
     @ApiOperation(value = "check${table.NameFU}Exist", notes = "存在性校验")
@@ -89,7 +90,7 @@ public class ${table.NameFU}Controller {
             log.debug("AppLayerController.exist 被触发, vo = {}", vo);
         }
 
-        return ${table.NameFL}Service.exist(vo);
+        return ResultUtil.ok(${table.NameFL}Service.exist(vo));
     }
 
 }
