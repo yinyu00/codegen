@@ -12,6 +12,7 @@ import ${param.basePackage}.dao.${table.NameFU}Mapper;
 import ${param.basePackage}.entity.${table.NameFU}Entity;
 import ${param.basePackage}.service.${table.NameFU}Service;
 import ${param.voPackage}.${table.NameFU}Vo;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -138,7 +139,7 @@ public class ${table.NameFU}ServiceImpl extends ServiceImpl<${table.NameFU}Mappe
             throw new RenException(ErrorCodeEnum.SYS_PARAM_NULL);
         }
 
-        int result = ${table.NameFL}Mapper.deleteBatchIds(idList);
+        int result = baseMapper.deleteBatchIds(idList);
 
         return result;
     }
@@ -164,7 +165,7 @@ public class ${table.NameFU}ServiceImpl extends ServiceImpl<${table.NameFU}Mappe
      * @return 列表
      */
     @Override
-    public PageData<${table.NameFU}Vo> listByWrapper(RequestPageVo<${table.NameFU}Vo> pageVo) {
+    public PageData<${table.NameFU}Entity> listByWrapper(RequestPageVo<${table.NameFU}Vo> pageVo) {
         return null;
     }
 
@@ -182,12 +183,12 @@ public class ${table.NameFU}ServiceImpl extends ServiceImpl<${table.NameFU}Mappe
         queryVo.setCurrent(1);
         queryVo.setSize(10);
 
-        List<${table.NameFU}Vo> ${table.NameFL}List = listByWrapper(queryVo).getRecords();
+        List<${table.NameFU}Entity> ${table.NameFL}List = listByWrapper(queryVo).getRecords();
         if(CollUtil.isEmpty(${table.NameFL}List)) {
             return CommonConstant.INT_ONE;  // 无重复记录
         }
 
-        for(${table.NameFU}Vo ${table.NameFL} : ${table.NameFL}List) {
+        for(${table.NameFU}Entity ${table.NameFL} : ${table.NameFL}List) {
             if(${table.NameFL}.getId().equals(originId)) {
                 continue; // 跳过相同id的记录
             }

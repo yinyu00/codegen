@@ -52,6 +52,7 @@ public class MysqlTableInitializer implements TableInitializer {
                         column.setDataLength(rs.getInt("CHARACTER_MAXIMUM_LENGTH"));
                         break;
 
+                    case "date":
                     case "datetime":
                     case "time":
                     case "timestamp":

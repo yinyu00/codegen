@@ -20,14 +20,14 @@ public interface ${table.NameFU}Service {
      * @param pageVo 分页查询条件
      * @return 列表
      */
-    PageData<${table.NameFU}Vo> listBySql(RequestPageVo<${table.NameFU}Vo> pageVo);
+    PageData<${table.NameFU}Entity> listBySql(RequestPageVo<${table.NameFU}Vo> pageVo);
 
     /**
      * 查询列表
      * @param pageVo 分页查询条件
      * @return 列表
      */
-    PageData<${table.NameFU}Vo> listByWrapper(RequestPageVo<${table.NameFU}Vo> pageVo);
+    PageData<${table.NameFU}Entity> listByWrapper(RequestPageVo<${table.NameFU}Vo> pageVo);
 
     /**
      * 根据id查看详情

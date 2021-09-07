@@ -35,21 +35,11 @@
             <if test="columnName != null"> and upper(column___name) like CONCAT('%','${r"$"}{@com.kangpaas.common.core.utils.StringUtil@genFuzzyStr(columnName)}','%')</if>
 -->
 <#list columns as column>
-            <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
+            <if test="instance != null and instance.${column.colNameFL} != null and instance.${column.colNameFL} != ''"> and ${column.colName} = ${r"#"}{instance.${column.colNameFL}}</if>
 </#list>
         </trim>
     </sql>
-    <!-- SQL查询条件明确，禁止conditions(便于索引) -->
-    <sql id="conditions2"><!-- Search Condition, 主要用户校验等精确查询 -->
-        <trim prefix="where " prefixOverrides="and |or">
-<!--
-            <if test="columnName != null"> and upper(column___name) = upper(${r"#"}{columnName})</if>
--->
-            <#list columns as column>
-            <if test="${column.colNameFL} != null"> and ${column.colName} = ${r"#"}{${column.colNameFL}}</if>
-</#list>
-        </trim>
-    </sql>
+
     <!-- 集成列 -->
     <sql id="columns">
     <#assign x = 0>
@@ -60,47 +50,11 @@
     </#list>
     </sql>
 
-    <select id="listBtSql" parameterType="${param.voPackage}.${table.NameFU}Vo" resultMap="voMap" >
+    <select id="listBySql" resultMap="BaseResultMap" >
         SELECT
         <include refid="columns"/>
         FROM ${table.Name}
         <include refid="conditions"/>
     </select>
 
-    <select id="select${table.NameFU}" parameterType="${param.voPackage}.${table.NameFU}Vo" resultMap="voMap" >
-        SELECT
-        <include refid="columns"/>
-        FROM ${table.Name}
-        <include refid="conditions2"/>
-    </select>
-
-    <select id="batchSelectByIdList" >
-        SELECT
-        <include refid="columns"/>
-        FROM ${table.Name}
-        WHERE
-        <#list columns as column>
-            <#if column.primaryKey>
-                ${column.colName}
-            </#if>
-        </#list>
-        IN
-        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
-        ${r"#"}{item}
-        </foreach>
-    </select>
-
-    <delete id="batchDelByIdList">
-        DELETE FROM ${table.Name}
-        WHERE
-        <#list columns as column>
-            <#if column.primaryKey>
-                ${column.colName}
-            </#if>
-        </#list>
-        IN
-        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">
-        ${r"#"}{item}
-        </foreach>
-    </delete>
 </mapper>

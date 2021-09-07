@@ -33,7 +33,7 @@ public class ${table.NameFU}Controller {
 
     @ApiOperation(value = "get${table.NameFU}List", notes = "查询列表")
     @PostMapping(value = "/query")
-    public Result<PageData<${table.NameFU}Vo>> select${table.NameFU}List(@RequestBody RequestPageVo<${table.NameFU}Vo> pageVo) {
+    public Result<PageData<${table.NameFU}Entity>> select${table.NameFU}List(@RequestBody RequestPageVo<${table.NameFU}Vo> pageVo) {
         return ResultUtil.ok(${table.NameFL}Service.listBySql(pageVo));
     }
 

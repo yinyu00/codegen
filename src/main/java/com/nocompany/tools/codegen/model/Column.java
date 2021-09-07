@@ -114,6 +114,7 @@ public class Column {
             case "text":
                 return "String";
 
+            case "date":
             case "datetime":
             case "time":
             case "timestamp":
