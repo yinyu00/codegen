@@ -26,7 +26,7 @@ public class TableInitializerTest {
 
     @Test
     public void initColumn() {
-        Table table = new Table("", "auth_position");
+        Table table = new Table("", "auth_position", "");
         tableInitializer.initColumn(table);
         tableInitializer.initPrimaryKey(table);
 

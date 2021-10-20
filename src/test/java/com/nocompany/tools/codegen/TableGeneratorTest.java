@@ -46,6 +46,9 @@ public class TableGeneratorTest {
     @Value("${db.vo.package}")
     private String voPackage;
 
+    @Value("${db.table.prefix}")
+    private String tablePrefix;
+
     public void setTableInitializer(TableInitializer tableInitializer) {
         this.tableInitializer = tableInitializer;
     }
@@ -55,7 +58,7 @@ public class TableGeneratorTest {
     }
 
     public void generate(String schema, String tableName) throws Exception {
-        Table table = new Table(schema, tableName);
+        Table table = new Table(schema, tableName, tablePrefix);
 
         tableInitializer.initTable(table);
         tableInitializer.initColumn(table);
@@ -80,10 +83,8 @@ public class TableGeneratorTest {
     @Test
     public void batchGenerate() throws Exception {
         List<String> tables = Arrays.asList(
-                "company_contract"
-                , "company_contract_item"
-                , "company_contract_inst"
-                , "company_contract_inst_param"
+                "e8_crm_customer",
+                "e8_crm_supplier"
         );
         for (String tableName : tables) {
             generate(schema, tableName);

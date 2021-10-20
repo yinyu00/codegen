@@ -46,11 +46,11 @@ public class Table {
         }
     }
 
-    public Table(String schema, String tableName) {
+    public Table(String schema, String tableName, String tablePrefix) {
         this.schema = schema;
         this.Name = tableName;
-        this.NameFU = GenUtil.getCamelCaseString(tableName, true);
-        this.NameFL = GenUtil.getCamelCaseString(tableName, false);
+        this.NameFU = GenUtil.getCamelCaseString(tableName.replaceFirst(tablePrefix, ""), true);
+        this.NameFL = GenUtil.getCamelCaseString(tableName.replaceFirst(tablePrefix, ""), false);
     }
 
     @Override
