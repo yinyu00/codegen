@@ -40,6 +40,9 @@ public class TableGeneratorTest {
     @Value("${db.template}")
     private String template;
 
+    @Value("${db.module}")
+    private String module;
+
     @Value("${db.base.package}")
     private String basePackage;
 
@@ -70,6 +73,7 @@ public class TableGeneratorTest {
         params.put(DATE, DateUtil.formatDate(new java.util.Date(System.currentTimeMillis()), "dd-MM-yyyy"));
         params.put(BASE_PACKAGE, basePackage);
         params.put(VO_PACKAGE, voPackage);
+        params.put(MODULE, module);
         params.put(BASE_URI, "/api/");
         params.put(API_ID_PREFIX, "60104550");
         params.put(MENU_ID, "60104550");
@@ -83,8 +87,19 @@ public class TableGeneratorTest {
     @Test
     public void batchGenerate() throws Exception {
         List<String> tables = Arrays.asList(
-                "e8_crm_customer",
-                "e8_crm_supplier"
+//                "fabric_mdm_prd_category",
+//                "fabric_mdm_prd_category_attr",
+//                "fabric_mdm_product",
+//                "fabric_mdm_product_attr"
+            "e8_mdm_dye_category",
+            "e8_mdm_dye_info",
+            "e8_mdm_dye_vat",
+            "e8_mdm_dye_vat_process",
+            "e8_mdm_process_step",
+            "e8_mdm_prod_category",
+            "e8_mdm_yarn_category",
+            "e8_mdm_yarn_info"
+
         );
         for (String tableName : tables) {
             generate(schema, tableName);

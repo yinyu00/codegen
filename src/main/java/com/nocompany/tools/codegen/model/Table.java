@@ -15,6 +15,7 @@ public class Table {
     public String Name;
     public String NameFL;
     public String NameFU;
+    public String NameLL;
     public String comments = "";
     private String schema;
 
@@ -51,6 +52,7 @@ public class Table {
         this.Name = tableName;
         this.NameFU = GenUtil.getCamelCaseString(tableName.replaceFirst(tablePrefix, ""), true);
         this.NameFL = GenUtil.getCamelCaseString(tableName.replaceFirst(tablePrefix, ""), false);
+        this.NameLL = NameFU.toLowerCase();
     }
 
     @Override

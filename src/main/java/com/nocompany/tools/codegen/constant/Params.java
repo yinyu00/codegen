@@ -16,6 +16,8 @@ public interface Params {
 
     String VO_PACKAGE = "voPackage";
 
+    String MODULE = "module";
+
     String BASE_URI = "baseUri";
 
     String API_ID_PREFIX = "apiIdPrefix";

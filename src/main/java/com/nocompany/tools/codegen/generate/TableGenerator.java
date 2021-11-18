@@ -93,6 +93,8 @@ public class TableGenerator {
         table.put("Name", t.getName());
         table.put("NameFL", t.NameFL);
         table.put("NameFU", t.NameFU);
+        table.put("NameLL", t.NameLL);
+        table.put("schema", t.getSchema());
         table.put("comments", t.comments);
 
         Map<String,Object> root = new HashMap<>();

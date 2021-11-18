@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
-* 客户 服务实现类
+* ${table.comments} 服务实现类
 *
 * @author BladeX
 * @since 2021-10-08
