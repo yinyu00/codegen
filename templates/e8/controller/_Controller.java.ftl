@@ -50,7 +50,7 @@ public class ${table.NameFU}Controller extends BizController<${table.NameFU}Serv
     @ApiOperation(value = "分页", notes = "传入BizEntity")
     @Override
     public R<IPage<${table.NameFU}>> list(${table.NameFU} entity, Query query) {
-        IPage<${table.NameFU}> pages = bizService.page(Condition.getPage(query), Condition.getQueryWrapper(entity));
+        IPage<${table.NameFU}> pages = bizService.selectPage(Condition.getPage(query), entity);
         return R.data(${table.NameFU}Wrapper.build().pageVO(pages));
     }
 

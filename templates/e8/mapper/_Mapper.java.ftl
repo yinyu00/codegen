@@ -36,6 +36,6 @@ public interface ${table.NameFU}Mapper extends BizMapper<${table.NameFU}> {
     * @param ${table.NameFL}
     * @return
     */
-   List<${table.NameFU}> selectPage(IPage page, ${table.NameFU} ${table.NameFL});
+   List<${table.NameFU}> selectPage(IPage page, ${table.NameFU} entity);
 
 }

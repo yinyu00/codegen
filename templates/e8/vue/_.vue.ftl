@@ -1,30 +1,34 @@
 <template>
  <basic-container>
-  <avue-crud :option="option"
-             :table-loading="loading"
-             :data="data"
-             :page.sync="page"
-             :permission="permissionList"
-             :before-open="beforeOpen"
-             v-model="form"
-             ref="crud"
-             @row-update="rowUpdate"
-             @row-save="rowSave"
-             @row-del="rowDel"
-             @search-change="searchChange"
-             @search-reset="searchReset"
-             @selection-change="selectionChange"
-             @current-change="currentChange"
-             @size-change="sizeChange"
-             @refresh-change="refreshChange"
-             @on-load="onLoad">
+  <avue-crud
+    :option="option"
+    :table-loading="loading"
+    :data="data"
+    :page.sync="page"
+    :permission="permissionList"
+    :before-open="beforeOpen"
+    v-model="form"
+    ref="crud"
+    @row-update="rowUpdate"
+    @row-save="rowSave"
+    @row-del="rowDel"
+    @search-change="searchChange"
+    @search-reset="searchReset"
+    @selection-change="selectionChange"
+    @current-change="currentChange"
+    @size-change="sizeChange"
+    @refresh-change="refreshChange"
+    @on-load="onLoad"
+  >
    <template slot="menuLeft">
-    <el-button type="danger"
-               size="small"
-               icon="el-icon-delete"
-               plain
-               v-if="permission.${table.NameFL}_delete"
-               @click="handleDelete">删 除
+    <el-button
+            type="danger"
+            size="small"
+            icon="el-icon-delete"
+            plain
+            v-if="permission.${table.NameFL}_delete"
+            @click="handleDelete"
+    >删 除
     </el-button>
    </template>
   </avue-crud>
@@ -59,87 +63,27 @@
      selection: true,
      dialogClickModal: false,
      column: [
+<#list columns as column>
+<#if column.colNameFL != "id" &&
+      column.colNameFL != "tenantId" &&
+              column.colNameFL != "createUser" &&
+              column.colNameFL != "createDept" &&
+              column.colNameFL != "createTime" &&
+              column.colNameFL != "updateUser" &&
+              column.colNameFL != "updateTime" &&
+              column.colNameFL != "status" &&
+              column.colNameFL != "isDeleted">
       {
-       label: "名称",
-       prop: "name",
+       label: "${column.comments}",
+       prop: "${column.colNameFL}",
        rules: [{
-        required: true,
-        message: "请输入名称",
+        required: <#if column.nullable="YES">false<#else>true</#if>,
+        message: "请输入${column.comments}",
         trigger: "blur"
        }]
       },
-      {
-       label: "传真",
-       prop: "fax",
-       rules: [{
-        required: true,
-        message: "请输入传真",
-        trigger: "blur"
-       }]
-      },
-      {
-       label: "联系人",
-       prop: "contactMan",
-       rules: [{
-        required: true,
-        message: "请输入联系人",
-        trigger: "blur"
-       }]
-      },
-      {
-       label: "账号",
-       prop: "account",
-       rules: [{
-        required: true,
-        message: "请输入账号",
-        trigger: "blur"
-       }]
-      },
-      {
-       label: "电话",
-       prop: "tel",
-       rules: [{
-        required: true,
-        message: "请输入电话",
-        trigger: "blur"
-       }]
-      },
-      {
-       label: "地址",
-       prop: "address",
-       rules: [{
-        required: true,
-        message: "请输入地址",
-        trigger: "blur"
-       }]
-      },
-      {
-       label: "手机",
-       prop: "mobile",
-       rules: [{
-        required: true,
-        message: "请输入手机",
-        trigger: "blur"
-       }]
-      },
-      {
-       label: "税号",
-       prop: "taxNo",
-       rules: [{
-        required: true,
-        message: "请输入税号",
-        trigger: "blur"
-       }]
-      },
-      {
-       label: "备注",
-       prop: "remarks",
-       rules: [{
-        required: true,
-        message: "请输入备注",
-        trigger: "blur"
-       }]
-      },
+</#if>
+</#list>
      ]
     },
     data: []
