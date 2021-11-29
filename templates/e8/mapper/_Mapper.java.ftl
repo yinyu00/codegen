@@ -33,7 +33,7 @@ public interface ${table.NameFU}Mapper extends BizMapper<${table.NameFU}> {
     * 自定义分页
     *
     * @param page
-    * @param ${table.NameFL}
+    * @param entity
     * @return
     */
    List<${table.NameFU}> selectPage(IPage page, ${table.NameFU} entity);

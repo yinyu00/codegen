@@ -2,6 +2,7 @@ package ${param.basePackage}.entity;
 
 import cn.runzogroup.biz.web.entity.BizEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -36,5 +37,11 @@ public class ${table.NameFU} extends BizEntity {
     private ${column.dbType} ${column.colNameFL};
     </#if>
 </#list>
+
+
+    public QueryWrapper<${table.NameFU}> toQueryWrapper() {
+        QueryWrapper<${table.NameFU}> qw = new QueryWrapper<>();
+        return qw;
+    }
 
 }
