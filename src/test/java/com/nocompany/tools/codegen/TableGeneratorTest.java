@@ -91,14 +91,20 @@ public class TableGeneratorTest {
 //                "fabric_mdm_prd_category_attr",
 //                "fabric_mdm_product",
 //                "fabric_mdm_product_attr"
-            "e8_mdm_dye_category",
+
+                // done
+//            "e8_mdm_dye_category",
+//            "e8_mdm_yarn_category",
+//            "e8_mdm_prod_category",
 //            "e8_mdm_dye_info",
-//            "e8_mdm_dye_vat",
-//            "e8_mdm_dye_vat_process",
+//            "e8_mdm_yarn_info",
 //            "e8_mdm_process_step",
-//            "e8_mdm_prod_category"
-            "e8_mdm_yarn_category"
-//            "e8_mdm_yarn_info"
+//            "e8_mdm_dye_vat",
+//            "e8_mdm_dye_vat_process"
+
+            "e8_mdm_order_item_plan"
+//                "e8_mdm_sell_order",
+//                "e8_mdm_sell_order_item"
 
         );
         for (String tableName : tables) {

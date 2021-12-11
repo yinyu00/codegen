@@ -42,16 +42,5 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "${table.comments}", tags = "${table.comments}接口")
 @AllArgsConstructor
 public class ${table.NameFU}Controller extends BizController<${table.NameFU}Service, ${table.NameFU}> {
-    /**
-     * 分页 客户
-     */
-    @GetMapping("/list")
-    @ApiOperationSupport(order = 2)
-    @ApiOperation(value = "分页", notes = "传入BizEntity")
-    @Override
-    public R<IPage<${table.NameFU}>> list(${table.NameFU} entity, Query query) {
-        IPage<${table.NameFU}> pages = bizService.selectPage(Condition.getPage(query), entity);
-        return R.data(${table.NameFU}Wrapper.build().pageVO(pages));
-    }
 
 }

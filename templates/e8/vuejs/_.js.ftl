@@ -3,7 +3,7 @@ import request from '@/router/axios';
 
 export const getList = (current, size, params) => {
   return request({
-    url: '/api/e8/${table.NameFL}/list',
+    url: '/api/e8/${table.NameFL}/page',
     method: 'get',
     params: {
       ...params,

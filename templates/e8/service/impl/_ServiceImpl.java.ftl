@@ -32,9 +32,4 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 @Service
 public class ${table.NameFU}ServiceImpl extends BizServiceImpl<${table.NameFU}Mapper, ${table.NameFU}> implements ${table.NameFU}Service {
 
-@Override
-public IPage<${table.NameFU}> selectPage(IPage<${table.NameFU}> page, ${table.NameFU} ${table.NameFL}) {
-    return page.setRecords(baseMapper.selectPage(page, ${table.NameFL}));
-    }
-
 }

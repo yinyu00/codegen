@@ -11,7 +11,7 @@
 </#list>
     </resultMap>
 
-    <select id="selectPage" resultMap="baseResultMap">
+    <select id="pageByEntity" resultMap="baseResultMap">
         select * from ${table.Name} where is_deleted = 0
     </select>
 
