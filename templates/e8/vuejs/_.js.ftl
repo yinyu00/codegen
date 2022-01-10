@@ -1,7 +1,7 @@
 
 import request from '@/router/axios';
 
-export const getList = (current, size, params) => {
+export const qry${table.NameFU}Page = (current, size, params) => {
   return request({
     url: '/api/e8/${table.NameFL}/page',
     method: 'get',
@@ -13,7 +13,19 @@ export const getList = (current, size, params) => {
   })
 }
 
-export const getDetail = (id) => {
+export const qry${table.NameFU}List = (current, size, params) => {
+  return request({
+    url: '/api/e8/${table.NameFL}/list',
+    method: 'get',
+    params: {
+      ...params,
+      current,
+      size,
+    }
+  })
+}
+
+export const get${table.NameFU}Detail = (id) => {
   return request({
     url: '/api/e8/${table.NameFL}/detail',
     method: 'get',
@@ -23,7 +35,7 @@ export const getDetail = (id) => {
   })
 }
 
-export const remove = (ids) => {
+export const remove${table.NameFU} = (ids) => {
   return request({
     url: '/api/e8/${table.NameFL}/remove',
     method: 'post',
@@ -33,7 +45,7 @@ export const remove = (ids) => {
   })
 }
 
-export const add = (row) => {
+export const add${table.NameFU} = (row) => {
   return request({
     url: '/api/e8/${table.NameFL}/submit',
     method: 'post',
@@ -41,7 +53,7 @@ export const add = (row) => {
   })
 }
 
-export const update = (row) => {
+export const update${table.NameFU} = (row) => {
   return request({
     url: '/api/e8/${table.NameFL}/submit',
     method: 'post',

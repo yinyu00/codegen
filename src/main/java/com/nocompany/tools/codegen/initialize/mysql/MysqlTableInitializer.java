@@ -3,6 +3,7 @@ package com.nocompany.tools.codegen.initialize.mysql;
 import com.nocompany.tools.codegen.initialize.TableInitializer;
 import com.nocompany.tools.codegen.model.Column;
 import com.nocompany.tools.codegen.model.Table;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 //@Profile(value = "mysql")
+@Slf4j
 public class MysqlTableInitializer implements TableInitializer {
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -23,6 +25,8 @@ public class MysqlTableInitializer implements TableInitializer {
 
     public void initTable(Table table) {
         String sql = "select * from information_schema.tables where table_schema='" + table.getSchema() + "' and table_name = '" + table.getName() + "'";
+
+        log.info("sql = {}", sql);
 
         Map<String, Object> tableMap = jdbcTemplate.queryForMap(sql);
         table.setComments((String)tableMap.get("TABLE_COMMENT"));

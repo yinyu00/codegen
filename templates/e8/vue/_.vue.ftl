@@ -1,24 +1,24 @@
 <template>
  <basic-container>
   <avue-crud
-    :option="option"
+    :option="option${table.NameFU}"
     :table-loading="loading"
-    :data="data"
-    :page.sync="page"
+    :data="data${table.NameFU}"
+    :page.sync="page${table.NameFU}"
     :permission="permissionList"
-    :before-open="beforeOpen"
-    v-model="form"
-    ref="crud"
-    @row-update="rowUpdate"
-    @row-save="rowSave"
-    @row-del="rowDel"
-    @search-change="searchChange"
-    @search-reset="searchReset"
-    @selection-change="selectionChange"
-    @current-change="currentChange"
-    @size-change="sizeChange"
-    @refresh-change="refreshChange"
-    @on-load="onLoad"
+    :before-open="before${table.NameFL}Open"
+    v-model="form${table.NameFU}"
+    ref="crud${table.NameFU}"
+    @row-update="${table.NameFL}Update"
+    @row-save="${table.NameFL}Save"
+    @row-del="${table.NameFL}Del"
+    @search-change="searchChange${table.NameFU}"
+    @search-reset="searchReset${table.NameFU}"
+    @selection-change="selectionChange${table.NameFU}"
+    @current-change="currentChange${table.NameFU}"
+    @size-change="sizeChange${table.NameFU}"
+    @refresh-change="refreshChange${table.NameFU}"
+    @on-load="on${table.NameFU}Load"
   >
    <template slot="menuLeft">
     <el-button
@@ -27,7 +27,7 @@
             icon="el-icon-delete"
             plain
             v-if="permission.${table.NameFL}_delete"
-            @click="handleDelete"
+            @click="handle${table.NameFU}Delete"
     >删 除
     </el-button>
    </template>
@@ -36,22 +36,22 @@
 </template>
 
 <script>
- import {getList, getDetail, add, update, remove} from "@/api/e8/${param.module}/${table.NameFU}";
+ import {qry${table.NameFU}Page, get${table.NameFU}Detail, add${table.NameFU}, update${table.NameFU}, remove${table.NameFU}} from "@/api/e8/${param.module}/${table.NameFU}";
  import {mapGetters} from "vuex";
 
  export default {
   data() {
    return {
-    form: {},
-    query: {},
+    form${table.NameFU}: {},
+    query${table.NameFU}: {},
     loading: true,
-    page: {
+    page${table.NameFU}: {
      pageSize: 10,
      currentPage: 1,
      total: 0
     },
-    selectionList: [],
-    option: {
+    selection${table.NameFU}List: [],
+    option${table.NameFU}: {
      height:'auto',
      calcHeight: 30,
      tip: false,
@@ -86,7 +86,7 @@
 </#list>
      ]
     },
-    data: []
+    data${table.NameFU}: []
    };
   },
   computed: {
@@ -101,16 +101,16 @@
    },
    ids() {
     let ids = [];
-    this.selectionList.forEach(ele => {
+    this.selection${table.NameFU}List.forEach(ele => {
      ids.push(ele.id);
     });
     return ids.join(",");
    }
   },
   methods: {
-   rowSave(row, done, loading) {
-    add(row).then(() => {
-     this.onLoad(this.page);
+   ${table.NameFL}Save(row, done, loading) {
+    add${table.NameFU}(row).then(() => {
+     this.on${table.NameFU}Load(this.page${table.NameFU});
      this.$message({
       type: "success",
       message: "操作成功!"
@@ -121,9 +121,9 @@
      window.console.log(error);
     });
    },
-   rowUpdate(row, index, done, loading) {
-    update(row).then(() => {
-     this.onLoad(this.page);
+   ${table.NameFL}Update(row, index, done, loading) {
+    update${table.NameFU}(row).then(() => {
+     this.on${table.NameFU}Load(this.page${table.NameFU});
      this.$message({
       type: "success",
       message: "操作成功!"
@@ -134,24 +134,24 @@
      console.log(error);
     });
    },
-   rowDel(row) {
+   ${table.NameFL}Del(row) {
     this.$confirm("确定将选择数据删除?", {
      confirmButtonText: "确定",
      cancelButtonText: "取消",
      type: "warning"
     })
             .then(() => {
-             return remove(row.id);
+             return remove${table.NameFU}(row.id);
             })
             .then(() => {
-             this.onLoad(this.page);
+             this.on${table.NameFU}Load(this.page${table.NameFU});
              this.$message({
               type: "success",
               message: "操作成功!"
              });
             });
    },
-   handleDelete() {
+   handle${table.NameFU}Delete() {
     if (this.selectionList.length === 0) {
      this.$message.warning("请选择至少一条数据");
      return;
@@ -162,59 +162,59 @@
      type: "warning"
     })
             .then(() => {
-             return remove(this.ids);
+             return remove${table.NameFU}(this.ids);
             })
             .then(() => {
-             this.onLoad(this.page);
+             this.on${table.NameFU}Load(this.page${table.NameFU});
              this.$message({
               type: "success",
               message: "操作成功!"
              });
-             this.$refs.crud.toggleSelection();
+             this.$refs.crud${table.NameFU}.toggleSelection();
             });
    },
-   beforeOpen(done, type) {
+   before${table.NameFU}Open(done, type) {
     if (["edit", "view"].includes(type)) {
-     getDetail(this.form.id).then(res => {
-      this.form = res.data.data;
+     get${table.NameFU}Detail(this.form${table.NameFU}.id).then(res => {
+      this.form${table.NameFU} = res.data.data;
      });
     }
     done();
    },
-   searchReset() {
-    this.query = {};
-    this.onLoad(this.page);
+   searchReset${table.NameFU}() {
+    this.query${table.NameFU} = {};
+    this.on${table.NameFU}Load(this.page${table.NameFU});
    },
-   searchChange(params, done) {
-    this.query = params;
-    this.page.currentPage = 1;
-    this.onLoad(this.page, params);
+   searchChange${table.NameFU}(params, done) {
+    this.query${table.NameFU} = params;
+    this.page${table.NameFU}.currentPage = 1;
+    this.on${table.NameFU}Load(this.page${table.NameFU}, params);
     done();
    },
-   selectionChange(list) {
-    this.selectionList = list;
+   selectionChange${table.NameFU}(list) {
+    this.selection${table.NameFU}List = list;
    },
-   selectionClear() {
-    this.selectionList = [];
-    this.$refs.crud.toggleSelection();
+   selectionClear${table.NameFU}() {
+    this.selection${table.NameFU}List = [];
+    this.$refs.crud${table.NameFU}.toggleSelection();
    },
-   currentChange(currentPage){
-    this.page.currentPage = currentPage;
+   currentChange${table.NameFU}(currentPage){
+    this.page${table.NameFU}.currentPage = currentPage;
    },
-   sizeChange(pageSize){
-    this.page.pageSize = pageSize;
+   sizeChange${table.NameFU}(pageSize){
+    this.page${table.NameFU}.pageSize = pageSize;
    },
-   refreshChange() {
-    this.onLoad(this.page, this.query);
+   refreshChange${table.NameFU}() {
+    this.on${table.NameFU}Load(this.page${table.NameFU}, this.query${table.NameFU});
    },
-   onLoad(page, params = {}) {
+   on${table.NameFU}Load(page, params = {}) {
     this.loading = true;
-    getList(page.currentPage, page.pageSize, Object.assign(params, this.query)).then(res => {
+    qry${table.NameFU}Page(this.page${table.NameFU}.currentPage, this.page${table.NameFU}.pageSize, Object.assign(params, this.query)).then(res => {
      const data = res.data.data;
-     this.page.total = data.total;
-     this.data = data.records;
+     this.page${table.NameFU}.total = data.total;
+     this.data${table.NameFU} = data.records;
      this.loading = false;
-     this.selectionClear();
+     this.selectionClear${table.NameFU}();
     });
    }
   }

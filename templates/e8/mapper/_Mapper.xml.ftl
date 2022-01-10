@@ -13,6 +13,9 @@
 
     <select id="pageByEntity" resultMap="baseResultMap">
         select * from ${table.Name} where is_deleted = 0
+        <if test="entity.id != null">
+            and id = ${r"#"}{entity.id}
+        </if>
     </select>
 
 </mapper>

@@ -102,9 +102,19 @@ public class TableGeneratorTest {
 //            "e8_mdm_dye_vat",
 //            "e8_mdm_dye_vat_process"
 
-            "e8_mdm_order_item_plan"
+//            "e8_mdm_order_item_plan"
 //                "e8_mdm_sell_order",
 //                "e8_mdm_sell_order_item"
+
+//                "e8_wms_warehouse",
+//                "e8_wms_stock_in",
+//                "e8_wms_stock_in_item",
+//                "e8_wms_stock_out",
+                "e8_mes_order_item_plan_report"
+
+//                "e8_wms_storage",
+//                "e8_wms_storage_log",
+//                "e8_wms_storage_summary"
 
         );
         for (String tableName : tables) {

@@ -29,13 +29,4 @@ import java.util.List;
  */
 public interface ${table.NameFU}Mapper extends BizMapper<${table.NameFU}> {
 
-   /**
-    * 自定义分页
-    *
-    * @param page
-    * @param entity
-    * @return
-    */
-   List<${table.NameFU}> pageByEntity(IPage page, ${table.NameFU} entity);
-
 }
