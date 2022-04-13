@@ -3,7 +3,7 @@ import request from '@/router/axios';
 
 export const qry${table.NameFU}Page = (current, size, params) => {
   return request({
-    url: '/api/e8/${table.NameFL}/page',
+    url: '/api/${param.schema}/${table.NameFL}/page',
     method: 'get',
     params: {
       ...params,
@@ -15,7 +15,7 @@ export const qry${table.NameFU}Page = (current, size, params) => {
 
 export const qry${table.NameFU}List = (current, size, params) => {
   return request({
-    url: '/api/e8/${table.NameFL}/list',
+    url: '/api/${param.schema}/${table.NameFL}/list',
     method: 'get',
     params: {
       ...params,
@@ -27,7 +27,7 @@ export const qry${table.NameFU}List = (current, size, params) => {
 
 export const get${table.NameFU}Detail = (id) => {
   return request({
-    url: '/api/e8/${table.NameFL}/detail',
+    url: '/api/${param.schema}/${table.NameFL}/detail',
     method: 'get',
     params: {
       id
@@ -37,7 +37,7 @@ export const get${table.NameFU}Detail = (id) => {
 
 export const remove${table.NameFU} = (ids) => {
   return request({
-    url: '/api/e8/${table.NameFL}/remove',
+    url: '/api/${param.schema}/${table.NameFL}/remove',
     method: 'post',
     params: {
       ids,
@@ -47,7 +47,7 @@ export const remove${table.NameFU} = (ids) => {
 
 export const add${table.NameFU} = (row) => {
   return request({
-    url: '/api/e8/${table.NameFL}/submit',
+    url: '/api/${param.schema}/${table.NameFL}/submit',
     method: 'post',
     data: row
   })
@@ -55,7 +55,7 @@ export const add${table.NameFU} = (row) => {
 
 export const update${table.NameFU} = (row) => {
   return request({
-    url: '/api/e8/${table.NameFL}/submit',
+    url: '/api/${param.schema}/${table.NameFL}/submit',
     method: 'post',
     data: row
   })

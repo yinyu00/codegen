@@ -110,7 +110,8 @@ public class TableGeneratorTest {
 //                "e8_wms_stock_in",
 //                "e8_wms_stock_in_item",
 //                "e8_wms_stock_out",
-                "e8_mes_order_item_plan_report"
+                "e8_crm_customer",
+                "e8_crm_supplier"
 
 //                "e8_wms_storage",
 //                "e8_wms_storage_log",
