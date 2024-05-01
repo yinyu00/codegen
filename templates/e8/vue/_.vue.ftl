@@ -36,7 +36,7 @@
 </template>
 
 <script>
- import {qry${table.NameFU}Page, get${table.NameFU}Detail, add${table.NameFU}, update${table.NameFU}, remove${table.NameFU}} from "@/api/${param.schema}/${param.module}/${table.NameFU}";
+ import {qry${table.NameFU}Page, get${table.NameFU}Detail, add${table.NameFU}, update${table.NameFU}, remove${table.NameFU}} from "@/api/fangshuo/general/${param.module}/${table.NameFU}";
  import {mapGetters} from "vuex";
 
  export default {

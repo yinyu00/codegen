@@ -1,6 +1,6 @@
 package ${param.basePackage}.entity;
 
-import cn.runzogroup.biz.web.entity.BizEntity;
+import cn.runzogroup.biz.web.entity.BizTenantEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiModel;
@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 @TableName("${table.Name}")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "${table.NameFU}对象", description = "${table.comments}")
-public class ${table.NameFU} extends BizEntity {
+public class ${table.NameFU} extends BizTenantEntity {
 <#list columns as column>
     <#if column.colNameFL != "id" &&
     column.colNameFL != "tenantId" &&
